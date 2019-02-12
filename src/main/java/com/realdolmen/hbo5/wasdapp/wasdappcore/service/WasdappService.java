@@ -7,4 +7,8 @@ import java.util.List;
 public interface WasdappService {
 
     List<WasdappEntry> findByNameContains(String nameShouldStartWith);
+
+    WasdappEntry save(WasdappEntry entry);
+
+    List<WasdappEntry> save(List<WasdappEntry> entry);
 }
