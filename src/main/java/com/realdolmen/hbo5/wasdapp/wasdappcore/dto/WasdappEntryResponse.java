@@ -1,4 +1,4 @@
-package com.realdolmen.hbo5.wasdapp.wasdappcore.rest;
+package com.realdolmen.hbo5.wasdapp.wasdappcore.dto;
 
 public class WasdappEntryResponse {
 

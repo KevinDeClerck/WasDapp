@@ -1,6 +1,8 @@
 package com.realdolmen.hbo5.wasdapp.wasdappcore.rest;
 
 import com.realdolmen.hbo5.wasdapp.wasdappcore.domain.WasdappEntry;
+import com.realdolmen.hbo5.wasdapp.wasdappcore.dto.WasdappEntryResponse;
+import com.realdolmen.hbo5.wasdapp.wasdappcore.service.WasdappService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 

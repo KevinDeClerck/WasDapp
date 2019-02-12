@@ -2,6 +2,7 @@ package com.realdolmen.hbo5.wasdapp.wasdappcore.rest;
 
 import com.realdolmen.hbo5.wasdapp.wasdappcore.domain.WasdappEntry;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.domain.WasdappEntryRepository;
+import com.realdolmen.hbo5.wasdapp.wasdappcore.service.impl.WasdappServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

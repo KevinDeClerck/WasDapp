@@ -1,7 +1,8 @@
-package com.realdolmen.hbo5.wasdapp.wasdappcore.rest;
+package com.realdolmen.hbo5.wasdapp.wasdappcore.service.impl;
 
 import com.realdolmen.hbo5.wasdapp.wasdappcore.domain.WasdappEntry;
-import com.realdolmen.hbo5.wasdapp.wasdappcore.domain.WasdappEntryRepository;
+import com.realdolmen.hbo5.wasdapp.wasdappcore.repo.WasdappEntryRepository;
+import com.realdolmen.hbo5.wasdapp.wasdappcore.service.WasdappService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
