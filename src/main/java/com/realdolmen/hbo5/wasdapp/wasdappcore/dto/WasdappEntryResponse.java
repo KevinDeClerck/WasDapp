@@ -33,4 +33,12 @@ public class WasdappEntryResponse {
             return wasdappEntryResponse;
         }
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return desciprion;
+    }
 }
