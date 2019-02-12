@@ -4,6 +4,7 @@ import com.realdolmen.hbo5.wasdapp.wasdappcore.domain.WasdappEntry;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.dto.SearchRequest;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.dto.WasdappEntryResponse;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.WasdappService;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,7 +22,7 @@ public class WasdappEntryController {
         this.wasdappService = wasdappService;
     }
 
-    @PostMapping("/search")
+    @PostMapping(value = "/search", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<WasdappEntryResponse> searchByNameLike(@RequestBody SearchRequest searchRequest){
        List<WasdappEntry> results =  wasdappService.findByNameContains(searchRequest.getName());
         return results.stream()
