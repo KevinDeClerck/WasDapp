@@ -1,14 +1,12 @@
 package com.realdolmen.hbo5.wasdapp.wasdappcore.domain;
 
 import com.google.common.truth.Truth;
+import com.realdolmen.hbo5.wasdapp.wasdappcore.repo.WasdappEntryRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import static org.mockito.Mockito.*;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
