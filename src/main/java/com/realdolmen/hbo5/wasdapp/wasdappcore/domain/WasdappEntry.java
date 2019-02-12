@@ -3,6 +3,7 @@ package com.realdolmen.hbo5.wasdapp.wasdappcore.domain;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "wasdapp_entry")
 public class WasdappEntry {
 
     @Id
