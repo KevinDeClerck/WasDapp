@@ -16,7 +16,7 @@
 
 	<properties>
 		<java.version>1.8</java.version>
-		<flyway.version>4.2.0</flyway.version>
+		<flyway.version>5.2.4</flyway.version>
 		<mockito.version>2.21.0</mockito.version>
 	</properties>
 
