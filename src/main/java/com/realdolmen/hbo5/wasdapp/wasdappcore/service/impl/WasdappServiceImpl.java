@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static java.util.stream.Collectors.*;
+
 @Service
 public class WasdappServiceImpl implements WasdappService {
 
@@ -20,5 +22,19 @@ public class WasdappServiceImpl implements WasdappService {
     @Override
     public List<WasdappEntry> findByNameContains(String shouldContain) {
         return wasdappRepository.findByNameContaining(shouldContain);
+    }
+
+    @Override
+    public WasdappEntry save(WasdappEntry entry) {
+        return wasdappRepository.save(entry);
+
+    }
+
+    @Override
+    public List<WasdappEntry> save(List<WasdappEntry> entries) {
+        return entries
+                .stream()
+                .map(this::save)
+                .collect(toList());
     }
 }
