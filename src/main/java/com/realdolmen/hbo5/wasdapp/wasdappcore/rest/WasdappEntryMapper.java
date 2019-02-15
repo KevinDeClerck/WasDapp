@@ -7,7 +7,7 @@ public class WasdappEntryMapper {
 
     public static WasdappEntryResponse mapToDto(WasdappEntry entry){
         return WasdappEntryResponse.builder()
-                .withDesciprion(entry.getDescription())
+                .withDescription(entry.getDescription())
                 .withName(entry.getName())
                 .build();
     }
