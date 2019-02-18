@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.*;
+
 @RestController("/wasdappentry")
 public class WasdappEntryController {
 
@@ -27,9 +29,7 @@ public class WasdappEntryController {
        List<WasdappEntry> results =  wasdappService.findByNameContains(searchRequest.getName());
         return results.stream()
                 .map(WasdappEntryMapper::mapToDto)
-                .collect(Collectors.toList());
+                .collect(toList());
     }
-
-
 
 }

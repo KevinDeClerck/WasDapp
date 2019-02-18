@@ -27,7 +27,6 @@ public class WasdappServiceImpl implements WasdappService {
     @Override
     public WasdappEntry save(WasdappEntry entry) {
         return wasdappRepository.save(entry);
-
     }
 
     @Override
