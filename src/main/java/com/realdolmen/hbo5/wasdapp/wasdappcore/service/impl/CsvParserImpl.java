@@ -17,6 +17,7 @@ import java.util.stream.Stream;
 
 import static java.lang.Double.valueOf;
 import static java.util.stream.Collectors.toList;
+import static org.apache.logging.log4j.util.Strings.isBlank;
 
 @Service
 public class CsvParserImpl implements CsvParser {
@@ -74,14 +75,14 @@ public class CsvParserImpl implements CsvParser {
     }
 
     private String getText(String s) {
-        return s.trim().equals("") ? null : s;
+        return isBlank(s) ? null : s;
     }
 
     private Double getDoubleValue(String s) {
-        return s.trim().equals("") ? null : valueOf(s);
+        return isBlank(s) ? null : valueOf(s);
     }
 
     private Long getLongValue(String s) {
-        return s.trim().equals("") ? null : Long.valueOf(s);
+        return isBlank(s) ? null : Long.valueOf(s);
     }
 }
