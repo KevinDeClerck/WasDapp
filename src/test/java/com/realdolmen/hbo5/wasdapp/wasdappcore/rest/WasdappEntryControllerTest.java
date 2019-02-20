@@ -43,9 +43,9 @@ public class WasdappEntryControllerTest {
 
         assertThat(result).hasSize(2);
         assertThat(result.get(0).getName()).isEqualTo("koffiemachien");
-        assertThat(result.get(0).getDescription()).isEqualTo("Koffiemachien met deca");
+        assertThat(result.get(0).getOmschrijving()).isEqualTo("Koffiemachien met deca");
         assertThat(result.get(1).getName()).isEqualTo("koffiemachien");
-        assertThat(result.get(1).getDescription()).isEqualTo("Koffiemachien met goed gerief");
+        assertThat(result.get(1).getOmschrijving()).isEqualTo("Koffiemachien met goed gerief");
 
     }
 
@@ -53,10 +53,10 @@ public class WasdappEntryControllerTest {
         WasdappEntry wasdappEntry = new WasdappEntry();
         wasdappEntry.setId(1L);
         wasdappEntry.setName(name);
-        wasdappEntry.setDescription(description);
-        wasdappEntry.setStreet("street");
-        wasdappEntry.setNumber("number");
-        wasdappEntry.setCity("city");
+        wasdappEntry.setOmschrijving(description);
+        wasdappEntry.setStraat("street");
+        wasdappEntry.setNummer("number");
+        wasdappEntry.setGemeente("city");
         wasdappEntry.setLat(2.02);
         wasdappEntry.setLon(3.03);
         return wasdappEntry;

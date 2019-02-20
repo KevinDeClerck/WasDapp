@@ -18,10 +18,10 @@ public class WasdappEntryMapperTest {
 
         wasdappEntry.setId(1L);
         wasdappEntry.setName("name");
-        wasdappEntry.setDescription("description");
-        wasdappEntry.setStreet("street");
-        wasdappEntry.setNumber("number");
-        wasdappEntry.setCity("city");
+        wasdappEntry.setOmschrijving("description");
+        wasdappEntry.setStraat("street");
+        wasdappEntry.setNummer("number");
+        wasdappEntry.setGemeente("city");
         wasdappEntry.setLat(2.02);
         wasdappEntry.setLon(3.03);
         mapped = WasdappEntryMapper.mapToDto(wasdappEntry);
@@ -31,7 +31,7 @@ public class WasdappEntryMapperTest {
 
     @Test
     public void mapsDescription() {
-        assertThat(mapped.getDescription()).isEqualTo("description");
+        assertThat(mapped.getOmschrijving()).isEqualTo("description");
 
     }
 
