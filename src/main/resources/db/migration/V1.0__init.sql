@@ -1,6 +1,6 @@
 create table wasdapp_entry (
     id int8 primary key not null,
-    name varchar(255) not null,
+    name varchar(255),
     locatie varchar(64),
     straat varchar(96),
     nummer varchar(10),
@@ -14,8 +14,8 @@ create table wasdapp_entry (
     email varchar(64),
     prijs double(64),
     persoon varchar(64),
-    aanmaak_Datum timestamp not null,
-    wijzig_Datum timestamp not null,
+    aanmaak_Datum timestamp,
+    wijzig_Datum timestamp,
     lat double precision,
     lon double precision
 );

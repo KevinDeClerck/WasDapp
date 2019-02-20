@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.Assert.*;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,32 +20,34 @@ public class WasdappEntryRepositoryTest {
 
     @Autowired
     private WasdappEntryRepository wasdappEntryRepository;
-    
+
     @Test
     public void getNameFindByIdTest() {
         System.out.println(wasdappEntryRepository.findById(1L).get().getName());
         List<WasdappEntry> test = new ArrayList<>();
         test = wasdappEntryRepository.findAll();
-        
-        for(WasdappEntry e : test){
+
+        for (WasdappEntry e : test) {
             System.out.println(e.getName());
         }
-        Truth.assertThat(wasdappEntryRepository.findById(1L).isPresent());  
+        Truth.assertThat(wasdappEntryRepository.findById(1L).isPresent());
     }
-    
-    @Ignore
+
     @Test
-    public void saveTest(){
+    public void updateEntryTest() {
         Timestamp ts = Timestamp.valueOf(LocalDateTime.now());
         WasdappEntry entry = new WasdappEntry();
+        entry.setId(1L);
         entry.setName("Theepot");
-        entry.setId(8L);
-        entry.setAanmaakDatum(ts);
         entry.setWijzigDatum(ts);
-        List<WasdappEntry> before = wasdappEntryRepository.findAll();
         wasdappEntryRepository.save(entry);
-        List<WasdappEntry> after = wasdappEntryRepository.findAll();
-        assertEquals(before.size()+1,after.size());     
+        assertEquals(wasdappEntryRepository.findById(1L).get().getName(),"Theepot");
+    }
+    
+    @Test
+    public void deleteEntryTest(){
+        WasdappEntry entryToDelete = wasdappEntryRepository.findById(4L).get();
+        wasdappEntryRepository.delete(entryToDelete);
+        assertFalse(wasdappEntryRepository.findById(4L).isPresent());
     }
 }
-
