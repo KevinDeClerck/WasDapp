@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui">
+    <head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <title>WasDapp</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <body>
+        <nav>
+            <ul>
+                <li><a href="">Home</a></li>
+                <li><a href="">Add</a></li>
+                <li><a href="">Upload</a></li>
+                <li><a href="">Login</a></li>
+            </ul>
+        </nav>
+        <b:container>
+            <h1>Table</h1>
+            <table>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Location</th>
+                    <th>Straat</th>
+                    <th>Nummer</th>
+                    <th>Postal Code</th>
+                    <th>Gemeente</th>
+                    <th>Land</th>
+                    <th>Omschrijving</th>
+                    <th>Telefoon</th>
+                    <th>Email</th>
+                    <th>Price</th>
+                    <th>Person</th>
+                    <th>Date created</th>
+                    <th>Lat</th>
+                    <th>Long</th>
+
+                    <th></th>
+                </tr>
+                <tr th:each="entry : ${entries}">
+                    <td th:text="${entry.id}"></td>
+                    <td th:text="${entry.name}"></td>
+                    <td th:text="${entry.locatie}"></td>
+                    <td th:text="${entry.straat}"></td>
+                    <td th:text="${entry.nummer}"></td>
+                    <td th:text="${entry.postCode}"></td>
+                    <td th:text="${entry.gemeente}"></td>
+                    <td th:text="${entry.land}"></td>
+                    <td th:text="${entry.omschrijving}"></td>
+                    <td th:text="${entry.telefoonNummer}"></td>
+                    <td th:text="${entry.email}"></td>
+                    <td th:text="${entry.prijs}"></td>
+                    <td th:text="${entry.persoon}"></td>
+                    <td th:text="${entry.aanmaakDatum}"></td>
+                    <td th:text="${entry.lat}"></td>
+                    <td th:text="${entry.lon}"></td>
+
+
+                </tr>
+
+            </table>
+        </b:container>
+
+    </body>
+</html>
