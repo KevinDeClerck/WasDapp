@@ -21,13 +21,7 @@ public class WasdappController {
     public String List(Model model){
             model.addAttribute("entries", wasdappService.findAllExisting());
             return "WasDapp.xhtml";
-        }
-       @RequestMapping(value="/Add", method=RequestMethod.GET)
-    public String List2(Model model){
-            model.addAttribute("entries", repo.findAll());
-            return "Add.xhtml";
-        }
-        
+        }       
     }
     
 

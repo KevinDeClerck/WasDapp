@@ -30,20 +30,19 @@ public class AddEntryController {
     WasdappEntryRepository repo;
 
 
-    @RequestMapping(value = "/new", method = RequestMethod.GET)
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String createForm(Model model) {
-        model.addAttribute("entries", wasdappService.findAllExisting());
-        return "new.xhtml";
+        return "add.xhtml";
     }
 
-    @RequestMapping(value = "/new", method = RequestMethod.POST)
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String entrySubmit(
             @RequestParam String name, @RequestParam String locatie,
             @RequestParam String straat, @RequestParam String nummer,
             @RequestParam String postCode, @RequestParam String gemeente,
             @RequestParam String land, @RequestParam String omschrijving,
-            @RequestParam String website, @RequestParam String telefoon,
-            @RequestParam String email, Model model) {
+            @RequestParam String telefoon, @RequestParam String email,
+            Model model) {
         WasdappEntryResponse entry = new WasdappEntryResponse();
         Long id = new Long(wasdappService.findAllExisting().size() + 1);
         entry.setId(id);
@@ -55,7 +54,6 @@ public class AddEntryController {
         entry.setGemeente(gemeente);
         entry.setLand(land);
         entry.setOmschrijving(omschrijving);
-        entry.setWebsite(website);
         entry.setTelefoonNummer(telefoon);
         entry.setEmail(email);
         wasdappService.update(entry);
