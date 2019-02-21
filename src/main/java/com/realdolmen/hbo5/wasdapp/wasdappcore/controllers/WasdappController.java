@@ -17,16 +17,12 @@ public class WasdappController {
     @Autowired
     WasdappEntryRepository repo;
     
-    @RequestMapping(value="/index", method=RequestMethod.GET)
+    @RequestMapping(value="/Wasdapp", method=RequestMethod.GET)
     public String List(Model model){
             model.addAttribute("entries", repo.findAll());
             return "WasDapp.xhtml";
         }
     
-    @RequestMapping("/Wasdapp")
-    public String List2(Model model){
-        return "WasDapp.xhtml";
-    }
         
     }
     
