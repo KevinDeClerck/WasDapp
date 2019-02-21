@@ -27,7 +27,12 @@ public class WasdappController {
     public String List2(Model model){
         return "WasDapp.xhtml";
     }
-        
+
+
+    @RequestMapping("/upload")
+    public String List3(Model model){
+        return "upload.xhtml";
+    }
     }
     
 

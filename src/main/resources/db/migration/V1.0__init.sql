@@ -27,3 +27,17 @@ insert into wasdapp_entry(id,name,locatie,straat,nummer,post_Code,gemeente,land,
 insert into wasdapp_entry(id,name,locatie,straat,nummer,post_Code,gemeente,land,omschrijving,wiki_Link,website,telefoon_Nummer,email,prijs,persoon,aanmaak_Datum,wijzig_Datum,lat,lon) values (5,'Kobe','Gent','testlaan','69A','9000','Gent','België','nlablabla','wasdapp.wiki','wasdapp.be','0485967415','wasdapp@gmail.com',10.25,'Kevin','2010-01-01 11:00:00','2010-01-01 13:00:00',10.10,10.05);
 insert into wasdapp_entry(id,name,locatie,straat,nummer,post_Code,gemeente,land,omschrijving,wiki_Link,website,telefoon_Nummer,email,prijs,persoon,aanmaak_Datum,wijzig_Datum,lat,lon) values (6,'Shmerik','Gent','testlaan','69A','9000','Gent','België','nlablabla','wasdapp.wiki','wasdapp.be','0485967415','wasdapp@gmail.com',10.25,'Kevin','2010-01-01 11:00:00','2010-01-01 13:00:00',10.10,10.05);
 insert into wasdapp_entry(id,name,locatie,straat,nummer,post_Code,gemeente,land,omschrijving,wiki_Link,website,telefoon_Nummer,email,prijs,persoon,aanmaak_Datum,wijzig_Datum,lat,lon) values (7,'Shelter','Gent','testlaan','69A','9000','Gent','België','nlablabla','wasdapp.wiki','wasdapp.be','0485967415','wasdapp@gmail.com',10.25,'Kevin','2010-01-01 11:00:00','2010-01-01 13:00:00',10.10,10.05);
+
+create table user (
+                      user_id int8 primary key not null,
+                      email varchar(64) not null,
+                      password varchar(64) not null,
+                      name varchar(64),
+                      achternaam varchar(64),
+                      role varchar
+);
+
+
+insert into user(user_id, email, password, name, achternaam, role) values (1, 'tetieiei777@gmail.com', 'jijiijiji', 'larry', 'jeremiah', 'admin');
+insert into user(user_id, email, password, name, achternaam, role) values (2, 'tetie787@gmail.com', 'neintje', 'kevin', 'de clerk', 'admin');
+insert into user(user_id, email, password, name, achternaam, role) values (3, 'tet77@gmail.com', 'password', 'jasper', 'marcel', 'user');
