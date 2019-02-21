@@ -61,19 +61,6 @@ public class WasdappServiceImpl implements WasdappService {
                 .map(WasdappEntryMapper::mapToDto)
                 .collect(toList());
     }
-
-    public List<WasdappEntryResponse> findAllExisting() {
-        List<WasdappEntry> entries = wasdappRepository.findAll();
-        List<WasdappEntry> entriesWithNames = new ArrayList<>();
-        for (WasdappEntry w : entries) {
-            if (w.getName() != null) {
-                entriesWithNames.add(w);
-            }
-        }
-        return entriesWithNames.stream()
-                .map(WasdappEntryMapper::mapToDto)
-                .collect(toList());
-    }
     
     public WasdappEntryResponse findById(Long id){
         WasdappEntry entry = wasdappRepository.findById(id).get();

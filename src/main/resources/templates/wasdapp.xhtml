@@ -42,8 +42,6 @@
                             <th>Omschrijving</th>
                             <th>Telefoon</th>
                             <th>Email</th>
-                            <th>Price</th>
-                            <th>Person</th>
                             <th>Date created</th>
                             <th>Lat</th>
                             <th>Lon</th>
@@ -64,15 +62,11 @@
                             <td th:text="${entry.omschrijving}"></td>
                             <td th:text="${entry.telefoonNummer}"></td>
                             <td th:text="${entry.email}"></td>
-                            <td th:text="${entry.prijs}"></td>
-                            <td th:text="${entry.persoon}"></td>
                             <td th:text="${entry.aanmaakDatum}"></td>
                             <td th:text="${entry.lat}"></td>
                             <td th:text="${entry.lon}"></td>
-                            <td><button type="button" class="btn btn-success">Edit</button></td>
+                            <td><a th:href="@{/edit(id=${entry.id})}"><button type="button" class="btn btn-success">Edit</button></a></td>
                             <td><a th:href="@{/delete_item(itemId=${entry.id})}"><button type="button" class="btn btn-danger">Delete</button></a></td>
-
-
                         </tr>
                     </thead>
                 </table>

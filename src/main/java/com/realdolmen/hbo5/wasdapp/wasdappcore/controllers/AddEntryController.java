@@ -29,7 +29,6 @@ public class AddEntryController {
     @Autowired
     WasdappEntryRepository repo;
 
-
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String createForm(Model model) {
         return "add.xhtml";
@@ -42,9 +41,10 @@ public class AddEntryController {
             @RequestParam String postCode, @RequestParam String gemeente,
             @RequestParam String land, @RequestParam String omschrijving,
             @RequestParam String telefoon, @RequestParam String email,
+            @RequestParam Double latitude, @RequestParam Double longitude,
             Model model) {
         WasdappEntryResponse entry = new WasdappEntryResponse();
-        Long id = new Long(wasdappService.findAllExisting().size() + 1);
+        Long id = 0L;
         entry.setId(id);
         entry.setName(name);
         entry.setLocatie(locatie);
@@ -56,6 +56,8 @@ public class AddEntryController {
         entry.setOmschrijving(omschrijving);
         entry.setTelefoonNummer(telefoon);
         entry.setEmail(email);
+        entry.setLat(latitude);
+        entry.setLon(longitude);
         wasdappService.update(entry);
 
         model.addAttribute("entry", entry);
