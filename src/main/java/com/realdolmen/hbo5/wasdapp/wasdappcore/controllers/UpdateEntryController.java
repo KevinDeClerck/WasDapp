@@ -29,22 +29,24 @@ public class UpdateEntryController {
     @Autowired
     WasdappEntryRepository repo;
 
-
-    @RequestMapping(value = "/update/{id}")
-    public String updateForm(@PathVariable Long id, Model model) {
-        model.addAttribute("entry", wasdappService.findById(id));
-        return "update";
+    @RequestMapping(value = "/edit")
+    public String updateForm(@RequestParam(name = "id") Long id, Model model) {
+        WasdappEntryResponse entry = wasdappService.findById(id);
+        model.addAttribute("entry", entry);
+        return "edit.xhtml";
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public String entrySubmit(
-            @RequestParam Long id, @RequestParam String telefoon,
-            @RequestParam String name, @RequestParam String locatie,
+            @RequestParam Long id, @RequestParam String name,
+            @RequestParam String locatie,
             @RequestParam String straat, @RequestParam String nummer,
             @RequestParam String postCode, @RequestParam String gemeente,
-            @RequestParam String land, @RequestParam String omschrijving, 
-            @RequestParam String email, Model model) {
-        WasdappEntryResponse entry = wasdappService.findById(id);
+            @RequestParam String land, @RequestParam String omschrijving,
+            @RequestParam String telefoon, @RequestParam String email,
+            @RequestParam Double latitude, @RequestParam Double longitude,
+            Model model) {
+        WasdappEntryResponse entry = new WasdappEntryResponse();
         entry.setId(id);
         entry.setName(name);
         entry.setLocatie(locatie);
@@ -56,6 +58,8 @@ public class UpdateEntryController {
         entry.setOmschrijving(omschrijving);
         entry.setTelefoonNummer(telefoon);
         entry.setEmail(email);
+        entry.setLat(latitude);
+        entry.setLon(longitude);
         wasdappService.update(entry);
 
         model.addAttribute("entry", entry);
@@ -63,4 +67,3 @@ public class UpdateEntryController {
         return "redirect:/wasdapp";
     }
 }
-
