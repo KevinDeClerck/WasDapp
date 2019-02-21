@@ -24,7 +24,6 @@ public class WasdappController {
         }
        @RequestMapping(value="/Add", method=RequestMethod.GET)
     public String List2(Model model){
-<<<<<<< src/main/java/com/realdolmen/hbo5/wasdapp/wasdappcore/controllers/WasdappController.java
         return "WasDapp.xhtml";
     }
 
@@ -33,12 +32,6 @@ public class WasdappController {
     public String List3(Model model){
         return "upload.xhtml";
     }
-=======
-            model.addAttribute("entries", repo.findAll());
-            return "Add.xhtml";
-        }
-        
->>>>>>> src/main/java/com/realdolmen/hbo5/wasdapp/wasdappcore/controllers/WasdappController.java
-    }
+}
     
 
