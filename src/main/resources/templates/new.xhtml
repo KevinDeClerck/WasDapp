@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui">
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <title>WasDapp</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <body>
+        <h1>Entries</h1>
+        <table>
+            <tr>
+                <th>Id</th>
+                <th></th>
+            </tr>
+            <tr th:each="entry : ${entries}">
+                <td th:text="${entry.id + ' ' + entry.name}"></td>
+            </tr>
+        </table>
+        <hr/>
+        <form th:action="@{/new}" method="post" enctype="multipart/form-data">
+            <div>
+                Name: <input name="name" />
+            </div>
+            <div>
+                Locatie: <input name="locatie" />
+            </div>
+            <div>
+                <input type="submit" value="Add Entry" name="button"/>
+            </div>
+        </form>
+    </body>
+</html>

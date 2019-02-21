@@ -19,7 +19,7 @@ public class WasdappController {
     
     @RequestMapping(value="/Wasdapp", method=RequestMethod.GET)
     public String List(Model model){
-            model.addAttribute("entries", repo.findAll());
+            model.addAttribute("entries", wasdappService.findAllExisting());
             return "WasDapp.xhtml";
         }
     
