@@ -27,6 +27,11 @@ public class WasdappController {
             model.addAttribute("entries", repo.findAll());
             return "Add.xhtml";
         }
+           @RequestMapping(value="/Edit", method=RequestMethod.GET)
+    public String List3(Model model){
+            model.addAttribute("entries", repo.findAll());
+            return "Edit.xhtml";
+        }
         
     }
     
