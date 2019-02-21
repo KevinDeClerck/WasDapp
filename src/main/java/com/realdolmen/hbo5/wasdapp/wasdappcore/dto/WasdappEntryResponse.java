@@ -249,4 +249,82 @@ public class WasdappEntryResponse {
     public Double getLon() {
         return lon;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setLocatie(String locatie) {
+        this.locatie = locatie;
+    }
+
+    public void setStraat(String straat) {
+        this.straat = straat;
+    }
+
+    public void setNummer(String nummer) {
+        this.nummer = nummer;
+    }
+
+    public void setPostCode(String postCode) {
+        this.postCode = postCode;
+    }
+
+    public void setGemeente(String gemeente) {
+        this.gemeente = gemeente;
+    }
+
+    public void setLand(String land) {
+        this.land = land;
+    }
+
+    public void setOmschrijving(String omschrijving) {
+        this.omschrijving = omschrijving;
+    }
+
+    public void setWikiLink(String wikiLink) {
+        this.wikiLink = wikiLink;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
+    }
+
+    public void setTelefoonNummer(String telefoonNummer) {
+        this.telefoonNummer = telefoonNummer;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPrijs(Double prijs) {
+        this.prijs = prijs;
+    }
+
+    public void setPersoon(String persoon) {
+        this.persoon = persoon;
+    }
+
+    public void setAanmaakDatum(Timestamp aanmaakDatum) {
+        this.aanmaakDatum = aanmaakDatum;
+    }
+
+    public void setWijzigDatum(Timestamp wijzigDatum) {
+        this.wijzigDatum = wijzigDatum;
+    }
+
+    public void setLat(Double lat) {
+        this.lat = lat;
+    }
+
+    public void setLon(Double lon) {
+        this.lon = lon;
+    }
+    
+    
 }

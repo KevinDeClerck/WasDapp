@@ -3,10 +3,12 @@ package com.realdolmen.hbo5.wasdapp.wasdappcore.service.impl;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.domain.WasdappEntry;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.dto.WasdappEntryResponse;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.repo.WasdappEntryRepository;
+import com.realdolmen.hbo5.wasdapp.wasdappcore.rest.WasdappEntryMapper;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.rest.WasdappEntryResponseMapper;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.WasdappService;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,13 +19,14 @@ import static java.util.stream.Collectors.*;
 public class WasdappServiceImpl implements WasdappService {
 
     private WasdappEntryRepository wasdappRepository;
-    
+
     private WasdappEntryResponseMapper wasdappEntryResponseMapper;
+
+    private WasdappEntryMapper wasdappEntryMapper;
 
     public WasdappServiceImpl(WasdappEntryRepository wasdappRepository) {
         this.wasdappRepository = wasdappRepository;
     }
-
 
     @Override
     public List<WasdappEntry> findByNameContains(String shouldContain) {
@@ -42,13 +45,39 @@ public class WasdappServiceImpl implements WasdappService {
                 .map(this::save)
                 .collect(toList());
     }
-    
-    public WasdappEntry update(WasdappEntryResponse entryResponse){
+
+    public WasdappEntry update(WasdappEntryResponse entryResponse) {
         WasdappEntry entry = wasdappEntryResponseMapper.mapToEntry(entryResponse);
-        if(entry.getAanmaakDatum() == null){
+        if (entry.getAanmaakDatum() == null) {
             entry.setAanmaakDatum(Timestamp.valueOf(LocalDateTime.now()));
         }
         entry.setWijzigDatum(Timestamp.valueOf(LocalDateTime.now()));
         return wasdappRepository.save(entry);
+    }
+
+    public List<WasdappEntryResponse> findAll() {
+        List<WasdappEntry> entries = wasdappRepository.findAll();
+        return entries.stream()
+                .map(WasdappEntryMapper::mapToDto)
+                .collect(toList());
+    }
+
+    public List<WasdappEntryResponse> findAllExisting() {
+        List<WasdappEntry> entries = wasdappRepository.findAll();
+        List<WasdappEntry> entriesWithNames = new ArrayList<>();
+        for (WasdappEntry w : entries) {
+            if (w.getName() != null) {
+                entriesWithNames.add(w);
+            }
+        }
+        return entriesWithNames.stream()
+                .map(WasdappEntryMapper::mapToDto)
+                .collect(toList());
+    }
+    
+    public WasdappEntryResponse findById(Long id){
+        WasdappEntry entry = wasdappRepository.findById(id).get();
+        WasdappEntryResponse entryResponse = wasdappEntryMapper.mapToDto(entry);
+        return entryResponse;
     }
 }
