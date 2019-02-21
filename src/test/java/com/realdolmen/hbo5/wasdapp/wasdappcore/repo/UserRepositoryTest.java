@@ -18,7 +18,7 @@ public class UserRepositoryTest {
     @Autowired
     private UserRepository userRepository;
 
-    @Test
+    /*@Test
     public void user() {
         System.out.println(userRepository.findById(1L).get().getName());
         List<UserWassdapp> test = new ArrayList<>();
@@ -28,5 +28,5 @@ public class UserRepositoryTest {
             System.out.println(e.getName());
         }
         Truth.assertThat(userRepository.findById(1L).isPresent());
-    }
+    }*/
 }
