@@ -37,12 +37,27 @@ public class AddEntryController {
     }
 
     @RequestMapping(value = "/new", method = RequestMethod.POST)
-    public String entrySubmit(@RequestParam String name, @RequestParam String locatie, Model model) {
+    public String entrySubmit(
+            @RequestParam String name, @RequestParam String locatie,
+            @RequestParam String straat, @RequestParam String nummer,
+            @RequestParam String postCode, @RequestParam String gemeente,
+            @RequestParam String land, @RequestParam String omschrijving,
+            @RequestParam String website, @RequestParam String telefoon,
+            @RequestParam String email, Model model) {
         WasdappEntryResponse entry = new WasdappEntryResponse();
         Long id = new Long(wasdappService.findAllExisting().size() + 1);
         entry.setId(id);
         entry.setName(name);
         entry.setLocatie(locatie);
+        entry.setStraat(straat);
+        entry.setNummer(nummer);
+        entry.setPostCode(postCode);
+        entry.setGemeente(gemeente);
+        entry.setLand(land);
+        entry.setOmschrijving(omschrijving);
+        entry.setWebsite(website);
+        entry.setTelefoonNummer(telefoon);
+        entry.setEmail(email);
         wasdappService.update(entry);
 
         model.addAttribute("entry", entry);
