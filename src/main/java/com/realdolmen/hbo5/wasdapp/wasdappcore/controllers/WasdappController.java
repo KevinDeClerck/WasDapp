@@ -19,10 +19,9 @@ public class WasdappController {
     
     @RequestMapping(value="/index", method=RequestMethod.GET)
     public String List(Model model){
-            model.addAttribute("entries", repo.findAll());
+            model.addAttribute("entries", wasdappService.findAll());
             return "index.xhtml";
         }
-        
     }
     
 

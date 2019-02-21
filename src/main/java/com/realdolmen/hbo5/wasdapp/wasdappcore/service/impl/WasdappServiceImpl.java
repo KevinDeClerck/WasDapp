@@ -3,10 +3,12 @@ package com.realdolmen.hbo5.wasdapp.wasdappcore.service.impl;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.domain.WasdappEntry;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.dto.WasdappEntryResponse;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.repo.WasdappEntryRepository;
+import com.realdolmen.hbo5.wasdapp.wasdappcore.rest.WasdappEntryMapper;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.rest.WasdappEntryResponseMapper;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.WasdappService;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +21,8 @@ public class WasdappServiceImpl implements WasdappService {
     private WasdappEntryRepository wasdappRepository;
     
     private WasdappEntryResponseMapper wasdappEntryResponseMapper;
+    
+    private WasdappEntryMapper wasdappEntryMapper;
 
     public WasdappServiceImpl(WasdappEntryRepository wasdappRepository) {
         this.wasdappRepository = wasdappRepository;
@@ -50,5 +54,25 @@ public class WasdappServiceImpl implements WasdappService {
         }
         entry.setWijzigDatum(Timestamp.valueOf(LocalDateTime.now()));
         return wasdappRepository.save(entry);
+    }
+    
+    public List<WasdappEntryResponse> findAll(){
+        List<WasdappEntry> entries = wasdappRepository.findAll();
+        return entries.stream()
+                .map(WasdappEntryMapper::mapToDto)
+                .collect(toList());
+    }
+    
+        public List<WasdappEntryResponse> findAllExisting(){
+        List<WasdappEntry> entries = wasdappRepository.findAll();
+        List<WasdappEntry> entriesWithNames = new ArrayList<>();
+        for (WasdappEntry w : entries) {
+            if(w.getName() != null){
+                entriesWithNames.add(w);
+            }   
+        }
+        return entriesWithNames.stream()
+                .map(WasdappEntryMapper::mapToDto)
+                .collect(toList());
     }
 }
