@@ -17,14 +17,14 @@ public class WasdappController {
     @Autowired
     WasdappEntryRepository repo;
     
-    @RequestMapping(value="/index", method=RequestMethod.GET)
+    @RequestMapping(value="/Wasdapp", method=RequestMethod.GET)
     public String List(Model model){
-            model.addAttribute("entries", repo.findAll());
+            model.addAttribute("entries", wasdappService.findAllExisting());
             return "WasDapp.xhtml";
         }
-    
-    @RequestMapping("/Wasdapp")
+       @RequestMapping(value="/Add", method=RequestMethod.GET)
     public String List2(Model model){
+<<<<<<< src/main/java/com/realdolmen/hbo5/wasdapp/wasdappcore/controllers/WasdappController.java
         return "WasDapp.xhtml";
     }
 
@@ -33,6 +33,12 @@ public class WasdappController {
     public String List3(Model model){
         return "upload.xhtml";
     }
+=======
+            model.addAttribute("entries", repo.findAll());
+            return "Add.xhtml";
+        }
+        
+>>>>>>> src/main/java/com/realdolmen/hbo5/wasdapp/wasdappcore/controllers/WasdappController.java
     }
     
 
