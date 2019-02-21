@@ -60,6 +60,6 @@ public class AddEntryController {
 
         model.addAttribute("entry", entry);
 
-        return "redirect:/Wasdapp";
+        return "redirect:/wasdapp";
     }
 }
