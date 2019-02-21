@@ -10,18 +10,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class WasdappController {
-    
+
     @Autowired
     WasdappServiceImpl wasdappService;
-    
+
     @Autowired
     WasdappEntryRepository repo;
-    
-    @RequestMapping(value="/Wasdapp", method=RequestMethod.GET)
-    public String List(Model model){
-            model.addAttribute("entries", wasdappService.findAllExisting());
-            return "WasDapp.xhtml";
-        }       
-    }
-    
 
+    @RequestMapping(value = "/Wasdapp", method = RequestMethod.GET)
+    public String List(Model model) {
+        model.addAttribute("entries", wasdappService.findAllExisting());
+        return "WasDapp.xhtml";
+    }
+
+    @RequestMapping("/upload")
+    public String List3(Model model) {
+        return "upload.xhtml";
+    }
+}
