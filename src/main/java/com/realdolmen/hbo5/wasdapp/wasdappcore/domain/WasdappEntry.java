@@ -6,14 +6,17 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "wasdapp_entry")
 public class WasdappEntry implements Serializable {
 
     @Id
+    @NotNull
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @NotNull
     @Column(nullable = false)
     private String name;
     @Column(length = 64)
@@ -44,7 +47,9 @@ public class WasdappEntry implements Serializable {
     @Column(length = 64)
     private String persoon;
     @Column(nullable = false)
+    @NotNull
     private Timestamp aanmaakDatum;
+    @NotNull
     @Column(nullable = false)
     private Timestamp wijzigDatum;
     @Column
