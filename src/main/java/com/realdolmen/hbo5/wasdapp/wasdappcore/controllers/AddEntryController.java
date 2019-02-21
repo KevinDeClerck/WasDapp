@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class NewEntryController {
+public class AddEntryController {
 
     @Autowired
     WasdappServiceImpl wasdappService;
@@ -29,11 +29,6 @@ public class NewEntryController {
     @Autowired
     WasdappEntryRepository repo;
 
-    @RequestMapping("/new/{id}")
-    public String developer(@PathVariable Long id, Model model) {
-        model.addAttribute("entry", repo.findById(id).get());
-        return "entry";
-    }
 
     @RequestMapping(value = "/new", method = RequestMethod.GET)
     public String createForm(Model model) {
@@ -52,6 +47,6 @@ public class NewEntryController {
 
         model.addAttribute("entry", entry);
 
-        return "index.xhtml";
+        return "redirect:/Wasdapp";
     }
 }

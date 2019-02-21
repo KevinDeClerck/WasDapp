@@ -16,9 +16,6 @@
             </tr>
             <tr th:each="entry : ${entries}">
                 <td th:text="${entry.id + ' ' + entry.name}"></td>
-                <td>
-                    <a th:href="@{/new/{id}(id=${entry.id})}">view</a>
-                </td>
             </tr>
         </table>
         <hr/>
