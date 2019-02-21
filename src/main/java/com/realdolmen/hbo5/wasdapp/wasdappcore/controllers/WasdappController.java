@@ -24,10 +24,14 @@ public class WasdappController {
         }
        @RequestMapping(value="/Add", method=RequestMethod.GET)
     public String List2(Model model){
-            model.addAttribute("entries", repo.findAll());
-            return "Add.xhtml";
-        }
-        
+        return "WasDapp.xhtml";
     }
+
+
+    @RequestMapping("/upload")
+    public String List3(Model model){
+        return "upload.xhtml";
+    }
+}
     
 

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html layout:decorate="~{task/layout}"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <title>WasDapp</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body> <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Wasdapp</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li ><a href="create">Add</a></li>
+                <li ><a href="#">Upload</a></li>
+                <li ><a href="#">Login</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container" style="padding: 5%">
+    <form>
+        <div class="form-group">
+            <label for="exampleFakeFile1">File</label>
+
+            <div class="input-group">
+                <input type="file" id="exampleFile1" name="exampleFile1" style="display: none">
+                <input type="text" class="form-control" id="exampleFakeFile1" readonly>
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" id="exampleFakeBrowseFile1">Browse...</button>
+                </span>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+</div>
+
+</body>
+
+</html>
