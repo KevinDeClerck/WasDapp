@@ -1,0 +1,409 @@
+ul {
+    width: fit-content;
+    margin: left;
+    list-style: none;
+}
+
+h1 {
+    padding-left: 2%;
+}
+
+
+
+
+.header {
+    background-color: dimgrey;
+    text-align: left;
+    padding: 0px;
+    border: 4px;
+}
+#WasDappTable {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+    color: black;
+}
+
+#WasDappTable td, #WasDappTable th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#WasDappTable tr:nth-child(even){background-color: white}
+
+#WasDappTable tr:hover {background-color: white;}
+
+#WasDappTable th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: Black;
+}
+
+/*Body*/
+body {
+    background: dimgrey;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    color: white;
+    width: 100%;
+}
+
+
+
+.topnav {
+    overflow: hidden;
+    background: black;
+    padding: padding;
+}
+
+.topnav a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    border-radius: 5px;
+
+}
+
+.topnav a:hover {
+    background-color: white;
+    color: #4CAF50;
+}
+
+.column {
+    float: center;
+    width: 80%;
+    padding: 15px;
+    margin: auto;
+    background: grey;
+    border-radius: 5px;
+
+}
+
+
+.row {
+    height: auto;
+}
+
+@media screen and (max-width:600px) {
+    .column-3 {
+        width: 100%;
+    }
+}
+
+/*social media knoppen*/
+.fa {
+    margin: auto;
+    margin-top: 10px;
+    padding: 50px;
+    font-size: 70px;
+    width: 50px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.fa-facebook {
+    background: #3B5998;
+    color: white;
+    width: 110px;
+}
+
+.fa-youtube {
+    background: red;
+    color: white;
+    width: 110px;
+
+}
+
+.fa-instagram {
+    background: black;
+    color: white;
+    width: 110px;
+}
+
+.fa:hover {
+    opacity: 0.9;
+    color: darkorange;
+}
+
+.column-3 {
+    float: left;
+    width: 30.33%;
+    padding: 15px;
+    padding-left: center;
+    padding-right: center;
+    background: grey;
+    margin-left: 30px;
+    ;
+    height: 700px;
+    border-radius: 5px;
+
+}
+
+/* Style the search field */
+form.example input[type=text] {
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    float: left;
+    width: 90%;
+    background: #f1f1f1;
+}
+
+
+/* Clear floats */
+form.example::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+@media screen and (max-width:600px) {
+    .column {
+        width: 100%;
+    }
+}
+
+/*projecten*/
+.flex-container {
+    display: flex;
+    width: 95%;
+    flex-wrap: wrap-reverse;
+    align-content: flex-start;
+    background: grey;
+    float: left;
+    margin-left: 2%;
+    border-radius: 5px;
+
+
+
+}
+
+.flex-container > div {
+    max-width: 380px;
+    margin: auto;
+    margin-left: 3%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+
+
+.flex-item {
+    background-color: darkgray;
+    padding-left: 2%;
+    padding-right: 2%;
+    width: 50%;
+    height: 250px;
+
+
+    line-height: 22px;
+    color: white;
+    font-weight: 250;
+    text-align: left;
+    padding-top: 2%;
+    border-radius: 15px;
+
+
+}
+
+
+
+/*Slideshow*/
+slider {
+    display: block;
+    width: 70%;
+    height: 70%;
+    background-color: grey;
+    overflow: hidden;
+    position: absolute;
+    margin-left: 15%;
+    margin-top: 1%;
+    border-radius: 15px;
+
+}
+
+
+slider > * {
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: grey;
+    animation: slide 12s infinite;
+    overflow: hidden;
+
+}
+
+slide:nth-child(1) {
+    left: 0%;
+    animation-delay: -1s;
+    background-image: url(IMG_0638.jpg);
+    background-size: cover;
+    background-position: center;
+
+}
+
+slide:nth-child(2) {
+    left: 0%;
+    animation-delay: 2s;
+    background-image: url(Afbeelding1.png);
+    background-size: cover;
+    background-position: center;
+
+}
+
+slide:nth-child(3) {
+    left: 0%;
+    animation-delay: 5s;
+    background-image: url(Capture.PNG);
+    background-size: cover;
+    background-position: center;
+
+}
+
+slide:nth-child(4) {
+    left: 0%;
+    animation-delay: 8s;
+    background-image: url(thumbnail_IMG_0749.jpg);
+    background-size: cover;
+    background-position: center;
+
+}
+
+slide p {
+    text-align: center;
+    width: 100%;
+    margin-top: 340px;
+    color: grey;
+}
+
+@keyframes slide {
+    0% {
+        left: 100%;
+        width: 100%;
+    }
+
+    5% {
+        left: 0%;
+    }
+
+    25% {
+        left: 0%;
+    }
+
+    30% {
+        left: -100%;
+        width: 100%;
+    }
+
+    30.0001% {
+        left: -100%;
+        width: 0%;
+    }
+
+    100% {
+        left: 100%;
+        width: 0%;
+    }
+}
+
+/*contact*/
+.column-2 {
+    float: center;
+    width: 95%;
+    padding: 15px;
+    margin: auto;
+    background: grey;
+    border-radius: 5px;
+
+
+}
+
+input[type=text],
+select,
+textarea {
+    width: 100%;
+    padding: 15px; border: 1px solid #ccc;
+    border-radius: 5px;
+    /* Rondere hoeken */
+    box-sizing: border-box;
+    /* padding en width blijven goed staan*/
+    margin-top: 6px;
+    margin-bottom: 5px;
+    resize: vertical
+}
+
+/* Styling de submit button*/
+input[type=submit] {
+    background-color: darkorange;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 6px;
+    ;
+}
+
+
+input[type=submit]:hover {
+    background-color: white;
+    color: darkorange;
+}
+
+/* background color toevoegen en padding rond de form */
+.container {
+    border-radius: 5px;
+    background-color: grey;
+    padding: 20%;
+    padding-top: 20px;
+    padding-bottom: 2%;
+    ;
+
+}
+
+
+/*onderste van de website*/
+.footer {
+    height: 20px;
+    padding: 0px;
+    height: 100px;
+    text-align: center;
+    background: black;
+    color: white;
+    padding-top: 5px;
+}
+
+.button {
+    background-color: black;
+    border: none;
+    color: white;
+    padding: 14px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    border-radius: 5px
+}
+
+.button:hover {
+    opacity: 0.9;
+    color: darkorange;
+}
+
+/*lettertype*/
+.w3-myfont {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+
+}
+
