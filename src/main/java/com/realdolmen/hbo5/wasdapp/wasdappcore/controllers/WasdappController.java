@@ -1,3 +1,4 @@
+
 package com.realdolmen.hbo5.wasdapp.wasdappcore.controllers;
 
 import com.realdolmen.hbo5.wasdapp.wasdappcore.repo.WasdappEntryRepository;
@@ -26,7 +27,6 @@ public class WasdappController {
     public String List2(Model model){
         return "WasDapp.xhtml";
     }
-
 
     @RequestMapping("/upload")
     public String List3(Model model){
