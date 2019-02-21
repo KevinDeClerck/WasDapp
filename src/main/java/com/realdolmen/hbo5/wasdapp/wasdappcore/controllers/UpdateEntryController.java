@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class AddEntryController {
+public class UpdateEntryController {
 
     @Autowired
     WasdappServiceImpl wasdappService;
@@ -30,21 +30,21 @@ public class AddEntryController {
     WasdappEntryRepository repo;
 
 
-    @RequestMapping(value = "/add", method = RequestMethod.GET)
-    public String createForm(Model model) {
-        return "add.xhtml";
+    @RequestMapping(value = "/update/{id}")
+    public String updateForm(@PathVariable Long id, Model model) {
+        model.addAttribute("entry", wasdappService.findById(id));
+        return "update";
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String entrySubmit(
+            @RequestParam Long id, @RequestParam String telefoon,
             @RequestParam String name, @RequestParam String locatie,
             @RequestParam String straat, @RequestParam String nummer,
             @RequestParam String postCode, @RequestParam String gemeente,
-            @RequestParam String land, @RequestParam String omschrijving,
-            @RequestParam String telefoon, @RequestParam String email,
-            Model model) {
-        WasdappEntryResponse entry = new WasdappEntryResponse();
-        Long id = new Long(wasdappService.findAllExisting().size() + 1);
+            @RequestParam String land, @RequestParam String omschrijving, 
+            @RequestParam String email, Model model) {
+        WasdappEntryResponse entry = wasdappService.findById(id);
         entry.setId(id);
         entry.setName(name);
         entry.setLocatie(locatie);
@@ -63,3 +63,4 @@ public class AddEntryController {
         return "redirect:/wasdapp";
     }
 }
+
