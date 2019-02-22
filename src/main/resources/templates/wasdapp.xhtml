@@ -23,6 +23,7 @@
                         <li ><a href="upload">Upload</a></li>
                         <li ><a href="login">Login</a></li>
                     </ul>
+                    </ul>
                 </div>
             </div>
         </nav>
@@ -32,18 +33,18 @@
                     <thead>
                         <tr>
                             <th><input type="checkbox" id="checkAll"/></th>
-                            <th>Id</th>
-                            <th>Name</th>
-                            <th>Location</th>
-                            <th>Adres</th>
-                            <th>Omschrijving</th>
-                            <th>Telefoon</th>
-                            <th>Email</th>
-                            <th>Last Modified</th>
-                            <th>Lat</th>
-                            <th>Lon</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
+                            <th th:text="#{id}"></th>
+                            <th th:text="#{naam}"></th>
+                            <th th:text="#{locatie}"></th>
+                            <th th:text="#{adres}"></th>
+                            <th th:text="#{omschrijving}"></th>
+                            <th th:text="#{telefoon}"></th>
+                            <th th:text="#{email}"></th>
+                            <th th:text="#{aanmaakdatum}"></th>
+                            <th th:text="#{lat}"></th>
+                            <th th:text="#{lon}"></th>
+                            <th th:text="#{edit}"></th>
+                            <th th:text="#{delete}"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -60,16 +61,33 @@
                             <td th:text="${entry.lat}"></td>
                             <td th:text="${entry.lon}"></td>
                             <td><a th:href="@{/edit(id=${entry.id})}"><button type="button" class="btn btn-default btn-success"><span class="glyphicon glyphicon-pencil"></span></button></a></td>
-                            <td><a th:href="@{/delete_item(itemId=${entry.id})}"><button type="button" class="btn btn-default btn-danger"><span class="glyphicon glyphicon-trash"></span></button></a></td>
+                            <td><a th:href="@{/delete_item(itemId=${entry.id})}"><button type="button" class="btn btn-default btn-danger" onclick="return confirm('Delete entry?')"><span class="glyphicon glyphicon-trash"></span></button></a></td>
                         </tr>
                     </tbody>
                 </table>
-                <input type="submit" class="btn btn-danger" value="Delete selected items">
+                <input type="submit" class="btn btn-danger" value="Delete selected items" onclick="return confirm('Delete entry?')">
                 <input type="checkbox" name="id" value="-1" style="display:none" checked="checked" />
             </form>
+            <span th:text="#{lang.change}"></span>:
+            <select id="locales">
+                <option value=""></option>
+                <option value="nl" th:text="#{lang.dutch}"></option>
+                <option value="fr" th:text="#{lang.fr}"></option>
+            </select>
             <script>
                 $("#checkAll").click(function () {
                     $(".check").prop('checked', $(this).prop('checked'));
+                });
+            </script>
+
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $("#locales").change(function () {
+                        var selectedOption = $('#locales').val();
+                        if (selectedOption != '') {
+                            window.location.replace('wasdappinternational?lang=' + selectedOption);
+                        }
+                    });
                 });
             </script>
         </div>
