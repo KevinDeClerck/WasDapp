@@ -9,6 +9,9 @@
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <title>WasDapp</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
     </head>
     <body>
         <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -23,6 +26,11 @@
                         <li ><a href="upload">Upload</a></li>
                         <li ><a href="login">Login</a></li>
                     </ul>
+                    <!--<select id="locales">
+                        <option value="">Choose Language</option>
+                        <option value="nl" th:text="#{lang.dutch}"></option>
+                        <option value="fr" th:text="#{lang.fr}"></option>
+                    </select>-->
                 </div>
             </div>
         </nav>
@@ -42,8 +50,8 @@
                             <th th:text="#{aanmaakdatum}"></th>
                             <th th:text="#{lat}"></th>
                             <th th:text="#{lon}"></th>
-                            <th th:text="#{edit}"></th>
-                            <th th:text="#{delete}"></th>
+                            <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -67,12 +75,12 @@
                 <input type="submit" class="btn btn-danger" value="Delete selected items" onclick="return confirm('Delete entry?')">
                 <input type="checkbox" name="id" value="-1" style="display:none" checked="checked" />
             </form>
-            <span th:text="#{lang.change}"></span>:
+            <!--<span th:text="#{lang.change}"></span>:
             <select id="locales">
                 <option value=""></option>
                 <option value="nl" th:text="#{lang.dutch}"></option>
                 <option value="fr" th:text="#{lang.fr}"></option>
-            </select>
+            </select>-->
             <script>
                 $("#checkAll").click(function () {
                     $(".check").prop('checked', $(this).prop('checked'));
