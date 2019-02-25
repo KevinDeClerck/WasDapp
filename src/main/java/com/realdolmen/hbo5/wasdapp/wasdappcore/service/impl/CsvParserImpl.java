@@ -18,6 +18,7 @@ import java.util.stream.Stream;
 import static java.lang.Double.valueOf;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Random;
 import static java.util.stream.Collectors.toList;
 import static org.apache.logging.log4j.util.Strings.isBlank;
@@ -65,7 +66,7 @@ public class CsvParserImpl implements CsvParser {
 
     private WasdappEntry mapLineToEntry(String s) {
         try{
-        String[] split = s.split(";");
+        String[] split = s.split(";",-1);
         WasdappEntry wasdappEntry = new WasdappEntry();
         wasdappEntry.setId(getLongValue(split[0]));
         wasdappEntry.setName(getText(split[1]));
