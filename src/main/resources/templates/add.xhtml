@@ -19,10 +19,10 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="wasdapp">Home</a></li>
-                        <li class="active"><a href="add">Add</a></li>
-                        <li ><a href="upload">Upload</a></li>
-                        <li ><a href="#">Login</a></li>
+                        <li><a href="wasdapp"><th th:text="#{Home}"/></a></li>
+                        <li class="active"><a href="add"><th th:text="#{Add}"/></a></li>
+                        <li><a href="upload"><th th:text="#{Upload}"/></a></li>
+                        <li><a href="login"><th th:text="#{SignOut}"/></a></li>
                     </ul>
                 </div>
             </div>
@@ -31,61 +31,61 @@
             <form style="margin: 50px" th:action="@{/add}" method="post" enctype="multipart/form-data">
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="Name">Name</label>
+                        <label for="Name"><th th:text="#{Name}"/></label>
                         <input  name="name" type="text" class="form-control" placeholder="Enter Name">
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="Location">Location</label>
+                        <label for="Location"><th th:text="#{Locatie}"/></label>
                         <input name="locatie" type="text" class="form-control" placeholder="Location">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="Street">Street</label>
+                        <label for="Street"><th th:text="#{Street}"/></label>
                         <input name="straat" type="text" class="form-control" placeholder="Street">
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="Number">Number</label>
+                        <label for="Number"><th th:text="#{Number}"/></label>
                         <input name="nummer" type="text" class="form-control" placeholder="Number">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="Postal code">Postal code</label>
+                        <label for="Postal code"><th th:text="#{PostalCode}"/></label>
                         <input name="postCode" type="text" class="form-control" placeholder="Postal code">
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="City">Township</label>
+                        <label for="City"><th th:text="#{TownShip}"/></label>
                         <input name="gemeente" type="text" class="form-control" placeholder="City">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="Land">Land</label>
+                        <label for="Land"><th th:text="#{Land}"/></label>
                         <input name="land" type="text" class="form-control" placeholder="land">
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="Description">Description</label>
+                        <label for="Description"><th th:text="#{Land}"/></label>
                         <input name="omschrijving" type="text" class="form-control" placeholder="Description">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="Telephone">Telephone</label>
+                        <label for="Telephone"><th th:text="#{Telephone}"/></label>
                         <input name="telefoon" type="text" class="form-control" placeholder="Telephone">
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="E-mail">E-mail</label>
+                        <label for="E-mail"><th th:text="#{EMail}"/></label>
                         <input name="email" type="email" class="form-control" placeholder="E-mail">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="Latitude">Latitude</label>
+                        <label for="Latitude"><th th:text="#{Latitude}"/></label>
                         <input name="latitude" type="number" step=".01" class="form-control" placeholder="Latitude">
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="Longitude">Longitude</label>
+                        <label for="Longitude"><th th:text="#{Longtitude}"/></label>
                         <input name="longitude" type="number" step=".01" class="form-control" placeholder="Longitude">
                     </div>
                 </div>

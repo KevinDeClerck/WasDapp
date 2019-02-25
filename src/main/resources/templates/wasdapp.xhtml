@@ -21,10 +21,10 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="wasdapp">Home</a></li>
-                        <li ><a href="add">Add</a></li>
-                        <li ><a href="upload">Upload</a></li>
-                        <li ><a href="login">Login</a></li>
+                        <li class="active"><a href="wasdapp"><th th:text="#{Home}"/></a></li>
+                        <li><a href="add"><th th:text="#{Add}"/></a></li>
+                        <li><a href="upload"><th th:text="#{Upload}"/></a></li>
+                        <li><a href="login"><th th:text="#{SignOut}"/></a></li>
                     </ul>
                     <!--<select id="locales">
                         <option value="">Choose Language</option>
@@ -72,15 +72,15 @@
                         </tr>
                     </tbody>
                 </table>
-                <input type="submit" class="btn btn-danger" value="Delete selected items" onclick="return confirm('Delete entry?')">
+                <input type="submit" class="btn btn-danger" value="Delete Selected items" onclick="return confirm('Delete entry?')">
                 <input type="checkbox" name="id" value="-1" style="display:none" checked="checked" />
             </form>
-            <!--<span th:text="#{lang.change}"></span>:
+            <span th:text="#{lang.change}"></span>:
             <select id="locales">
                 <option value=""></option>
                 <option value="nl" th:text="#{lang.dutch}"></option>
                 <option value="fr" th:text="#{lang.fr}"></option>
-            </select>-->
+            </select>
             <script>
                 $("#checkAll").click(function () {
                     $(".check").prop('checked', $(this).prop('checked'));
