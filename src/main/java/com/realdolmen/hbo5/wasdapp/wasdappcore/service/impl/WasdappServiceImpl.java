@@ -35,6 +35,12 @@ public class WasdappServiceImpl implements WasdappService {
 
     @Override
     public WasdappEntry save(WasdappEntry entry) {
+        Long id = 0L;
+        entry.setId(id);
+        if (entry.getAanmaakDatum() == null) {
+            entry.setAanmaakDatum(Timestamp.valueOf(LocalDateTime.now()));
+        }
+        entry.setWijzigDatum(Timestamp.valueOf(LocalDateTime.now()));
         return wasdappRepository.save(entry);
     }
 

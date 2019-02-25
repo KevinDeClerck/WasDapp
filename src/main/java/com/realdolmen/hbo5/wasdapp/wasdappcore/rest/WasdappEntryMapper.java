@@ -36,7 +36,7 @@ public class WasdappEntryMapper {
                 .withAanmaakDatum(createDate)
                 .withWijzigDatum(updateDate)
                 .withLat(entry.getLat())
-                .withLon(entry.getLat())
+                .withLon(entry.getLon())
                 .build();
     }
 }
