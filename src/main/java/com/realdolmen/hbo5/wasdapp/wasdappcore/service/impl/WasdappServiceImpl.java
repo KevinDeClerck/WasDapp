@@ -1,7 +1,9 @@
 package com.realdolmen.hbo5.wasdapp.wasdappcore.service.impl;
 
+import com.realdolmen.hbo5.wasdapp.wasdappcore.domain.UserWassdapp;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.domain.WasdappEntry;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.dto.WasdappEntryResponse;
+import com.realdolmen.hbo5.wasdapp.wasdappcore.repo.UserRepository;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.repo.WasdappEntryRepository;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.rest.WasdappEntryMapper;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.rest.WasdappEntryResponseMapper;
@@ -23,11 +25,11 @@ public class WasdappServiceImpl implements WasdappService {
     private WasdappEntryResponseMapper wasdappEntryResponseMapper;
 
     private WasdappEntryMapper wasdappEntryMapper;
-
+    
     public WasdappServiceImpl(WasdappEntryRepository wasdappRepository) {
         this.wasdappRepository = wasdappRepository;
     }
-
+    
     @Override
     public List<WasdappEntry> findByNameContains(String shouldContain) {
         return wasdappRepository.findByNameContaining(shouldContain);

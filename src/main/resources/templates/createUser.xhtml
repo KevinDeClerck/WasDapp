@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui">
+    <head>
+        <link rel="stylesheet/less" type="text/css" href="styles.less" />
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <title>WasDapp</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2" id="toggler">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"><a class="nav-link" href="wasdapp">Home</a></li>
+                    <li class="nav-item active"><a class="nav-link" href="add">Add</a></li>
+                    <li class="nav-item"><a class="nav-link" href="upload">Upload</a></li>
+                </ul>
+            </div>
+            <div class="mx-auto order-0">
+                <a class="navbar-brand mx-auto" href="wasdapp">Wasdapp</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#toggler" aria-controls="toggler" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse w-100 order-3 dual-collapse2" id="toggler">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="login">Login</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div>
+            <form style="margin: 50px; margin-top: 20px;" th:action="@{/createUser}" method="post" enctype="multipart/form-data">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="Name">First Name</label>
+                        <input  name="name" type="text" class="form-control" placeholder="First Name">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="Lastname">Lastname</label>
+                        <input name="achternaam" type="text" class="form-control" placeholder="Lastname">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="E-mail">E-mail</label>
+                        <input name="email" type="text" class="form-control" placeholder="E-mail">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="Password">Password</label>
+                        <input name="password" type="password" class="form-control" placeholder="Password">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="Confirm Password">Confirm Password</label>
+                        <input name="confPass" type="password" class="form-control" placeholder="Confirm Password">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="checkbox">
+                        <label><input type="radio" name="role" value="admin"  > Admin</label>
+                        <label><input type="radio" name="role" value="user" checked="checked"> User</label>
+                    </div>             
+
+                </div>
+                <button type="submit" class="btn btn-success">Create User</button>
+
+
+            </form>
+
+
+        </div>
+
+        <table>
+            <tr th:each="entry : ${entries}">
+                <td th:text="${entry.id}"></td>
+                <td th:text="${entry.name}"></td>
+                <td th:text="${entry.role}"></td>
+
+
+        </table>
+    </body>
+</html>
