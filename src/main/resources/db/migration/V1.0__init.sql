@@ -28,3 +28,15 @@ insert into wasdapp_entry(name,locatie,straat,nummer,post_Code,gemeente,land,oms
 insert into wasdapp_entry(name,locatie,straat,nummer,post_Code,gemeente,land,omschrijving,wiki_Link,website,telefoon_Nummer,email,prijs,persoon,aanmaak_Datum,wijzig_Datum,lat,lon) values ('Shmerik','Gent','testlaan','69A','9000','Gent','België','nlablabla','wasdapp.wiki','wasdapp.be','0485967415','wasdapp@gmail.com',10.25,'Kevin','2010-01-01 11:00:00','2010-01-01 13:00:00',10.10,10.05);
 insert into wasdapp_entry(name,locatie,straat,nummer,post_Code,gemeente,land,omschrijving,wiki_Link,website,telefoon_Nummer,email,prijs,persoon,aanmaak_Datum,wijzig_Datum,lat,lon) values ('Shelter','Gent','testlaan','69A','9000','Gent','België','nlablabla','wasdapp.wiki','wasdapp.be','0485967415','wasdapp@gmail.com',10.25,'Kevin','2010-01-01 11:00:00','2010-01-01 13:00:00',10.10,10.05);
 
+create table gebruiker (
+                      user_id int8 auto_increment primary key not null,
+                      email varchar(64) not null,
+                      password varchar(64) not null,
+                      name varchar(64),
+                      achternaam varchar(64),
+                      role varchar
+);
+
+insert into gebruiker(email, password, name, achternaam, role) values ('tetieiei777@gmail.com', 'jijiijiji', 'larry', 'jeremiah', 'admin');
+insert into gebruiker(email, password, name, achternaam, role) values ('tetie787@gmail.com', 'neintje', 'kevin', 'de clerk', 'admin');
+insert into gebruiker(email, password, name, achternaam, role) values ('tet77@gmail.com', 'password', 'jasper', 'marcel', 'user');
