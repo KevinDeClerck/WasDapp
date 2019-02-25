@@ -3,40 +3,46 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:b="http://bootsfaces.net/ui">
     <head>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="../css/frontend wasdapp.css">
         <link rel="stylesheet/less" type="text/css" href="styles.less" />
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <title>WasDapp</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     </head>
     <body>
-        <nav class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="wasdapp">Wasdapp</a>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="wasdapp">Home</a></li>
-                        <li ><a href="add">Add</a></li>
-                        <li ><a href="upload">Upload</a></li>
-                        <li ><a href="login">Login</a></li>
-                    </ul>
-                    <!--<select id="locales">
-                        <option value="">Choose Language</option>
-                        <option value="nl" th:text="#{lang.dutch}"></option>
-                        <option value="fr" th:text="#{lang.fr}"></option>
-                    </select>-->
-                </div>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2" id="toggler">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active"><a class="nav-link" href="wasdapp">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="add">Add</a></li>
+                    <li class="nav-item"><a class="nav-link" href="upload">Upload</a></li>
+                </ul>
+            </div>
+            <div class="mx-auto order-0">
+                <a class="navbar-brand mx-auto" href="wasdapp">Wasdapp</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#toggler" aria-controls="toggler" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse w-100 order-3 dual-collapse2" id="toggler">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="login">Login</a></li>
+                </ul>
             </div>
         </nav>
-        <div style="margin-top: 70px; margin-right: 20px; margin-left: 20px;">
+        <div style="
+             width: 95%;
+             margin: 0px auto;
+             float: none;
+             padding-top: 30px;">
             <form action="deleteItems" method="get">
-                <table id="example" class="table table-condensed table-hover table-dark" style="width:100%; border-style: groove;">
+                <table class="table table-condensed table-hover text-centered" style="
+                       border: groove;
+                       border-radius: 5px;
+                       width: 100%">
                     <thead>
                         <tr>
                             <th><input type="checkbox" id="checkAll"/></th>
@@ -67,12 +73,12 @@
                             <td th:text="${entry.aanmaakDatum}"></td>
                             <td th:text="${entry.lat}"></td>
                             <td th:text="${entry.lon}"></td>
-                            <td><a th:href="@{/edit(id=${entry.id})}"><button type="button" class="btn btn-default btn-success"><span class="glyphicon glyphicon-pencil"></span></button></a></td>
-                            <td><a th:href="@{/delete_item(itemId=${entry.id})}"><button type="button" class="btn btn-default btn-danger" onclick="return confirm('Delete entry?')"><span class="glyphicon glyphicon-trash"></span></button></a></td>
+                            <td><a th:href="@{/edit(id=${entry.id})}"><button type="button" class="btn btn-success btn-sm"><i class="material-icons">edit</i></button></a></td>
+                            <td><a th:href="@{/delete_item(itemId=${entry.id})}"><button type="button" class="btn btn-danger btn-sm" onclick="return confirm('Delete entry?')"><i class="material-icons">delete</i></button></a></td>
                         </tr>
                     </tbody>
                 </table>
-                <input type="submit" class="btn btn-danger" value="Delete selected items" onclick="return confirm('Delete entry?')">
+                <button type="submit" class="btn btn-danger" onclick="return confirm('Delete entry?')">Delete selected items</button>
                 <input type="checkbox" name="id" value="-1" style="display:none" checked="checked" />
             </form>
             <!--<span th:text="#{lang.change}"></span>:
