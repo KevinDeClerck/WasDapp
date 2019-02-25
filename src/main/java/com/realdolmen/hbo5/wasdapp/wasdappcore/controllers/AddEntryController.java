@@ -64,4 +64,9 @@ public class AddEntryController {
 
         return "redirect:/wasdapp";
     }
+    @GetMapping("addinternational")
+    public String getInternationalPage(Model model) {
+        model.addAttribute("entries", wasdappService.findAll());
+        return "add.xhtml";
+    }
 }
