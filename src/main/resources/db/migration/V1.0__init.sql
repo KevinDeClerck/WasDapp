@@ -34,7 +34,7 @@ create table gebruiker (
                       password varchar(64) not null,
                       name varchar(64),
                       achternaam varchar(64),
-                      role varchar
+                      role varchar(20)
 );
 
 insert into gebruiker(email, password, name, achternaam, role) values ('tetieiei777@gmail.com', 'jijiijiji', 'larry', 'jeremiah', 'admin');

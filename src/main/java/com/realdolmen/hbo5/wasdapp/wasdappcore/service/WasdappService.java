@@ -1,5 +1,6 @@
 package com.realdolmen.hbo5.wasdapp.wasdappcore.service;
 
+import com.realdolmen.hbo5.wasdapp.wasdappcore.domain.UserWassdapp;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.domain.WasdappEntry;
 
 import java.util.List;
