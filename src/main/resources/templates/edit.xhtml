@@ -16,9 +16,9 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2" id="toggler">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item"><a class="nav-link" href="wasdapp">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="add">Add</a></li>
-                    <li class="nav-item"><a class="nav-link" href="upload">Upload</a></li>
+                    <li class="nav-item"><a class="nav-link" href="wasdapp"><th th:text="#{Home}"/></a></li>
+                    <li class="nav-item active"><a class="nav-link" href="add"><th th:text="#{Add}"/></a></li>
+                    <li class="nav-item"><a class="nav-link" href="upload"><th th:text="#{Upload}"/></a></li>
                 </ul>
             </div>
             <div class="mx-auto order-0">
@@ -29,81 +29,89 @@
             </div>
             <div class="navbar-collapse collapse w-100 order-3 dual-collapse2" id="toggler">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a class="nav-link" href="login">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="login"><th th:text="#{SignOut}"/></a></li>
+                    <select  class="btn btn-primary dropdown-toggle bg-dark"  id="locales">
+                        <option value=""><th th:text="#{language}"/></option>
+                        <option value="nl" th:text="#{lang.dutch}"></option>
+                        <option value="fr" th:text="#{lang.fr}"></option>
+                    </select>
                 </ul>
             </div>
         </nav>
         <div>
-            <form style="margin: 50px; margin-top: 20px;" th:action="@{/edit}" method="post" enctype="multipart/form-data">
+            <form style="margin: 50px; margin-top: 20px;" th:action="@{/add}" method="post" enctype="multipart/form-data">
                 <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <label for="ID">ID</label>
-                        <input name="id" th:value="${entry.id}" type="id" class="form-control" readonly>
+                    <div class="form-group col-md-6">
+                        <label for="Name"><th th:text="#{Name}"/></label>
+                        <input  name="name" type="text" class="form-control" th:attr="placeholder=#{pNaam}">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="Location"><th th:text="#{Locatie}"/></label>
+                        <input name="locatie" type="text" class="form-control" th:attr="placeholder=#{pLocatie}">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="Name">Name</label>
-                        <input name="name" th:value="${entry.name}" type="text" class="form-control" placeholder="Enter Name">
+                        <label for="Street"><th th:text="#{Street}"/></label>
+                        <input name="straat" type="text" class="form-control" th:attr="placeholder=#{pStraat}">
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="Location">Location</label>
-                        <input name="locatie" th:value="${entry.locatie}" type="text" class="form-control" placeholder="Location">
+                        <label for="Number"><th th:text="#{Number}"/></label>
+                        <input name="nummer" type="text" class="form-control" th:attr="placeholder=#{pNummer}">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="Street">Street</label>
-                        <input name="straat" th:value="${entry.straat}" type="text" class="form-control" placeholder="Street">
+                        <label for="Postal code"><th th:text="#{PostalCode}"/></label>
+                        <input name="postCode" type="text" class="form-control" th:attr="placeholder=#{pPostcode}">
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="Number">Number</label>
-                        <input name="nummer" th:value="${entry.nummer}" type="text" class="form-control" placeholder="Number">
+                        <label for="City"><th th:text="#{TownShip}"/></label>
+                        <input name="gemeente" type="text" class="form-control" th:attr="placeholder=#{pGemeente}">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="Postal code">Postal code</label>
-                        <input name="postCode" th:value="${entry.postCode}" type="text" class="form-control" placeholder="Postal code">
+                        <label for="Land"><th th:text="#{Land}"/></label>
+                        <input name="land" type="text" class="form-control" th:attr="placeholder=#{pLand}">
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="City">Township</label>
-                        <input name="gemeente" th:value="${entry.gemeente}" type="text" class="form-control" placeholder="City">
+                        <label for="Description"><th th:text="#{Description}"/></label>
+                        <input name="omschrijving" type="text" class="form-control" th:attr="placeholder=#{pOmschrijving}">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="Land">Land</label>
-                        <input name="land" th:value="${entry.land}" type="text" class="form-control" placeholder="land">
+                        <label for="Telephone"><th th:text="#{Telephone}"/></label>
+                        <input name="telefoon" type="text" class="form-control" th:attr="placeholder=#{pTelefoon}">
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="Description">Description</label>
-                        <input name="omschrijving" th:value="${entry.omschrijving}" type="text" class="form-control" placeholder="Description">
+                        <label for="E-mail"><th th:text="#{EMail}"/></label>
+                        <input name="email" type="email" class="form-control" th:attr="placeholder=#{pEmail}">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="Telephone">Telephone</label>
-                        <input name="telefoon" th:value="${entry.telefoonNummer}" type="text" class="form-control" placeholder="Telephone">
+                        <label for="Latitude"><th th:text="#{Latitude}"/></label>
+                        <input name="latitude" type="number" step=".01" class="form-control" th:attr="placeholder=#{pLatitude}">
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="E-mail">E-mail</label>
-                        <input name="email" th:value="${entry.email}" type="e-mail" class="form-control" placeholder="E-mail">
+                        <label for="Longitude"><th th:text="#{Longtitude}"/></label>
+                        <input name="longitude" type="number" step=".01" class="form-control" placeholder="Longitude">
                     </div>
                 </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="Latitude">Latitude</label>
-                        <input name="latitude" th:value="${entry.lat}" type="number" step=".01" class="form-control" placeholder="Latitude">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="Longitude">Longitude</label>
-                        <input name="longitude" th:value="${entry.lon}" type="number" step=".01" class="form-control" placeholder="Longitude">
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-success">Edit</button>
+                <button type="submit" class="btn btn-success"><th th:text="#{Edit}"/></button>
             </form>
         </div>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#locales").change(function () {
+                    var selectedOption = $('#locales').val();
+                    if (selectedOption != '') {
+                        window.location.replace('editinternational?lang=' + selectedOption);
+                    }
+                });
+            });
+        </script>
     </body>
 </html>
-
