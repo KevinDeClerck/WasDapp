@@ -39,17 +39,33 @@
             </div>
         </nav>
         <div class="container" style="padding: 5%">
+            <div>
+                <h3 style="color: red" th:inline="text" >
+                    [[${string}]]
+                </h3>
+                <h4 style="color: red; font-size: 20px" th:inline="text" >
+                    <b>[[${validFile}]]</b>
+                </h4>
+                <ul>
+                    <li th:text="${comma}" style="font-size: 18px; list-style-type: none"></li>
+                    <li th:text="${line}" style="font-size: 18px; list-style-type: none"></li>
+                    <li th:text="${carriage}" style="font-size: 18px; list-style-type: none"></li>
+                    <li th:text="${row}" style="font-size: 18px; list-style-type: none"></li>
+                    <li th:text="${title}" style="font-size: 18px; list-style-type: none"></li>
+                    <li th:text="${emptyLines}" style="font-size: 18px; list-style-type: none"></li>
+                </ul>
+            </div>
             <form th:action="@{/upload}" method="post" enctype="multipart/form-data">
                 <div class="custom-file">
-                    <input type="file" name="file" class="custom-file-input" id="upload" required>
-                    <label for="upload" class="custom-file-label">Choose file...</label>
+                    <input type="file" name="file" class="custom-file-input" id="upload" accept=".csv,.json" required>
+                    <label for="upload" class="custom-file-label">Choose a CSV or JSON file...</label>
                 </div>
                 <br>
                 <button type="submit" class="btn btn-success"><th th:text="#{Submit}"/></button>
             </form>
         </div>
         <script>
-            $('#upload').on('change',function(){
+            $('#upload').on('change', function () {
                 var fileName = $(this).val();
                 var cleanFileName = fileName.replace('C:\\fakepath\\', " ");
                 $(this).next('.custom-file-label').html(cleanFileName);
