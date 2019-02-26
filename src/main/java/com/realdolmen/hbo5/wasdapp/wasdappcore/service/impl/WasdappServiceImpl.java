@@ -25,11 +25,11 @@ public class WasdappServiceImpl implements WasdappService {
     private WasdappEntryResponseMapper wasdappEntryResponseMapper;
 
     private WasdappEntryMapper wasdappEntryMapper;
-    
+
     public WasdappServiceImpl(WasdappEntryRepository wasdappRepository) {
         this.wasdappRepository = wasdappRepository;
     }
-    
+
     @Override
     public List<WasdappEntry> findByNameContains(String shouldContain) {
         return wasdappRepository.findByNameContaining(shouldContain);
@@ -37,8 +37,8 @@ public class WasdappServiceImpl implements WasdappService {
 
     @Override
     public WasdappEntry save(WasdappEntry entry) {
-        Long id = 0L;
-        entry.setId(id);
+            Long idNull = 0L;
+            entry.setId(idNull);
         if (entry.getAanmaakDatum() == null) {
             entry.setAanmaakDatum(Timestamp.valueOf(LocalDateTime.now()));
         }
@@ -69,8 +69,8 @@ public class WasdappServiceImpl implements WasdappService {
                 .map(WasdappEntryMapper::mapToDto)
                 .collect(toList());
     }
-    
-    public WasdappEntryResponse findById(Long id){
+
+    public WasdappEntryResponse findById(Long id) {
         WasdappEntry entry = wasdappRepository.findById(id).get();
         WasdappEntryResponse entryResponse = wasdappEntryMapper.mapToDto(entry);
         return entryResponse;
