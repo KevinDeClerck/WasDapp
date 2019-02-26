@@ -2,6 +2,7 @@ package com.realdolmen.hbo5.wasdapp.wasdappcore.controllers;
 
 import com.realdolmen.hbo5.wasdapp.wasdappcore.dto.WasdappEntryResponse;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.repo.WasdappEntryRepository;
+import com.realdolmen.hbo5.wasdapp.wasdappcore.service.CurrentUser;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.impl.WasdappServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,16 +16,25 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class UpdateEntryController {
 
     @Autowired
-    WasdappServiceImpl wasdappService;
+    CurrentUser currentUser;
 
     @Autowired
-    WasdappEntryRepository repo;
+    WasdappServiceImpl wasdappService;
 
     @RequestMapping(value = "/edit")
     public String updateForm(@RequestParam(name = "id") Long id, Model model) {
         WasdappEntryResponse entry = wasdappService.findById(id);
         model.addAttribute("entry", entry);
-        return "edit.xhtml";
+        if (currentUser.getCurrentUser() != null) {
+            if (currentUser.getCurrentUser().getRole().equals("admin")) {
+                return "edit.xhtml";
+            } else {
+                return "redirect:/wasdapp";
+            }
+        } else {
+            return "redirect:/login";
+        }
+
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
@@ -56,10 +66,5 @@ public class UpdateEntryController {
         model.addAttribute("entry", entry);
 
         return "redirect:/wasdapp";
-    }
-       @GetMapping("editinternational")
-    public String getInternationalPage(Model model) {
-        model.addAttribute("entries", wasdappService.findAll());
-        return "edit.xhtml";
     }
 }

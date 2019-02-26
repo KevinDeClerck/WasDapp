@@ -37,6 +37,6 @@ create table gebruiker (
                       role varchar(20)
 );
 
-insert into gebruiker(email, password, name, achternaam, role) values ('tetieiei777@gmail.com', 'jijiijiji', 'larry', 'jeremiah', 'admin');
+insert into gebruiker(email, password, name, achternaam, role) values ('admin@gmail.com', 'password', 'larry', 'jeremiah', 'admin');
 insert into gebruiker(email, password, name, achternaam, role) values ('tetie787@gmail.com', 'neintje', 'kevin', 'de clerk', 'admin');
-insert into gebruiker(email, password, name, achternaam, role) values ('tet77@gmail.com', 'password', 'jasper', 'marcel', 'user');
+insert into gebruiker(email, password, name, achternaam, role) values ('test@gmail.com', 'password', 'jasper', 'marcel', 'user');

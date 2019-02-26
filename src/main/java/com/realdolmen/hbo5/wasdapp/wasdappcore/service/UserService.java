@@ -28,9 +28,18 @@ public class UserService {
         return entries;
     }
 
-    public boolean findUser(String uname, String upwd) {
+    public UserWassdapp getUser(String uname) {
+        List<UserWassdapp> list = userRepo.findAll();
+        for (UserWassdapp u : list) {
+            if (u.getEmail().equals(uname)) {
+                return u;
+            }
+        }
+        return null;
+    }
+
+    public boolean validUser(String uname, String upwd) {
         boolean isValidUser = false;
-        System.out.println(uname + " met pass: " + upwd);
         try {
             List<UserWassdapp> list = userRepo.findAll();
             for (UserWassdapp u : list) {
@@ -41,8 +50,6 @@ public class UserService {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("exception thrown: " + e.getMessage());
             isValidUser = false;
         }
         return isValidUser;

@@ -75,4 +75,12 @@ public class WasdappServiceImpl implements WasdappService {
         WasdappEntryResponse entryResponse = wasdappEntryMapper.mapToDto(entry);
         return entryResponse;
     }
+    
+    public void deleteById(Long id){
+        wasdappRepository.deleteById(id);
+    }
+    
+    public void deleteAll(){
+        wasdappRepository.deleteAll();
+    }
 }
