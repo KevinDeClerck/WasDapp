@@ -1,6 +1,7 @@
 package com.realdolmen.hbo5.wasdapp.wasdappcore.service.impl;
 
 import com.realdolmen.hbo5.wasdapp.wasdappcore.domain.WasdappEntry;
+import com.realdolmen.hbo5.wasdapp.wasdappcore.exception.WrongCSVException;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.WasdappService;
 import java.time.LocalDateTime;
 import org.junit.After;
@@ -17,6 +18,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.samePropertyValuesAs;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -71,7 +73,7 @@ public class CsvParserImplTest {
         WasdappEntry wasdappEntry3 = new WasdappEntry();
         wasdappEntry3.setName("a");
 
-        csvParser.importCsv("import.csv");
+        csvParser.importCsvFile("import.csv");
 
         verify(wasdappService, times(4)).save(captor.capture());
         wasdappEntry0.setAanmaakDatum(captor.getAllValues().get(0).getAanmaakDatum());
@@ -90,6 +92,121 @@ public class CsvParserImplTest {
     public void shouldThrowANullpointerExceptionIfTheFileDoesNotExist() {
 
         thrown.expect(NullPointerException.class);
-        csvParser.importCsv("szq.csv");
+        csvParser.importCsvFile("szq.csv");
     }
+      
+    @Test
+    public void shouldThrowExceptionLangeGemeente(){
+        String s = "999999;koffiemachien;hqfklhsdhslkfklh;Gaston crommenlaan;4;;GentfGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqqsdfdfqsfdq;;Kantoor gent in de refter;;;;;;;51.037028;3.73";
+        assertNull(csvParser.mapLineToEntry(s));
+    }
+    
+    @Test
+    public void shouldThrowExceptionLangeEmail(){
+        String s = "999999;koffiemachien;hqfklhsdhslkfklh;Gaston crommenlaan;4;;Gentfqssdfqsfdq;;Kantoor gent in de refter;;;;GentfqssdfqsfdqGGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqentfqssdfqsfdqGentfqssdfqsfdq;;;51.037028;3.73";
+        assertNull(csvParser.mapLineToEntry(s));
+    }
+    
+    @Test
+    public void shouldThrowExceptionLangeID(){
+        String s = "9999999999999999;koffiemachien;hqfklhsdhslkfklh;Gaston crommenlaan;4;;Gentfqsddqsfqsdfqsfdq;;Kantoor gent in de refter;;;;;;;51.037028;3.73";
+        assertNull(csvParser.mapLineToEntry(s));
+    }
+    
+    @Test
+    public void shouldThrowExceptionLangeLand(){
+        String s = "999999;koffiemachien;hqfklhsdhslkfklh;Gaston crommenlaan;4;;Gentfqsdqsdfqsfdq;GentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdq;Kantoor gent in de refter;;;;;;;51.037028;3.73";
+        assertNull(csvParser.mapLineToEntry(s));
+    }
+    
+    @Test
+    public void shouldThrowExceptionLangeLat(){
+        String s = "999999;koffiemachien;hqfklhsdhslkfklh;Gaston crommenlaan;4;;Gentfqsddqsfqsdfqsfdq;;Kantoor gent in de refter;;;;;;;51.0375564465456456465465465456456456465465645645028;3.73";
+        assertNull(csvParser.mapLineToEntry(s));
+    }
+    
+    @Test
+    public void shouldThrowExceptionLangeLocatie(){
+        String s = "999999;koffiemachien;hqfklhGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqsdhslkfklh;Gaston crommenlaan;4;;Gentfqsfdqsfqsdfqsfdq;;Kantoor gent in de refter;;;;;;;51.037028;3.73";
+        assertNull(csvParser.mapLineToEntry(s));
+    }
+    
+    @Test
+    public void shouldThrowExceptionLangeLon(){
+        String s = "999999;koffiemachien;hqfklhsdhslkfklh;Gaston crommenlaan;4;;Gentfqsdfdqsfdqsfqsdfqsfdq;;Kantoor gent in de refter;;;;;;;51.037028;3.76544564564564564564656454654656456456456453";
+        assertNull(csvParser.mapLineToEntry(s));
+    }
+    
+    @Test
+    public void shouldThrowExceptionLangePersoon(){
+        String s = "999999;koffiemachien;hqfklhsdhslkfklh;Gaston crommenlaan;4;;Gentfqsdfqsfsfdqsfdqsfqsdfqsfdq;;Kantoor gent in de refter;;;;;;GentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdq;51.037028;3.73";
+        assertNull(csvParser.mapLineToEntry(s));
+    }
+    
+    @Test
+    public void shouldThrowExceptionLangeNummer(){
+        String s = "999999;koffiemachien;hqfklhsdhslkfklh;Gaston crommenlaan;446545456456456456654564564;;;;Kantoor gent in de refter;;;;;;;51.037028;3.73";
+        assertNull(csvParser.mapLineToEntry(s));
+    }
+    
+    @Test
+    public void shouldThrowExceptionLangeOmschrijving(){
+        String s = "999999;koffiemachien;hqfklhsdhslkfklh;Gaston crommenlaan;4;;;;Kantoor genGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqt in de refter;;;;;;;51.037028;3.73";
+        assertNull(csvParser.mapLineToEntry(s));
+    }
+    
+    @Test
+    public void shouldThrowExceptionLangePostcode(){
+        String s = "999999;koffiemachien;hqfklhsdhslkfklh;Gaston crommenlaan;4;645465456456456465465465456456465456645645465456645645;;;Kantoor gent in de refter;;;;;;;51.037028;3.73";
+        assertNull(csvParser.mapLineToEntry(s));
+    }
+    
+    @Test
+    public void shouldThrowExceptionLangePrijs(){
+        String s = "999999;koffiemachien;hqfklhsdhslkfklh;Gaston crommenlaan;4;;;;Kantoor gent in de refter;;;;;45645645645645645645664545645645645645656445;;51.037028;3.73";
+        assertNull(csvParser.mapLineToEntry(s));
+    }
+    
+    @Test
+    public void shouldThrowExceptionLangeStraat(){
+        String s = "999999;koffiemachien;hqfklhsdhslkfklh;Gaston crommenlaGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqan;4;;;;Kantoor gent in de refter;;;;;;;51.037028;3.73";
+        assertNull(csvParser.mapLineToEntry(s));
+    }
+    
+    @Test
+    public void shouldThrowExceptionLangeTelefoon(){
+        String s = "999999;koffiemachien;hqfklhsdhslkfklh;Gaston crommenlaan;4;;;;Kantoor gent in de refter;;;GentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdq;;;;51.037028;3.73";
+        assertNull(csvParser.mapLineToEntry(s));
+    }
+    
+    @Test
+    public void shouldThrowExceptionLangeTitel(){
+        String s = "999999;koffGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqiemachien;hqfklhsdhslkfklh;Gaston crommenlaan;4;;;;Kantoor gent in de refter;;;;;;;51.037028;3.73";
+        assertNull(csvParser.mapLineToEntry(s));
+    }
+    
+    @Test
+    public void shouldThrowExceptionLangeWebsite(){
+        String s = "999999;koffiemachien;hqfklhsdhslkfklh;Gaston crommenlaan;4;;;;Kantoor gent in de refter;GentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdq;;;;;;51.037028;3.73";
+        assertNull(csvParser.mapLineToEntry(s));
+    }
+    
+    @Test
+    public void shouldThrowExceptionLangeWikiLink(){
+        String s = "999999;koffiemachien;hqfklhsdhslkfklh;Gaston crommenlaan;4;;;;Kantoor gent in de refter;;GentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdq;;;;;51.037028;3.73";
+        assertNull(csvParser.mapLineToEntry(s));
+    }
+    
+    @Test
+    public void shouldNotWorkWithoutTitleTest(){
+        String s = "999999;;hqfklhsdhslkfklh;Gaston crommenlaan;4;;;;Kantoor gent in de refter;;Gentfqsfqsfdq;;;;;51.037028;3.73";
+        assertNull(csvParser.mapLineToEntry(s));
+    }
+    
+    @Test
+    public void shouldWorkTest(){
+        String s = "1;koffiemachien;refter;Gaston crommenlaan;4;1777;Gent;Nederland;Kantoor gent in de refter;wlink.wlink;link.link;0477;hup@mail.Com;20;Jan;51.037028;3.735785";
+        assertNotNull(csvParser.mapLineToEntry(s));
+    }
+    
 }
