@@ -29,7 +29,7 @@
             </div>
             <div class="navbar-collapse collapse w-100 order-3 dual-collapse2" id="toggler">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a class="nav-link" href="login"><th th:text="#{SignOut}"/></a></li>
+                    <li class="nav-item"><a class="nav-link" href="logout"><th th:text="#{SignOut}"/></a></li>
                         <select  class="btn btn-primary dropdown-toggle bg-dark"  id="locales">
                             <option value=""><th th:text="#{language}"/></option>
                             <option value="nl" th:text="#{lang.dutch}"></option>
@@ -83,7 +83,7 @@
                             <td th:text="${entry.lat}"></td>
                             <td th:text="${entry.lon}"></td>
                             <td><a th:href="@{/edit(id=${entry.id})}"><button type="button" class="btn btn-success btn-sm"><i class="material-icons">edit</i></button></a></td>
-                            <td><a th:href="@{/delete_item(itemId=${entry.id})}"><button type="button" class="btn btn-danger btn-sm" onclick="return confirm('Delete entry?')"><i class="material-icons">delete</i></button></a></td>
+                            <td><a th:href="@{/deleteItems(id=${entry.id})}"><button type="button" class="btn btn-danger btn-sm" onclick="return confirm('Delete entry?')"><i class="material-icons">delete</i></button></a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -101,7 +101,7 @@
                     $("#locales").change(function () {
                         var selectedOption = $('#locales').val();
                         if (selectedOption != '') {
-                            window.location.replace('wasdappinternational?lang=' + selectedOption);
+                            window.location.replace('wasdapp?lang=' + selectedOption);
                         }
                     });
                 });
