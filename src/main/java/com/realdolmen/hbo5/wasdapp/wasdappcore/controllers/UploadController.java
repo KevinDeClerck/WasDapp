@@ -4,8 +4,12 @@ import com.realdolmen.hbo5.wasdapp.wasdappcore.repo.WasdappEntryRepository;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.CsvParser;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.impl.CsvParserImpl;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.impl.WasdappServiceImpl;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -67,9 +71,11 @@ public class UploadController {
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public String upload(@RequestParam MultipartFile file, Model model) throws IOException {
         String path = file.getOriginalFilename();
+        //String fileInput = IOUtils.toString(file.getInputStream(),  StandardCharsets.UTF_8);
+        InputStream is = file.getInputStream();
         if (path.endsWith(".csv")) {
             try {
-                csvParser.importCsv(path);
+                csvParser.importCsv(is);
             } catch (Exception e) {
                 return "redirect:/uploadErrorWrongCSV";
             }
