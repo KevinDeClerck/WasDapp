@@ -6,30 +6,46 @@
 package com.realdolmen.hbo5.wasdapp.wasdappcore.service;
 
 import com.realdolmen.hbo5.wasdapp.wasdappcore.domain.UserWassdapp;
-import com.realdolmen.hbo5.wasdapp.wasdappcore.domain.WasdappEntry;
-import com.realdolmen.hbo5.wasdapp.wasdappcore.dto.WasdappEntryResponse;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.repo.UserRepository;
-import com.realdolmen.hbo5.wasdapp.wasdappcore.rest.WasdappEntryMapper;
 import java.util.List;
-import static java.util.stream.Collectors.toList;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
-    
+
     private UserRepository userRepo;
 
     public UserService(UserRepository userRepo) {
         this.userRepo = userRepo;
     }
-    
-     public UserWassdapp save(UserWassdapp entry) {
+
+    public UserWassdapp save(UserWassdapp entry) {
         return userRepo.save(entry);
     }
-    
-         public List<UserWassdapp> findAll() {
+
+    public List<UserWassdapp> findAll() {
         List<UserWassdapp> entries = userRepo.findAll();
         return entries;
     }
-    
+
+    public boolean findUser(String uname, String upwd) {
+        boolean isValidUser = false;
+        System.out.println(uname + " met pass: " + upwd);
+        try {
+            List<UserWassdapp> list = userRepo.findAll();
+            for (UserWassdapp u : list) {
+                if (u.getEmail().equals(uname)) {
+                    if (u.getPassword().equals(upwd)) {
+                        isValidUser = true;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("exception thrown: " + e.getMessage());
+            isValidUser = false;
+        }
+        return isValidUser;
+    }
+
 }

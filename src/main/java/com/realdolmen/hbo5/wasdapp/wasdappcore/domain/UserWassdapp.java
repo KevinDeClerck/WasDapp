@@ -1,6 +1,7 @@
 package com.realdolmen.hbo5.wasdapp.wasdappcore.domain;
 
 
+import java.io.Serializable;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -12,7 +13,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "gebruiker")
-public class UserWassdapp {
+public class UserWassdapp implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
