@@ -1,9 +1,9 @@
-
 package com.realdolmen.hbo5.wasdapp.wasdappcore.controllers;
 
 import com.realdolmen.hbo5.wasdapp.wasdappcore.domain.UserWassdapp;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.dto.WasdappEntryResponse;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.repo.UserRepository;
+import com.realdolmen.hbo5.wasdapp.wasdappcore.service.CurrentUser;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.UserService;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.impl.WasdappServiceImpl;
 import java.util.List;
@@ -14,26 +14,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
-       
-
 @Controller
 public class createUserController {
-    
-    
+
+    @Autowired
+    CurrentUser currentUser;
+
     @Autowired
     UserService userService;
-    
+
     @Autowired
     UserRepository userRepo;
-    
+
     @RequestMapping(value = "/createUser", method = RequestMethod.GET)
     public String createForm(Model model) {
-                            List<UserWassdapp> list= userService.findAll();
-                    model.addAttribute("entries", list);
-        return "createUser.xhtml";
+        List<UserWassdapp> list = userService.findAll();
+        model.addAttribute("entries", list);
+        if (currentUser.getCurrentUser() != null) {
+            if (currentUser.getCurrentUser().getRole().equals("admin")) {
+                return "createUser.xhtml";
+            } else {
+                return "redirect:/wasdapp";
+            }
+        } else {
+            return "redirect:/wasdapp";
+        }
+
     }
-    
+
     @RequestMapping(value = "/createUser", method = RequestMethod.POST)
     public String entrySubmit(
             @RequestParam String name, @RequestParam String email,
