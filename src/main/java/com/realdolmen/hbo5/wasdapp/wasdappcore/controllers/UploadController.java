@@ -23,31 +23,60 @@ public class UploadController {
 
     @Autowired
     WasdappEntryRepository repo;
-    
+
     @Autowired
     CsvParserImpl csvParser;
-       
+
     @RequestMapping("/upload")
     public String showUpload(Model model) {
         return "upload.xhtml";
     }
-       @GetMapping("uploadinternational")
+
+    @RequestMapping("/uploadError")
+    public String uploadError(Model model) {
+        String string = "Please upload a valid file.";
+        model.addAttribute("string", string);
+        return "upload.xhtml";
+    }
+    
+    @RequestMapping("/uploadErrorWrongCSV")
+    public String uploadErrorWrongCSV(Model model) {
+        String validFile = "Please make sure your CSV file is valid:";
+        String comma = "Seperate data fields with a comma.";
+        String line = "Keep each record on a seperate line.";
+        String carriage = "Do not follow the last record in a file with a carriage return.";
+        String row = "Each row needs an equal amount of colums.";
+        String title = "Make sure there is a title.";
+        String emptyLines = "Make sure there are no empty lines in the file.";
+        model.addAttribute("validFile", validFile);
+        model.addAttribute("comma", comma);
+        model.addAttribute("line", line);
+        model.addAttribute("carriage", carriage);
+        model.addAttribute("row", row);
+        model.addAttribute("title", title);
+        model.addAttribute("emptyLines", emptyLines);
+        return "upload.xhtml";
+    }
+
+    @GetMapping("uploadinternational")
     public String getInternationalPage(Model model) {
         model.addAttribute("entries", wasdappService.findAll());
         return "upload.xhtml";
     }
-    
+
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
-    public String upload(@RequestParam MultipartFile file, Model model) throws IOException{
+    public String upload(@RequestParam MultipartFile file, Model model) throws IOException {
         String path = file.getOriginalFilename();
-        try{
-        csvParser.importCsv(path);
-        }catch (Exception e){
-            e.printStackTrace();
+        if (path.endsWith(".csv")) {
+            try {
+                csvParser.importCsv(path);
+            } catch (Exception e) {
+                return "redirect:/uploadErrorWrongCSV";
+            }
+            return "redirect:/wasdapp";
+        } else if (path.endsWith(".json")) {
+            return "redirect:/uploadError";
         }
-        
-        return "redirect:/wasdapp";
+        return "redirect:/uploadError";
     }
-    
-    
 }
