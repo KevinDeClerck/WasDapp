@@ -1,9 +1,18 @@
 package com.realdolmen.hbo5.wasdapp.wasdappcore.service.impl;
 
 import com.realdolmen.hbo5.wasdapp.wasdappcore.domain.WasdappEntry;
+import com.realdolmen.hbo5.wasdapp.wasdappcore.exception.EmptyFileException;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.exception.WrongCSVException;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.WasdappService;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.After;
 import org.junit.Rule;
 import org.junit.Test;
@@ -94,119 +103,135 @@ public class CsvParserImplTest {
         thrown.expect(NullPointerException.class);
         csvParser.importCsvFile("szq.csv");
     }
-      
+
     @Test
-    public void shouldThrowExceptionLangeGemeente(){
+    public void shouldThrowExceptionLangeGemeente() {
         String s = "999999;koffiemachien;hqfklhsdhslkfklh;Gaston crommenlaan;4;;GentfGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqqsdfdfqsfdq;;Kantoor gent in de refter;;;;;;;51.037028;3.73";
         assertNull(csvParser.mapLineToEntry(s));
     }
-    
+
     @Test
-    public void shouldThrowExceptionLangeEmail(){
+    public void shouldThrowExceptionLangeEmail() {
         String s = "999999;koffiemachien;hqfklhsdhslkfklh;Gaston crommenlaan;4;;Gentfqssdfqsfdq;;Kantoor gent in de refter;;;;GentfqssdfqsfdqGGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqentfqssdfqsfdqGentfqssdfqsfdq;;;51.037028;3.73";
         assertNull(csvParser.mapLineToEntry(s));
     }
-    
+
     @Test
-    public void shouldThrowExceptionLangeID(){
+    public void shouldThrowExceptionLangeID() {
         String s = "9999999999999999;koffiemachien;hqfklhsdhslkfklh;Gaston crommenlaan;4;;Gentfqsddqsfqsdfqsfdq;;Kantoor gent in de refter;;;;;;;51.037028;3.73";
         assertNull(csvParser.mapLineToEntry(s));
     }
-    
+
     @Test
-    public void shouldThrowExceptionLangeLand(){
+    public void shouldThrowExceptionLangeLand() {
         String s = "999999;koffiemachien;hqfklhsdhslkfklh;Gaston crommenlaan;4;;Gentfqsdqsdfqsfdq;GentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdq;Kantoor gent in de refter;;;;;;;51.037028;3.73";
         assertNull(csvParser.mapLineToEntry(s));
     }
-    
+
     @Test
-    public void shouldThrowExceptionLangeLat(){
+    public void shouldThrowExceptionLangeLat() {
         String s = "999999;koffiemachien;hqfklhsdhslkfklh;Gaston crommenlaan;4;;Gentfqsddqsfqsdfqsfdq;;Kantoor gent in de refter;;;;;;;51.0375564465456456465465465456456456465465645645028;3.73";
         assertNull(csvParser.mapLineToEntry(s));
     }
-    
+
     @Test
-    public void shouldThrowExceptionLangeLocatie(){
+    public void shouldThrowExceptionLangeLocatie() {
         String s = "999999;koffiemachien;hqfklhGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqsdhslkfklh;Gaston crommenlaan;4;;Gentfqsfdqsfqsdfqsfdq;;Kantoor gent in de refter;;;;;;;51.037028;3.73";
         assertNull(csvParser.mapLineToEntry(s));
     }
-    
+
     @Test
-    public void shouldThrowExceptionLangeLon(){
+    public void shouldThrowExceptionLangeLon() {
         String s = "999999;koffiemachien;hqfklhsdhslkfklh;Gaston crommenlaan;4;;Gentfqsdfdqsfdqsfqsdfqsfdq;;Kantoor gent in de refter;;;;;;;51.037028;3.76544564564564564564656454654656456456456453";
         assertNull(csvParser.mapLineToEntry(s));
     }
-    
+
     @Test
-    public void shouldThrowExceptionLangePersoon(){
+    public void shouldThrowExceptionLangePersoon() {
         String s = "999999;koffiemachien;hqfklhsdhslkfklh;Gaston crommenlaan;4;;Gentfqsdfqsfsfdqsfdqsfqsdfqsfdq;;Kantoor gent in de refter;;;;;;GentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdq;51.037028;3.73";
         assertNull(csvParser.mapLineToEntry(s));
     }
-    
+
     @Test
-    public void shouldThrowExceptionLangeNummer(){
+    public void shouldThrowExceptionLangeNummer() {
         String s = "999999;koffiemachien;hqfklhsdhslkfklh;Gaston crommenlaan;446545456456456456654564564;;;;Kantoor gent in de refter;;;;;;;51.037028;3.73";
         assertNull(csvParser.mapLineToEntry(s));
     }
-    
+
     @Test
-    public void shouldThrowExceptionLangeOmschrijving(){
+    public void shouldThrowExceptionLangeOmschrijving() {
         String s = "999999;koffiemachien;hqfklhsdhslkfklh;Gaston crommenlaan;4;;;;Kantoor genGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqt in de refter;;;;;;;51.037028;3.73";
         assertNull(csvParser.mapLineToEntry(s));
     }
-    
+
     @Test
-    public void shouldThrowExceptionLangePostcode(){
+    public void shouldThrowExceptionLangePostcode() {
         String s = "999999;koffiemachien;hqfklhsdhslkfklh;Gaston crommenlaan;4;645465456456456465465465456456465456645645465456645645;;;Kantoor gent in de refter;;;;;;;51.037028;3.73";
         assertNull(csvParser.mapLineToEntry(s));
     }
-    
+
     @Test
-    public void shouldThrowExceptionLangePrijs(){
+    public void shouldThrowExceptionLangePrijs() {
         String s = "999999;koffiemachien;hqfklhsdhslkfklh;Gaston crommenlaan;4;;;;Kantoor gent in de refter;;;;;45645645645645645645664545645645645645656445;;51.037028;3.73";
         assertNull(csvParser.mapLineToEntry(s));
     }
-    
+
     @Test
-    public void shouldThrowExceptionLangeStraat(){
+    public void shouldThrowExceptionLangeStraat() {
         String s = "999999;koffiemachien;hqfklhsdhslkfklh;Gaston crommenlaGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqan;4;;;;Kantoor gent in de refter;;;;;;;51.037028;3.73";
         assertNull(csvParser.mapLineToEntry(s));
     }
-    
+
     @Test
-    public void shouldThrowExceptionLangeTelefoon(){
+    public void shouldThrowExceptionLangeTelefoon() {
         String s = "999999;koffiemachien;hqfklhsdhslkfklh;Gaston crommenlaan;4;;;;Kantoor gent in de refter;;;GentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdq;;;;51.037028;3.73";
         assertNull(csvParser.mapLineToEntry(s));
     }
-    
+
     @Test
-    public void shouldThrowExceptionLangeTitel(){
+    public void shouldThrowExceptionLangeTitel() {
         String s = "999999;koffGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqiemachien;hqfklhsdhslkfklh;Gaston crommenlaan;4;;;;Kantoor gent in de refter;;;;;;;51.037028;3.73";
         assertNull(csvParser.mapLineToEntry(s));
     }
-    
+
     @Test
-    public void shouldThrowExceptionLangeWebsite(){
+    public void shouldThrowExceptionLangeWebsite() {
         String s = "999999;koffiemachien;hqfklhsdhslkfklh;Gaston crommenlaan;4;;;;Kantoor gent in de refter;GentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdq;;;;;;51.037028;3.73";
         assertNull(csvParser.mapLineToEntry(s));
     }
-    
+
     @Test
-    public void shouldThrowExceptionLangeWikiLink(){
+    public void shouldThrowExceptionLangeWikiLink() {
         String s = "999999;koffiemachien;hqfklhsdhslkfklh;Gaston crommenlaan;4;;;;Kantoor gent in de refter;;GentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdq;;;;;51.037028;3.73";
         assertNull(csvParser.mapLineToEntry(s));
     }
-    
+
     @Test
-    public void shouldNotWorkWithoutTitleTest(){
+    public void shouldNotWorkWithoutTitleTest() {
         String s = "999999;;hqfklhsdhslkfklh;Gaston crommenlaan;4;;;;Kantoor gent in de refter;;Gentfqsfqsfdq;;;;;51.037028;3.73";
         assertNull(csvParser.mapLineToEntry(s));
     }
-    
+
     @Test
-    public void shouldWorkTest(){
+    public void shouldWorkTest() {
         String s = "1;koffiemachien;refter;Gaston crommenlaan;4;1777;Gent;Nederland;Kantoor gent in de refter;wlink.wlink;link.link;0477;hup@mail.Com;20;Jan;51.037028;3.735785";
         assertNotNull(csvParser.mapLineToEntry(s));
     }
-    
+
+    @Test
+    public void readLinesWorksTest() throws FileNotFoundException, IOException, WrongCSVException {
+        File file = new File("src/main/resources/import.csv");
+        InputStream stream = new FileInputStream(file);
+        List<String> strings = new ArrayList<>();
+        String lineOne = ";koffiemachien;;Gaston crommenlaan;4;;Gent;;Kantoor gent in de refter;;;;;;;51.037028;3.735785";
+        strings = csvParser.readLines(stream);
+        assertEquals(lineOne, strings.get(0));
+    }
+
+    @Test
+    public void readLinesDoesntWorkTest() throws FileNotFoundException, IOException {
+        File file = new File("src/main/resources/testFiles/Leeg.csv");
+        InputStream stream = new FileInputStream(file);
+        assertNull(csvParser.readLines(stream));
+    }
 }
