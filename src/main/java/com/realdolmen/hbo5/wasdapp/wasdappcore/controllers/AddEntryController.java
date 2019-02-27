@@ -23,6 +23,7 @@ public class AddEntryController {
     public String createForm(Model model) {
         if (currentUser.getCurrentUser() != null) {
             if (currentUser.getCurrentUser().getRole().equals("admin")) {
+                model.addAttribute(currentUser);
                 return "add.xhtml";
             } else {
                 return "redirect:/wasdapp";
