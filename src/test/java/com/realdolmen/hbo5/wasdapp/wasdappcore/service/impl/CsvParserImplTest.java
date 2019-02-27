@@ -106,14 +106,14 @@ public class CsvParserImplTest {
 
     @Test
     public void shouldThrowExceptionLangeGemeente() {
-        String s = "999999;koffiemachien;hqfklhsdhslkfklh;Gaston crommenlaan;4;;GentfGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqqsdfdfqsfdq;;Kantoor gent in de refter;;;;;;;51.037028;3.73";
-        assertNull(csvParser.mapLineToEntry(s));
+        String gemeente = "999999;koffiemachien;hqfklhsdhslkfklh;Gaston crommenlaan;4;;GentfGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqqsdfdfqsfdq;;Kantoor gent in de refter;;;;;;;51.037028;3.73";
+        assertNull(csvParser.mapLineToEntry(gemeente));
     }
 
     @Test
     public void shouldThrowExceptionLangeEmail() {
-        String s = "999999;koffiemachien;hqfklhsdhslkfklh;Gaston crommenlaan;4;;Gentfqssdfqsfdq;;Kantoor gent in de refter;;;;GentfqssdfqsfdqGGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqentfqssdfqsfdqGentfqssdfqsfdq;;;51.037028;3.73";
-        assertNull(csvParser.mapLineToEntry(s));
+        String a = "999999;koffiemachien;hqfklhsdhslkfklh;Gaston crommenlaan;4;;Gentfqssdfqsfdq;;Kantoor gent in de refter;;;;GentfqssdfqsfdqGGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqGentfqssdfqsfdqentfqssdfqsfdqGentfqssdfqsfdq;;;51.037028;3.73";
+        assertNull(csvParser.mapLineToEntry(a));
     }
 
     @Test
