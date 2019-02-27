@@ -1,5 +1,6 @@
 package com.realdolmen.hbo5.wasdapp.wasdappcore.domain;
 
+import com.realdolmen.hbo5.wasdapp.wasdappcore.util.Logger;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -7,10 +8,13 @@ import java.util.Date;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import org.apache.logging.log4j.LogManager;
 
 @Entity
 @Table(name = "wasdapp_entry")
 public class WasdappEntry implements Serializable {
+
+    private static final org.apache.logging.log4j.Logger LOGGER = LogManager.getLogger(Logger.class.getName());
 
     @Id
     @NotNull
@@ -183,25 +187,25 @@ public class WasdappEntry implements Serializable {
 
         public WasdappEntry build() {
             WasdappEntry wasdappEntry = new WasdappEntry();
-            wasdappEntry.omschrijving = this.omschrijving;
-            wasdappEntry.name = this.name;
-            wasdappEntry.id = this.id;
-            wasdappEntry.locatie = this.locatie;
-            wasdappEntry.straat = this.straat;
-            wasdappEntry.nummer = this.nummer;
-            wasdappEntry.postCode = this.postCode;
-            wasdappEntry.gemeente = this.gemeente;
-            wasdappEntry.land = this.land;
-            wasdappEntry.wikiLink = this.wikiLink;
-            wasdappEntry.website = this.website;
-            wasdappEntry.telefoonNummer = this.telefoonNummer;
-            wasdappEntry.email = this.email;
-            wasdappEntry.prijs = this.prijs;
-            wasdappEntry.persoon = this.persoon;
-            wasdappEntry.aanmaakDatum = this.aanmaakDatum;
-            wasdappEntry.wijzigDatum = this.wijzigDatum;
-            wasdappEntry.lat = this.lat;
-            wasdappEntry.lon = this.lon;
+            wasdappEntry.setOmschrijving(this.omschrijving);
+            wasdappEntry.setName(this.name);
+            wasdappEntry.setId(this.id);
+            wasdappEntry.setLocatie(this.locatie);
+            wasdappEntry.setStraat(this.straat);
+            wasdappEntry.setNummer(this.nummer);
+            wasdappEntry.setPostCode(this.postCode);
+            wasdappEntry.setGemeente(this.gemeente);
+            wasdappEntry.setLand(this.land);
+            wasdappEntry.setWikiLink(this.wikiLink);
+            wasdappEntry.setWebsite(this.website);
+            wasdappEntry.setTelefoonNummer(this.telefoonNummer);
+            wasdappEntry.setEmail(this.email);
+            wasdappEntry.setPrijs(this.prijs);
+            wasdappEntry.setPersoon(this.persoon);
+            wasdappEntry.setAanmaakDatum(this.aanmaakDatum);
+            wasdappEntry.setWijzigDatum(this.wijzigDatum);
+            wasdappEntry.setLat(this.lat);
+            wasdappEntry.setLon(this.lon);
             return wasdappEntry;
         }
     }
@@ -211,7 +215,11 @@ public class WasdappEntry implements Serializable {
     }
 
     public void setId(Long id) {
-        this.id = id;
+        if (id != null && id < 99999999L && id > -99999999L) {
+            this.id = id;
+        } else {
+            LOGGER.error("ID too long.");
+        }
     }
 
     public String getName() {
@@ -219,7 +227,11 @@ public class WasdappEntry implements Serializable {
     }
 
     public void setName(String name) {
-        this.name = name;
+        if (name != null && name.length() <= 64) {
+            this.name = name;
+        } else {
+            LOGGER.error("Name too long.");
+        }
     }
 
     public String getLocatie() {
@@ -227,7 +239,11 @@ public class WasdappEntry implements Serializable {
     }
 
     public void setLocatie(String locatie) {
-        this.locatie = locatie;
+        if (locatie != null && locatie.length() <= 64) {
+            this.locatie = locatie;
+        } else {
+            LOGGER.error("Locatie too long.");
+        }
     }
 
     public String getStraat() {
@@ -235,7 +251,11 @@ public class WasdappEntry implements Serializable {
     }
 
     public void setStraat(String straat) {
-        this.straat = straat;
+        if (straat != null && straat.length() <= 64) {
+            this.straat = straat;
+        } else {
+            LOGGER.error("Straat too long.");
+        }
     }
 
     public String getNummer() {
@@ -243,7 +263,11 @@ public class WasdappEntry implements Serializable {
     }
 
     public void setNummer(String nummer) {
-        this.nummer = nummer;
+        if (nummer != null && nummer.length() <= 64) {
+            this.nummer = nummer;
+        } else {
+            LOGGER.error("Nummer too long.");
+        }
     }
 
     public String getPostCode() {
@@ -251,7 +275,11 @@ public class WasdappEntry implements Serializable {
     }
 
     public void setPostCode(String postCode) {
-        this.postCode = postCode;
+        if (postCode != null && postCode.length() <= 64) {
+            this.postCode = postCode;
+        } else {
+            LOGGER.error("PostCode too long.");
+        }
     }
 
     public String getGemeente() {
@@ -259,7 +287,11 @@ public class WasdappEntry implements Serializable {
     }
 
     public void setGemeente(String gemeente) {
-        this.gemeente = gemeente;
+        if (gemeente != null && gemeente.length() <= 64) {
+            this.gemeente = gemeente;
+        } else {
+            LOGGER.error("Gemeente too long.");
+        }
     }
 
     public String getLand() {
@@ -267,7 +299,11 @@ public class WasdappEntry implements Serializable {
     }
 
     public void setLand(String land) {
-        this.land = land;
+        if (land != null && land.length() <= 64) {
+            this.land = land;
+        } else {
+            LOGGER.error("Land too long.");
+        }
     }
 
     public String getOmschrijving() {
@@ -275,7 +311,11 @@ public class WasdappEntry implements Serializable {
     }
 
     public void setOmschrijving(String omschrijving) {
-        this.omschrijving = omschrijving;
+        if (omschrijving != null && omschrijving.length() <= 1024) {
+            this.omschrijving = omschrijving;
+        } else {
+            LOGGER.error("Omschrijving too long.");
+        }
     }
 
     public String getWikiLink() {
@@ -283,7 +323,11 @@ public class WasdappEntry implements Serializable {
     }
 
     public void setWikiLink(String wikiLink) {
-        this.wikiLink = wikiLink;
+        if (wikiLink != null && wikiLink.length() <= 64) {
+            this.wikiLink = wikiLink;
+        } else {
+            LOGGER.error("WikiLink too long.");
+        }
     }
 
     public String getWebsite() {
@@ -291,7 +335,11 @@ public class WasdappEntry implements Serializable {
     }
 
     public void setWebsite(String website) {
-        this.website = website;
+        if (website != null && website.length() <= 64) {
+            this.website = website;
+        } else {
+            LOGGER.error("Website too long.");
+        }
     }
 
     public String getTelefoonNummer() {
@@ -299,7 +347,11 @@ public class WasdappEntry implements Serializable {
     }
 
     public void setTelefoonNummer(String telefoonNummer) {
-        this.telefoonNummer = telefoonNummer;
+        if (telefoonNummer != null && telefoonNummer.length() <= 64) {
+            this.telefoonNummer = telefoonNummer;
+        } else {
+            LOGGER.error("Telefoonnummer too long.");
+        }
     }
 
     public String getEmail() {
@@ -307,7 +359,11 @@ public class WasdappEntry implements Serializable {
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        if (email != null && email.length() <= 64) {
+            this.email = email;
+        } else {
+            LOGGER.error("Email too long.");
+        }
     }
 
     public Double getPrijs() {
@@ -315,7 +371,11 @@ public class WasdappEntry implements Serializable {
     }
 
     public void setPrijs(Double prijs) {
-        this.prijs = prijs;
+        if (prijs != null && prijs < 99999999D && prijs > -99999999D) {
+            this.prijs = prijs;
+        } else {
+            LOGGER.error("Prijs too long.");
+        }
     }
 
     public String getPersoon() {
@@ -323,7 +383,11 @@ public class WasdappEntry implements Serializable {
     }
 
     public void setPersoon(String persoon) {
-        this.persoon = persoon;
+        if (persoon != null && persoon.length() <= 64) {
+            this.persoon = persoon;
+        } else {
+            LOGGER.error("Persoon too long.");
+        }
     }
 
     public Timestamp getAanmaakDatum() {
@@ -347,7 +411,11 @@ public class WasdappEntry implements Serializable {
     }
 
     public void setLat(Double lat) {
-        this.lat = lat;
+        if (lat != null && lat < 9999999999999999D && lat > -9999999999999999D) {
+            this.lat = lat;
+        } else {
+            LOGGER.error("Latitude too long.");
+        }
     }
 
     public Double getLon() {
@@ -355,7 +423,10 @@ public class WasdappEntry implements Serializable {
     }
 
     public void setLon(Double lon) {
-        this.lon = lon;
+        if (lon != null && lon < 9999999999999999D && lon > -9999999999999999D) {
+            this.lon = lon;
+        } else {
+            LOGGER.error("Longitude too long.");
+        }
     }
-
 }
