@@ -2,6 +2,7 @@ package com.realdolmen.hbo5.wasdapp.wasdappcore.controllers;
 
 import com.realdolmen.hbo5.wasdapp.wasdappcore.repo.WasdappEntryRepository;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.CsvParser;
+import com.realdolmen.hbo5.wasdapp.wasdappcore.service.CurrentUser;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.impl.CsvParserImpl;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.impl.WasdappServiceImpl;
 import java.io.File;
@@ -26,21 +27,22 @@ public class UploadController {
     WasdappServiceImpl wasdappService;
 
     @Autowired
-    WasdappEntryRepository repo;
+    CurrentUser currentUser;
 
     @Autowired
     CsvParserImpl csvParser;
 
     @RequestMapping("/upload")
     public String showUpload(Model model) {
-        return "upload.xhtml";
-    }
-
-    @RequestMapping("/uploadError")
-    public String uploadError(Model model) {
-        String string = "Please upload a valid file.";
-        model.addAttribute("string", string);
-        return "upload.xhtml";
+          if (currentUser.getCurrentUser() != null) {
+            if (currentUser.getCurrentUser().getRole().equals("admin")) {
+                return "upload.xhtml";
+            } else {
+                return "redirect:/wasdapp";
+            }
+        } else {
+            return "redirect:/login";
+        }
     }
     
     @RequestMapping("/uploadErrorWrongCSV")

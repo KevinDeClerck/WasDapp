@@ -17,8 +17,10 @@
             <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2" id="toggler">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active"><a class="nav-link" href="wasdapp"><th th:text="#{Home}"/></a></li>
-                    <li class="nav-item"><a class="nav-link" href="add"><th th:text="#{Add}"/></a></li>
-                    <li class="nav-item"><a class="nav-link" href="upload"><th th:text="#{Upload}"/></a></li>
+                    <li class="nav-item"  th:if="${currentUser.currentUser.role == 'admin'}"><a class="nav-link" href="add"><th th:text="#{Add}"/></a></li>
+                    <li class="nav-item" th:if="${currentUser.currentUser.role == 'admin'}"><a class="nav-link" href="upload"><th th:text="#{Upload}"/></a></li>
+                    <li class="nav-item" th:if="${currentUser.currentUser.role == 'admin'}"><a class="nav-link" href="createUser"><th th:text="#{AddUser}"/></a></li>
+
                 </ul>
             </div>
             <div class="mx-auto order-0">
@@ -29,6 +31,7 @@
             </div>
             <div class="navbar-collapse collapse w-100 order-3 dual-collapse2" id="toggler">
                 <ul class="navbar-nav ml-auto">
+                    <li class="nav-text" ><a class="nav-link disabled" href="logout" style="color:white; font-weight: bold"><th th:text="#{Welcome} + ${currentUser.currentUser.name}"/></a></li>
                     <li class="nav-item"><a class="nav-link" href="logout"><th th:text="#{SignOut}"/></a></li>
                     <select  class="btn btn-primary dropdown-toggle bg-dark"  id="locales">
                         <option value=""><th th:text="#{language}"/></option>
