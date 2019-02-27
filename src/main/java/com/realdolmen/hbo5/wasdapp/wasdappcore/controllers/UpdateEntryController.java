@@ -27,6 +27,7 @@ public class UpdateEntryController {
         model.addAttribute("entry", entry);
         if (currentUser.getCurrentUser() != null) {
             if (currentUser.getCurrentUser().getRole().equals("admin")) {
+                model.addAttribute(currentUser);
                 return "edit.xhtml";
             } else {
                 return "redirect:/wasdapp";

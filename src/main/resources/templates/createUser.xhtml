@@ -12,13 +12,14 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     </head>
-    <body>
+    <body style="background-color: #4FA5B6">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2" id="toggler">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item"><a class="nav-link" href="wasdapp">Home</a></li>
-                    <li class="nav-item active"><a class="nav-link" href="add">Add</a></li>
-                    <li class="nav-item"><a class="nav-link" href="upload">Upload</a></li>
+                    <li class="nav-item"><a class="nav-link" href="wasdapp"><th th:text="#{Home}"/></a></li>
+                    <li class="nav-item"><a class="nav-link" href="add"><th th:text="#{Add}"/></a></li>
+                    <li class="nav-item"><a class="nav-link" href="upload"><th th:text="#{Upload}"/></a></li>
+                    <li class="nav-item"><a class="nav-link" href="createUser"><th th:text="#{AddUser}"/></a></li>
                 </ul>
             </div>
             <div class="mx-auto order-0">
@@ -29,7 +30,14 @@
             </div>
             <div class="navbar-collapse collapse w-100 order-3 dual-collapse2" id="toggler">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a class="nav-link" href="login">Login</a></li>
+                    <li class="nav-text" ><a class="nav-link disabled" href="logout" style="color:white; font-weight: bold"><th th:text="#{Welcome} + ${currentUser.currentUser.name}"/></a></li>
+                    <li class="nav-item"><a class="nav-link" href="logout"><th th:text="#{SignOut}"/></a></li>
+                    <select  class="btn btn-primary dropdown-toggle bg-dark"  id="locales">
+                        <option value=""><th th:text="#{language}"/></option>
+                        <option value="nl" th:text="#{lang.dutch}"></option>
+                        <option value="fr" th:text="#{lang.fr}"></option>
+                    </select>
+
                 </ul>
             </div>
         </nav>
@@ -38,31 +46,32 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="Name">First Name</label>
-                        <input  name="name" type="text" class="form-control" placeholder="First Name">
+                        <input  name="name" type="text" class="form-control" placeholder="First Name" maxlength="64" required>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="Lastname">Lastname</label>
-                        <input name="achternaam" type="text" class="form-control" placeholder="Lastname">
+                        <input name="achternaam" type="text" class="form-control" placeholder="Lastname" maxlength="64" required>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="E-mail">E-mail</label>
-                        <input name="email" type="text" class="form-control" placeholder="E-mail">
+                        <input name="email" type="text" class="form-control" placeholder="E-mail" pattern="^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$" required>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="Password">Password</label>
-                        <input name="password" type="password" class="form-control" placeholder="Password">
+                        <input name="password" type="password" class="form-control" placeholder="Password" maxlength="64" required>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="Confirm Password">Confirm Password</label>
-                        <input name="confPass" type="password" class="form-control" placeholder="Confirm Password">
+                        <input name="confPass" type="password" class="form-control" placeholder="Confirm Password" maxlength="64" required >
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="checkbox">
-                        <label><input type="radio" name="role" value="admin"  > Admin</label>
+                        
                         <label><input type="radio" name="role" value="user" checked="checked"> User</label>
+                        <label><input type="radio" name="role" value="admin"  > Admin</label>
                     </div>             
 
                 </div>
@@ -74,12 +83,27 @@
 
         </div>
 
-        <table>
+ <table class="table table-condensed table-hover text-centered" style="
+                   border-radius: 5px;
+                   width: 100%;
+                   background-color: white
+                   ">
+            <thead>
+            <tr>
+                <th>User Id: </th>
+                <th>Email: </th>
+                <th>naam: </th>
+                <th>Role: </th>
+            </tr>
+            </thead>
+            <tbody>
             <tr th:each="entry : ${entries}">
                 <td th:text="${entry.id}"></td>
-                <td th:text="${entry.name}"></td>
+                <td th:text="${entry.email}"></td>
+                <td th:text="${entry.name +' '+ entry.achterNaam}"></td>
                 <td th:text="${entry.role}"></td>
-
+            </tr>
+            </tbody>
 
         </table>
     </body>

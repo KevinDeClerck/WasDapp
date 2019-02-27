@@ -3,20 +3,37 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:b="http://bootsfaces.net/ui">
     <head>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        
         <title>Login</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     </head>
-    <body>
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <a class="navbar-brand">Wasdapp</a>
-                </div>
+    </head>
+    <body style="background-color: #4FA5B6">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2" id="toggler">
             </div>
-        </div>
-        <div class="container" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0;margin: auto; width: 250px; height: 250px;">
-            <form id="login_form" th:action="@{/validate}" method="POST">
+            <div class="mx-auto order-0">
+                <a class="navbar-brand mx-auto" href="wasdapp">Wasdapp</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#toggler" aria-controls="toggler" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse w-100 order-3 dual-collapse2" id="toggler">
+                <ul class="navbar-nav ml-auto">
+                    <select  class="btn btn-primary dropdown-toggle bg-dark"  id="locales">
+                        <option value=""><th th:text="#{language}"/></option>
+                        <option value="nl" th:text="#{lang.dutch}"></option>
+                        <option value="fr" th:text="#{lang.fr}"></option>
+                    </select>
+                </ul>
+            </div>
+        </nav>
+        <div class="container" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0;margin: auto; width: 300px; height: 250px;">
+            <form id="login_form" th:action="@{/login}" method="POST">
                 <div class="form-group">
                     <label for="name">Username:</label>
                     <input type="text" class="form-control" id="name" placeholder="Enter username" name="username">
@@ -25,15 +42,26 @@
                     <label for="pwd">Password:</label>
                     <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="password">
                 </div>
-                <button id="confirm_user" type="submit" class="btn btn-primary">Login</button>
+                <p th:text="${test}" style="color: red;"></p>
+                <button id="confirm_user" type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
             </form>
             
-                    <p>
+            <p>
             User account: test@gmail.com / password
             Admin account: admin@gmail.com / password
         </p>
         </div>
         
 
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#locales").change(function () {
+                    var selectedOption = $('#locales').val();
+                    if (selectedOption != '') {
+                        window.location.replace('uploadinternational?lang=' + selectedOption);
+                    }
+                });
+            });
+        </script>
     </body>
 </html>
