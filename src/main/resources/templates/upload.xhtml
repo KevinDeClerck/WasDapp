@@ -30,12 +30,14 @@
             </div>
             <div class="navbar-collapse collapse w-100 order-3 dual-collapse2" id="toggler">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a class="nav-link" href="login"><th th:text="#{SignOut}"/></a></li>
+                    <li class="nav-text" ><a class="nav-link disabled" href="logout" style="color:white; font-weight: bold"><th th:text="#{Welcome} + ${currentUser.currentUser.name}"/></a></li>
+                    <li class="nav-item"><a class="nav-link" href="logout"><th th:text="#{SignOut}"/></a></li>
                     <select  class="btn btn-primary dropdown-toggle bg-dark"  id="locales">
                         <option value=""><th th:text="#{language}"/></option>
                         <option value="nl" th:text="#{lang.dutch}"></option>
                         <option value="fr" th:text="#{lang.fr}"></option>
                     </select>
+
                 </ul>
             </div>
         </nav>
@@ -59,7 +61,7 @@
             <form th:action="@{/upload}" method="post" enctype="multipart/form-data">
                 <div class="custom-file">
                     <input type="file" name="file" class="custom-file-input" id="upload" accept=".csv,.json" required>
-                    <label for="upload" class="custom-file-label">Choose a CSV or JSON file...</label>
+                    <label for="upload" class="custom-file-label"><th th:text="#{UploadMsg}"/></label>
                 </div>
                 <br>
                 <button type="submit" class="btn btn-success"><th th:text="#{Submit}"/></button>

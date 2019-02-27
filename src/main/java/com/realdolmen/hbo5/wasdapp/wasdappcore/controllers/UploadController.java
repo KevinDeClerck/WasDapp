@@ -36,6 +36,7 @@ public class UploadController {
     public String showUpload(Model model) {
           if (currentUser.getCurrentUser() != null) {
             if (currentUser.getCurrentUser().getRole().equals("admin")) {
+                model.addAttribute(currentUser);
                 return "upload.xhtml";
             } else {
                 return "redirect:/wasdapp";
@@ -61,12 +62,6 @@ public class UploadController {
         model.addAttribute("row", row);
         model.addAttribute("title", title);
         model.addAttribute("emptyLines", emptyLines);
-        return "upload.xhtml";
-    }
-
-    @GetMapping("uploadinternational")
-    public String getInternationalPage(Model model) {
-        model.addAttribute("entries", wasdappService.findAll());
         return "upload.xhtml";
     }
 
