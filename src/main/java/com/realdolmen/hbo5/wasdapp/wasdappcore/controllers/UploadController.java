@@ -76,10 +76,10 @@ public class UploadController {
         if (path.endsWith(".csv")) {
             try {
                 csvParser.importCsv(is);
+                return "redirect:/wasdapp";
             } catch (Exception e) {
                 return "redirect:/uploadErrorWrongCSV";
-            }
-            return "redirect:/wasdapp";
+            } 
         } else if (path.endsWith(".json")) {
             return "redirect:/uploadError";
         }

@@ -1,6 +1,7 @@
 package com.realdolmen.hbo5.wasdapp.wasdappcore.service.impl;
 
 import com.realdolmen.hbo5.wasdapp.wasdappcore.domain.WasdappEntry;
+import com.realdolmen.hbo5.wasdapp.wasdappcore.exception.EmptyFileException;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.exception.WasdappRuntimeException;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.exception.WrongCSVException;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.CsvParser;
@@ -58,6 +59,7 @@ public class CsvParserImpl implements CsvParser {
         } catch (Exception e) {
             errMsg = "Faulty CSV file.";
             LOGGER.error(errMsg);
+            throw new WrongCSVException();
         }
         if (!entries.contains(null)) {
             wasdappService.save(entries);
@@ -85,7 +87,13 @@ public class CsvParserImpl implements CsvParser {
                 stringList.add(line);
                 line = bufferedReader.readLine();
             }
-            return stringList;
+            if (!stringList.isEmpty()) {
+                return stringList;
+            } else {
+                errMsg = "File is empty.";
+                LOGGER.error(errMsg);
+                throw new EmptyFileException();
+            }
         } catch (Exception e) {
             errMsg = "Can't read lines.";
             LOGGER.error(errMsg);
