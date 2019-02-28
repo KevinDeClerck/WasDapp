@@ -1,12 +1,12 @@
 package com.realdolmen.hbo5.wasdapp.wasdappcore.service.impl;
 
 import com.realdolmen.hbo5.wasdapp.wasdappcore.dto.WasdappEntryResponse;
-import com.realdolmen.hbo5.wasdapp.wasdappcore.service.impl.WasdappServiceImpl;
-import java.io.ByteArrayInputStream;
+import com.realdolmen.hbo5.wasdapp.wasdappcore.util.Logger;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.logging.log4j.LogManager;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
@@ -16,6 +16,8 @@ import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
 public class GeneratePdfReport {
 
+    
+     private static final org.apache.logging.log4j.Logger LOGGER = LogManager.getLogger(Logger.class.getName());
 
     public ByteArrayOutputStream generatePdf(List<WasdappEntryResponse> entries) throws IOException {
         try {
@@ -28,7 +30,6 @@ public class GeneratePdfReport {
                     PDPage page = new PDPage(new PDRectangle(PDRectangle.A4.getHeight(), PDRectangle.A4.getWidth()));
                     doc.addPage(page);
                     paginas.add(page);
-
                     PDPageContentStream CS = new PDPageContentStream(doc, paginas.get(x), PDPageContentStream.AppendMode.APPEND, true, true);
                     CS.beginText();
                     CS.newLineAtOffset(25, 550);
@@ -51,7 +52,7 @@ public class GeneratePdfReport {
                 return output;
             }
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            LOGGER.error("Error writing PDF.");
         }
         return null;
         
