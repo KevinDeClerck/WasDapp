@@ -30,6 +30,7 @@ public class createUserController {
             if (currentUser.getCurrentUser().getRole().equals("admin")) {
                 List<UserWassdapp> list = userService.findAll();
                 model.addAttribute("entries", list);
+                model.addAttribute(currentUser);
                 return "createUser.xhtml";
             } else {
                 return "redirect:/wasdapp";

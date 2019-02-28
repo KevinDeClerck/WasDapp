@@ -2,7 +2,9 @@ package com.realdolmen.hbo5.wasdapp.wasdappcore.controllers;
 
 import com.realdolmen.hbo5.wasdapp.wasdappcore.repo.WasdappEntryRepository;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.CsvParser;
+import com.realdolmen.hbo5.wasdapp.wasdappcore.service.CurrentUser;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.impl.CsvParserImpl;
+import com.realdolmen.hbo5.wasdapp.wasdappcore.service.impl.JsonParserImpl;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.impl.WasdappServiceImpl;
 import java.io.File;
 import java.io.IOException;
@@ -26,20 +28,33 @@ public class UploadController {
     WasdappServiceImpl wasdappService;
 
     @Autowired
-    WasdappEntryRepository repo;
+    CurrentUser currentUser;
 
     @Autowired
     CsvParserImpl csvParser;
+    
+    @Autowired
+    JsonParserImpl jsonParser;
 
     @RequestMapping("/upload")
     public String showUpload(Model model) {
-        return "upload.xhtml";
+          if (currentUser.getCurrentUser() != null) {
+            if (currentUser.getCurrentUser().getRole().equals("admin")) {
+                model.addAttribute(currentUser);
+                return "upload.xhtml";
+            } else {
+                return "redirect:/wasdapp";
+            }
+        } else {
+            return "redirect:/login";
+        }
     }
-
-    @RequestMapping("/uploadError")
-    public String uploadError(Model model) {
-        String string = "Please upload a valid file.";
-        model.addAttribute("string", string);
+    
+    @RequestMapping("/uploadErrorWrongJSON")
+    public String uploadErrorWrongJSON(Model model) {
+        String image = "https://i.imgur.com/FVspaQl.png";
+        model.addAttribute("image", image);
+        model.addAttribute(currentUser);
         return "upload.xhtml";
     }
     
@@ -59,19 +74,13 @@ public class UploadController {
         model.addAttribute("row", row);
         model.addAttribute("title", title);
         model.addAttribute("emptyLines", emptyLines);
-        return "upload.xhtml";
-    }
-
-    @GetMapping("uploadinternational")
-    public String getInternationalPage(Model model) {
-        model.addAttribute("entries", wasdappService.findAll());
+        model.addAttribute(currentUser);
         return "upload.xhtml";
     }
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public String upload(@RequestParam MultipartFile file, Model model) throws IOException {
         String path = file.getOriginalFilename();
-        //String fileInput = IOUtils.toString(file.getInputStream(),  StandardCharsets.UTF_8);
         InputStream is = file.getInputStream();
         if (path.endsWith(".csv")) {
             try {
@@ -81,7 +90,13 @@ public class UploadController {
                 return "redirect:/uploadErrorWrongCSV";
             } 
         } else if (path.endsWith(".json")) {
-            return "redirect:/uploadError";
+            try{
+                jsonParser.importJson(is);
+                return "redirect:/wasdapp";  
+            }catch(Exception e){
+                e.printStackTrace();
+            return "redirect:/uploadErrorWrongJSON";
+            }
         }
         return "redirect:/uploadError";
     }

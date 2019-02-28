@@ -22,6 +22,7 @@ public class WasdappController {
     public String showList(Model model) {
         if (currentUser.getCurrentUser() != null) {
             model.addAttribute("entries", wasdappService.findAll());
+            model.addAttribute(currentUser);
             return "wasdapp.xhtml";
         } else {
             return "redirect:/login";
