@@ -1,21 +1,14 @@
 package com.realdolmen.hbo5.wasdapp.wasdappcore.controllers;
 
-import com.realdolmen.hbo5.wasdapp.wasdappcore.repo.WasdappEntryRepository;
-import com.realdolmen.hbo5.wasdapp.wasdappcore.service.CsvParser;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.CurrentUser;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.impl.CsvParserImpl;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.impl.JsonParserImpl;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.impl.WasdappServiceImpl;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;

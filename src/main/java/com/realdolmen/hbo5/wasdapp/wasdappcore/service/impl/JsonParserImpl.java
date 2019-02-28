@@ -8,7 +8,6 @@ import com.realdolmen.hbo5.wasdapp.wasdappcore.service.WasdappService;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.util.Logger;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -3,8 +3,6 @@ package com.realdolmen.hbo5.wasdapp.wasdappcore.domain;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.util.Logger;
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.util.Date;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;

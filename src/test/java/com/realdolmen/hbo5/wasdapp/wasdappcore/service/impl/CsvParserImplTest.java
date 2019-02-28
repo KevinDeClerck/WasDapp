@@ -1,7 +1,6 @@
 package com.realdolmen.hbo5.wasdapp.wasdappcore.service.impl;
 
 import com.realdolmen.hbo5.wasdapp.wasdappcore.domain.WasdappEntry;
-import com.realdolmen.hbo5.wasdapp.wasdappcore.exception.EmptyFileException;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.exception.WrongFileException;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.WasdappService;
 import java.io.File;
@@ -9,8 +8,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;

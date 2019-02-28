@@ -2,7 +2,6 @@
 package com.realdolmen.hbo5.wasdapp.wasdappcore.service.impl;
 
 import com.realdolmen.hbo5.wasdapp.wasdappcore.domain.WasdappEntry;
-import com.realdolmen.hbo5.wasdapp.wasdappcore.service.WasdappService;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -14,7 +13,6 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -22,9 +20,6 @@ public class JsonParserImplTest {
     
     @InjectMocks
     private JsonParserImpl jsonParser;
-    
-    @Mock
-    private WasdappService wasdappService;
     
     @Test
     public void shouldReadJsonTest() throws FileNotFoundException, IOException{
