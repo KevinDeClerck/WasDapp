@@ -38,19 +38,14 @@ public class LoginController {
     
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String validateUser(Model model, @RequestParam("username")String username, @RequestParam("password")String password) {
-        String msg = "";
         boolean isValid = userService.validUser(username, password); 
         if(isValid) {
             currentUser.setCurrentUser(userService.getUser(username));
-            
             return "redirect:/wasdapp";
         } else {
-            msg = "Invalid credentials";
             model.addAttribute("test","Wrong username and password combination, please try again." );
+            return "login.xhtml";
         }
-        model.addAttribute("msg", msg);  
-        model.addAttribute("test","Wrong username and password combination, please try again." );
-        return "login.xhtml";
     }
     
     @GetMapping("/logout")
