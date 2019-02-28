@@ -3,8 +3,6 @@ package com.realdolmen.hbo5.wasdapp.wasdappcore.domain;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.util.Logger;
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.util.Date;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -29,7 +27,7 @@ public class WasdappEntry implements Serializable {
     private String straat;
     @Column(length = 10)
     private String nummer;
-    @Column(length = 6)
+    @Column(length = 8)
     private String postCode;
     @Column(length = 64)
     private String gemeente;

@@ -45,6 +45,9 @@
         <div class="container" style="padding: 5%">
             <img th:src="${image}">
             <div>
+                <h3 style="color: red; font-size: 20px" th:inline="text" >
+                    <b>[[${string}]]</b>
+                </h3>
                 <h4 style="color: red; font-size: 20px" th:inline="text" >
                     <b>[[${validFile}]]</b>
                 </h4>
@@ -78,7 +81,7 @@
                 $("#locales").change(function () {
                     var selectedOption = $('#locales').val();
                     if (selectedOption != '') {
-                        window.location.replace('uploadinternational?lang=' + selectedOption);
+                        window.location.replace('upload?lang=' + selectedOption);
                     }
                 });
             });

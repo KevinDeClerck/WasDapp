@@ -1,16 +1,13 @@
 package com.realdolmen.hbo5.wasdapp.wasdappcore.service.impl;
 
-import com.realdolmen.hbo5.wasdapp.wasdappcore.domain.UserWassdapp;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.domain.WasdappEntry;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.dto.WasdappEntryResponse;
-import com.realdolmen.hbo5.wasdapp.wasdappcore.repo.UserRepository;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.repo.WasdappEntryRepository;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.rest.WasdappEntryMapper;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.rest.WasdappEntryResponseMapper;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.WasdappService;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

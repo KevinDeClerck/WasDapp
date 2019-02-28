@@ -30,17 +30,5 @@
                 <button id="confirm_user" type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
             </form>
         </div>
-        
-
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $("#locales").change(function () {
-                    var selectedOption = $('#locales').val();
-                    if (selectedOption != '') {
-                        window.location.replace('uploadinternational?lang=' + selectedOption);
-                    }
-                });
-            });
-        </script>
     </body>
 </html>
