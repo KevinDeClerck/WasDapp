@@ -34,7 +34,7 @@ public class UploadController {
 
     @RequestMapping("/upload")
     public String showUpload(Model model) {
-          if (currentUser.getCurrentUser() != null) {
+        if (currentUser.getCurrentUser() != null) {
             if (currentUser.getCurrentUser().getRole().equals("admin")) {
                 model.addAttribute(currentUser);
                 return "upload.xhtml";
@@ -45,7 +45,7 @@ public class UploadController {
             return "redirect:/login";
         }
     }
-    
+
     @RequestMapping("/uploadErrorWrongCSV")
     public String uploadErrorWrongCSV(Model model) {
         String validFile = "Please make sure your CSV file is valid:";
@@ -62,6 +62,7 @@ public class UploadController {
         model.addAttribute("row", row);
         model.addAttribute("title", title);
         model.addAttribute("emptyLines", emptyLines);
+        model.addAttribute(currentUser);
         return "upload.xhtml";
     }
 
@@ -76,7 +77,7 @@ public class UploadController {
                 return "redirect:/wasdapp";
             } catch (Exception e) {
                 return "redirect:/uploadErrorWrongCSV";
-            } 
+            }
         } else if (path.endsWith(".json")) {
             return "redirect:/uploadError";
         }
