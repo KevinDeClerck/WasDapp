@@ -50,9 +50,17 @@ public class UploadController {
         }
     }
     
+    @RequestMapping("/uploadError")
+    public String uploadError(Model model) {
+        String string = "Please upload a CSV or JSON file.";
+        model.addAttribute("string", string);
+        model.addAttribute(currentUser);
+        return "upload.xhtml";
+    }
+    
     @RequestMapping("/uploadErrorWrongJSON")
     public String uploadErrorWrongJSON(Model model) {
-        String image = "https://i.imgur.com/FVspaQl.png";
+        String image = "https://i.imgur.com/iKN0rGa.png";
         model.addAttribute("image", image);
         model.addAttribute(currentUser);
         return "upload.xhtml";
@@ -94,7 +102,6 @@ public class UploadController {
                 jsonParser.importJson(is);
                 return "redirect:/wasdapp";  
             }catch(Exception e){
-                e.printStackTrace();
             return "redirect:/uploadErrorWrongJSON";
             }
         }

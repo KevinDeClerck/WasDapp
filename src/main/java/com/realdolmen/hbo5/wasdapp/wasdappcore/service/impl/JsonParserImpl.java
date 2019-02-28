@@ -33,7 +33,14 @@ public class JsonParserImpl {
     public void importJson(InputStream is) throws IOException, WrongFileException{
         entries = readJson(is);
         if(entries != null){
-        wasdappService.save(entries);
+            for(WasdappEntry w : entries){
+                if(!w.getName().isEmpty()){
+                    wasdappService.save(w);
+                }else{
+                    errMsg ="Empty name found in file, this entry has not been added.";
+                    LOGGER.error(errMsg);
+                }
+            }
         }else{
             errMsg = "The list of entries to save is empty.";
             LOGGER.error(errMsg);

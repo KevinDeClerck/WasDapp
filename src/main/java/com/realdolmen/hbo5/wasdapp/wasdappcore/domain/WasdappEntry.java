@@ -29,7 +29,7 @@ public class WasdappEntry implements Serializable {
     private String straat;
     @Column(length = 10)
     private String nummer;
-    @Column(length = 6)
+    @Column(length = 8)
     private String postCode;
     @Column(length = 64)
     private String gemeente;
