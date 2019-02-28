@@ -16,8 +16,8 @@
         <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-        <script type="text/javascript" src="dataTables.ellipsis.js"></script>        
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>     
+        <script src="https://cdn.datatables.net/plug-ins/1.10.19/dataRender/ellipsis.js"></script>
     </head>
     <body style="background-color: #4FA5B6">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -81,7 +81,7 @@
                             <td th:text="${entry.id}"></td>
                             <td th:text="${entry.name}"></td>
                             <td th:text="${entry.locatie}"></td>
-                            <td><a th:title="${entry.straat+' '+entry.nummer+' '+entry.gemeente+' '+entry.postCode+' '+entry.land}" data-toggle="tooltip" data-placement="right" style="margin:20px;"><i class="fas fa-map-marked-alt"></i></a></td>
+                            <td><a th:title="|${#strings.defaultString(entry.straat,nothing)} ${#strings.defaultString(entry.nummer,nothing)} ${#strings.defaultString(entry.gemeente,nothing)} ${#strings.defaultString(entry.postCode,nothing)} ${#strings.defaultString(entry.land,nothing)}|" data-toggle="tooltip" data-placement="right" style="margin:20px;"><i class="fas fa-map-marked-alt"></i></a></td>
                             <td><a th:title="${entry.omschrijving}" data-toggle="tooltip" data-placement="right" style="margin:20px;">
                                 <i class="fas fa-info-circle"></i>
                             </a></td>
@@ -137,7 +137,11 @@
                 $(document).ready(function () {
                     $('#tablePagination').DataTable({
                         "pageLength": 6,
-                        "lengthMenu": [ [6, 25, -1], [6, 25, "All"] ]
+                        "lengthMenu": [ [6, 25, -1], [6, 25, "All"] ],
+                        "columnDefs": [ {
+                        "targets": [ 1, 2, 3, 6, 7, 8, 9, 10 ],
+                        "mRender": $.fn.dataTable.render.ellipsis(10)
+            }]
                     });
                 });
             </script>
