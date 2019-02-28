@@ -24,10 +24,10 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2" id="toggler">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active"><a class="nav-link" href="wasdapp"><th th:text="#{Home}"/></a></li>
-                    <li class="nav-item"  th:if="${currentUser.currentUser.role == 'admin'}"><a class="nav-link" href="add"><th th:text="#{Add}"/></a></li>
-                    <li class="nav-item" th:if="${currentUser.currentUser.role == 'admin'}"><a class="nav-link" href="upload"><th th:text="#{Upload}"/></a></li>
-                    <li class="nav-item" th:if="${currentUser.currentUser.role == 'admin'}"><a class="nav-link" href="createUser"><th th:text="#{AddUser}"/></a></li>
+                    <li class="nav-item"><a class="nav-link" href="wasdapp"><th th:text="#{Home}"/></a></li>
+                    <li class="nav-item"><a class="nav-link" href="add"><th th:text="#{Add}"/></a></li>
+                    <li class="nav-item"><a class="nav-link" href="upload"><th th:text="#{Upload}"/></a></li>
+                    <li class="nav-item"><a class="nav-link" href="createUser"><th th:text="#{AddUser}"/></a></li>
                 </ul>
             </div>
             <div class="mx-auto order-0">
@@ -44,7 +44,10 @@
                         <option value=""><th th:text="#{language}"/></option>
                         <option value="nl" th:text="#{lang.dutch}"></option>
                         <option value="fr" th:text="#{lang.fr}"></option>
+                        <option value="eng" th:text="#{lang.eng}"></option>
+
                     </select>
+
                 </ul>
             </div>
         </nav>
@@ -95,7 +98,7 @@
                             <td th:if="${currentUser.currentUser.role == 'admin'}"><a th:href="@{/deleteItems(id=${entry.id})}"><button type="button" class="btn btn-danger btn-sm" onclick="return confirm('Delete entry?')"><i class="material-icons">delete</i></button></a></td>                        </tr>
                     </tbody>
                 </table>
-                <button th:if="${currentUser.currentUser.role == 'admin'}" type="button" class="btn btn-danger"  data-toggle="modal" data-target="#confirm-delete">Verwijder geselecteerde items</button>
+                <button th:if="${currentUser.currentUser.role == 'admin'}" type="button" class="btn btn-danger"  data-toggle="modal" data-target="#confirm-delete"><th th:text="#{DeleteSelected}"</th></button>
                 <button type="submit" id="test2" class="btn btn-success">Download PDF</button>
                 
                 <input type="checkbox" name="id" value="-1" style="display:none" checked="checked" />
@@ -103,14 +106,14 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                Confirm delete
+                              <th th:text="#{alert}"></th>  
                             </div>
                             <div class="modal-body">
-                                Bent u zeker dat u de geselecteerde items wilt verwijderen?
+                              <th th:text="#{alertmessage}"></th>  
                             </div>
                             <div class="modal-footer">
                                 <button id="test1" type="submit" class="btn btn-danger btn-ok"><th th:text="#{DeleteSelected}"</th></button> 
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal"><th th:text="#{cancel}"</th></button>
                             </div>
                         </div>
                     </div>
