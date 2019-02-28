@@ -3,18 +3,21 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:b="http://bootsfaces.net/ui">
     <head>
-        <link rel="stylesheet/less" type="text/css" href="styles.less" />
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <title>WasDapp</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
-        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+        <link rel="stylesheet" href="C:\Users\guukb\OneDrive\Documenten\NetBeansProjects\wasdappTeamA\src\main\resources\css\pagination.css">
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.19/pagination/full_numbers_no_ellipses.js"></script>
     </head>
     <body style="background-color: #4FA5B6">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -50,8 +53,7 @@
              float: none;
              padding-top: 14px;">
             <form action="deleteItems" method="get">
-                <table id="tablePagination" class="table table-condensed table-hover text-centered compact" style="
-                       border-radius: 5px;
+                <table id="tablePagination" class="table table-condensed table-hover text-centered compact table-borderless" style="
                        width: 100%;
                        background-color: white
                        ">
@@ -127,7 +129,8 @@
                 $(document).ready(function () {
                     $('#tablePagination').DataTable({
                         "pageLength": 6,
-                        "lengthMenu": [ [6, 25, -1], [6, 25, "All"] ]
+                        "lengthMenu": [ [6, 25, -1], [6, 25, "All"] ],
+                        "pagingType": "full_numbers_no_ellipses"
                     });
                 });
             </script>

@@ -217,8 +217,6 @@ public class WasdappEntry implements Serializable {
     public void setId(Long id) {
         if (id != null && id < 99999999L && id > -99999999L) {
             this.id = id;
-        } else {
-            LOGGER.error("ID too long.");
         }
     }
 
@@ -229,8 +227,6 @@ public class WasdappEntry implements Serializable {
     public void setName(String name) {
         if (name != null && name.length() <= 64) {
             this.name = name;
-        } else {
-            LOGGER.error("Name too long.");
         }
     }
 
@@ -241,8 +237,6 @@ public class WasdappEntry implements Serializable {
     public void setLocatie(String locatie) {
         if (locatie != null && locatie.length() <= 64) {
             this.locatie = locatie;
-        } else {
-            LOGGER.error("Locatie too long.");
         }
     }
 
@@ -253,8 +247,6 @@ public class WasdappEntry implements Serializable {
     public void setStraat(String straat) {
         if (straat != null && straat.length() <= 64) {
             this.straat = straat;
-        } else {
-            LOGGER.error("Straat too long.");
         }
     }
 
@@ -265,8 +257,6 @@ public class WasdappEntry implements Serializable {
     public void setNummer(String nummer) {
         if (nummer != null && nummer.length() <= 64) {
             this.nummer = nummer;
-        } else {
-            LOGGER.error("Nummer too long.");
         }
     }
 
@@ -277,8 +267,6 @@ public class WasdappEntry implements Serializable {
     public void setPostCode(String postCode) {
         if (postCode != null && postCode.length() <= 64) {
             this.postCode = postCode;
-        } else {
-            LOGGER.error("PostCode too long.");
         }
     }
 
@@ -289,8 +277,6 @@ public class WasdappEntry implements Serializable {
     public void setGemeente(String gemeente) {
         if (gemeente != null && gemeente.length() <= 64) {
             this.gemeente = gemeente;
-        } else {
-            LOGGER.error("Gemeente too long.");
         }
     }
 
@@ -301,8 +287,6 @@ public class WasdappEntry implements Serializable {
     public void setLand(String land) {
         if (land != null && land.length() <= 64) {
             this.land = land;
-        } else {
-            LOGGER.error("Land too long.");
         }
     }
 
@@ -313,8 +297,6 @@ public class WasdappEntry implements Serializable {
     public void setOmschrijving(String omschrijving) {
         if (omschrijving != null && omschrijving.length() <= 1024) {
             this.omschrijving = omschrijving;
-        } else {
-            LOGGER.error("Omschrijving too long.");
         }
     }
 
@@ -325,8 +307,6 @@ public class WasdappEntry implements Serializable {
     public void setWikiLink(String wikiLink) {
         if (wikiLink != null && wikiLink.length() <= 64) {
             this.wikiLink = wikiLink;
-        } else {
-            LOGGER.error("WikiLink too long.");
         }
     }
 
@@ -337,8 +317,6 @@ public class WasdappEntry implements Serializable {
     public void setWebsite(String website) {
         if (website != null && website.length() <= 64) {
             this.website = website;
-        } else {
-            LOGGER.error("Website too long.");
         }
     }
 
@@ -349,8 +327,6 @@ public class WasdappEntry implements Serializable {
     public void setTelefoonNummer(String telefoonNummer) {
         if (telefoonNummer != null && telefoonNummer.length() <= 64) {
             this.telefoonNummer = telefoonNummer;
-        } else {
-            LOGGER.error("Telefoonnummer too long.");
         }
     }
 
@@ -361,8 +337,6 @@ public class WasdappEntry implements Serializable {
     public void setEmail(String email) {
         if (email != null && email.length() <= 64) {
             this.email = email;
-        } else {
-            LOGGER.error("Email too long.");
         }
     }
 
@@ -373,8 +347,6 @@ public class WasdappEntry implements Serializable {
     public void setPrijs(Double prijs) {
         if (prijs != null && prijs < 99999999D && prijs > -99999999D) {
             this.prijs = prijs;
-        } else {
-            LOGGER.error("Prijs too long.");
         }
     }
 
@@ -385,8 +357,6 @@ public class WasdappEntry implements Serializable {
     public void setPersoon(String persoon) {
         if (persoon != null && persoon.length() <= 64) {
             this.persoon = persoon;
-        } else {
-            LOGGER.error("Persoon too long.");
         }
     }
 
@@ -413,8 +383,6 @@ public class WasdappEntry implements Serializable {
     public void setLat(Double lat) {
         if (lat != null && lat < 9999999999999999D && lat > -9999999999999999D) {
             this.lat = lat;
-        } else {
-            LOGGER.error("Latitude too long.");
         }
     }
 
@@ -425,8 +393,6 @@ public class WasdappEntry implements Serializable {
     public void setLon(Double lon) {
         if (lon != null && lon < 9999999999999999D && lon > -9999999999999999D) {
             this.lon = lon;
-        } else {
-            LOGGER.error("Longitude too long.");
         }
     }
 }
