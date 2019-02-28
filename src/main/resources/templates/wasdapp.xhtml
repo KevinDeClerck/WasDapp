@@ -81,7 +81,7 @@
                             <td th:text="${entry.id}"></td>
                             <td th:text="${entry.name}"></td>
                             <td th:text="${entry.locatie}"></td>
-                            <td><a th:title="${entry.straat+' '+entry.nummer+' '+entry.gemeente+' '+entry.postCode+' '+entry.land}" data-toggle="tooltip" data-placement="right" style="margin:20px;"><i class="fas fa-map-marked-alt"></i></a></td>
+                            <td><a th:title="|${#strings.defaultString(entry.straat,nothing)} ${#strings.defaultString(entry.nummer,nothing)} ${#strings.defaultString(entry.gemeente,nothing)} ${#strings.defaultString(entry.postCode,nothing)} ${#strings.defaultString(entry.land,nothing)}|" data-toggle="tooltip" data-placement="right" style="margin:20px;"><i class="fas fa-map-marked-alt"></i></a></td>
                             <td><a th:title="${entry.omschrijving}" data-toggle="tooltip" data-placement="right" style="margin:20px;">
                                 <i class="fas fa-info-circle"></i>
                             </a></td>
