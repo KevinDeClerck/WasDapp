@@ -1,12 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.realdolmen.hbo5.wasdapp.wasdappcore.controllers;
 
-import static antlr.Utils.error;
-import com.realdolmen.hbo5.wasdapp.wasdappcore.domain.UserWassdapp;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.CurrentUser;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

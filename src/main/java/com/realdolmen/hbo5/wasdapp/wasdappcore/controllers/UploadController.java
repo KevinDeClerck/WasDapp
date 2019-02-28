@@ -1,21 +1,14 @@
 package com.realdolmen.hbo5.wasdapp.wasdappcore.controllers;
 
-import com.realdolmen.hbo5.wasdapp.wasdappcore.repo.WasdappEntryRepository;
-import com.realdolmen.hbo5.wasdapp.wasdappcore.service.CsvParser;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.CurrentUser;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.impl.CsvParserImpl;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.impl.JsonParserImpl;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.impl.WasdappServiceImpl;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -50,9 +43,17 @@ public class UploadController {
         }
     }
     
+    @RequestMapping("/uploadError")
+    public String uploadError(Model model) {
+        String string = "Please upload a CSV or JSON file.";
+        model.addAttribute("string", string);
+        model.addAttribute(currentUser);
+        return "upload.xhtml";
+    }
+    
     @RequestMapping("/uploadErrorWrongJSON")
     public String uploadErrorWrongJSON(Model model) {
-        String image = "https://i.imgur.com/FVspaQl.png";
+        String image = "https://i.imgur.com/iKN0rGa.png";
         model.addAttribute("image", image);
         model.addAttribute(currentUser);
         return "upload.xhtml";
@@ -94,7 +95,6 @@ public class UploadController {
                 jsonParser.importJson(is);
                 return "redirect:/wasdapp";  
             }catch(Exception e){
-                e.printStackTrace();
             return "redirect:/uploadErrorWrongJSON";
             }
         }

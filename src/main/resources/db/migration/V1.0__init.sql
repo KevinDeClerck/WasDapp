@@ -4,7 +4,7 @@ create table wasdapp_entry (
     locatie varchar(64),
     straat varchar(96),
     nummer varchar(10),
-    post_Code varchar(6),
+    post_Code varchar(8),
     gemeente varchar(64),
     land varchar(64),
     omschrijving varchar(2048),

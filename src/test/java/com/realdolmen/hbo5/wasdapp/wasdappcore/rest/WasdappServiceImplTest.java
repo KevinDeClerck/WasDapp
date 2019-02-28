@@ -7,14 +7,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
 import java.util.List;
-
 import static com.google.common.truth.Truth.assertThat;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.dto.WasdappEntryResponse;
-import java.util.ArrayList;
-import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
