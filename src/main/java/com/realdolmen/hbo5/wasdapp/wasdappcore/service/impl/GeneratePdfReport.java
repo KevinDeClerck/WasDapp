@@ -1,7 +1,9 @@
-package com.realdolmen.hbo5.wasdapp.wasdappcore.domain;
+package com.realdolmen.hbo5.wasdapp.wasdappcore.service.impl;
 
 import com.realdolmen.hbo5.wasdapp.wasdappcore.dto.WasdappEntryResponse;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.impl.WasdappServiceImpl;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,26 +12,23 @@ import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
-import org.springframework.beans.factory.annotation.Autowired;
+
 
 public class GeneratePdfReport {
 
-    private List<WasdappEntryResponse> result = new ArrayList<>();
 
-    @Autowired
-    WasdappServiceImpl wasdappService;
-
-    public void generatePdf() throws IOException {
-        result = wasdappService.findAll();
+    public ByteArrayOutputStream generatePdf(List<WasdappEntryResponse> entries) throws IOException {
         try {
-            if (result != null) {
+            if (entries != null) {
+                ByteArrayOutputStream output = new ByteArrayOutputStream(); 
                 PDDocument doc = new PDDocument();
                 int x = 0;
                 ArrayList<PDPage> paginas = new ArrayList<>();
-                for (WasdappEntryResponse i : result) {
+                for (WasdappEntryResponse i : entries) {
                     PDPage page = new PDPage(new PDRectangle(PDRectangle.A4.getHeight(), PDRectangle.A4.getWidth()));
                     doc.addPage(page);
                     paginas.add(page);
+
                     PDPageContentStream CS = new PDPageContentStream(doc, paginas.get(x), PDPageContentStream.AppendMode.APPEND, true, true);
                     CS.beginText();
                     CS.newLineAtOffset(25, 550);
@@ -46,10 +45,16 @@ public class GeneratePdfReport {
                     CS.close();
                     x++;
                 }
+                
+                doc.save(output);
                 doc.close();
+                return output;
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+        return null;
+        
     }
 }
+

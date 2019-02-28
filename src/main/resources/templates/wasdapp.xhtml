@@ -95,6 +95,7 @@
                     </tbody>
                 </table>
                 <button th:if="${currentUser.currentUser.role == 'admin'}" type="button" class="btn btn-danger"  data-toggle="modal" data-target="#confirm-delete">Verwijder geselecteerde items</button>
+                
                 <input type="checkbox" name="id" value="-1" style="display:none" checked="checked" />
                 <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
