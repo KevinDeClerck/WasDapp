@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
         <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+        <link rel="icon" href="https://i.imgur.com/JnS6xHp.jpg">
         <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -52,7 +53,7 @@
              margin: 0px auto;
              float: none;
              padding-top: 14px;">
-            <form action="deleteItems" method="get">
+            <form id="form" action="deleteItems" method="get">
                 <table id="tablePagination" class="table table-condensed table-hover text-centered compact" style="
                        border-radius: 5px;
                        width: 100%;
@@ -95,6 +96,8 @@
                     </tbody>
                 </table>
                 <button th:if="${currentUser.currentUser.role == 'admin'}" type="button" class="btn btn-danger"  data-toggle="modal" data-target="#confirm-delete">Verwijder geselecteerde items</button>
+                <button type="submit" id="test2" class="btn btn-success">Download PDF</button>
+                
                 <input type="checkbox" name="id" value="-1" style="display:none" checked="checked" />
                 <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
@@ -106,7 +109,7 @@
                                 Bent u zeker dat u de geselecteerde items wilt verwijderen?
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-danger btn-ok"><th th:text="#{DeleteSelected}"</th></button> 
+                                <button id="test1" type="submit" class="btn btn-danger btn-ok"><th th:text="#{DeleteSelected}"</th></button> 
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                             </div>
                         </div>
@@ -116,6 +119,17 @@
             <script>
                 $(function () {
                 $('[data-toggle="tooltip"]').tooltip();
+                });
+            </script>
+            <script>
+                $('#test1').click(function () {
+                    $('#form').attr('action', 'deleteItems');
+                    $('#form').submit();
+                });
+
+                $('#test2').click(function () {
+                    $('#form').attr('action', 'download');
+                    $('#form').submit();
                 });
             </script>
             <script>
