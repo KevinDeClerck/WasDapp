@@ -11,15 +11,13 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-        <link rel="icon" href="https://i.imgur.com/JnS6xHp.jpg">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
         <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
         <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-        <script src="bootstrap/js/bootstrap-tooltip.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="dataTables.ellipsis.js"></script>        
     </head>
     <body style="background-color: #4FA5B6">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -83,7 +81,7 @@
                             <td th:text="${entry.id}"></td>
                             <td th:text="${entry.name}"></td>
                             <td th:text="${entry.locatie}"></td>
-                            <td th:text="${entry.straat+' '+entry.nummer+' - '+entry.postCode+' '+entry.gemeente+' - '+entry.land}"></td>
+                            <td><a th:title="${entry.straat+' '+entry.nummer+' '+entry.gemeente+' '+entry.postCode+' '+entry.land}" data-toggle="tooltip" data-placement="right" style="margin:20px;"><i class="fas fa-map-marked-alt"></i></a></td>
                             <td><a th:title="${entry.omschrijving}" data-toggle="tooltip" data-placement="right" style="margin:20px;">
                                 <i class="fas fa-info-circle"></i>
                             </a></td>
@@ -115,11 +113,11 @@
                     </div>
                 </div>
             </form>
-    <script>
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip();
-        });</script>
-
+            <script>
+                $(function () {
+                $('[data-toggle="tooltip"]').tooltip();
+                });
+            </script>
             <script>
                 $("#checkAll").click(function () {
                     $(".check").prop('checked', $(this).prop('checked'));
