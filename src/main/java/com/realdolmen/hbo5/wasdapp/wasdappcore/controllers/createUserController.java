@@ -1,11 +1,9 @@
 package com.realdolmen.hbo5.wasdapp.wasdappcore.controllers;
 
 import com.realdolmen.hbo5.wasdapp.wasdappcore.domain.UserWassdapp;
-import com.realdolmen.hbo5.wasdapp.wasdappcore.dto.WasdappEntryResponse;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.repo.UserRepository;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.CurrentUser;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.UserService;
-import com.realdolmen.hbo5.wasdapp.wasdappcore.service.impl.WasdappServiceImpl;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,10 +26,10 @@ public class createUserController {
 
     @RequestMapping(value = "/createUser", method = RequestMethod.GET)
     public String createForm(Model model) {
-        List<UserWassdapp> list = userService.findAll();
-        model.addAttribute("entries", list);
         if (currentUser.getCurrentUser() != null) {
             if (currentUser.getCurrentUser().getRole().equals("admin")) {
+                List<UserWassdapp> list = userService.findAll();
+                model.addAttribute("entries", list);
                 model.addAttribute(currentUser);
                 return "createUser.xhtml";
             } else {

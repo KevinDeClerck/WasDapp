@@ -71,8 +71,8 @@
                             <th th:text="#{aanmaakdatum}"></th>
                             <th th:text="#{lat}"></th>
                             <th th:text="#{lon}"></th>
-                            <th></th>
-                            <th></th>
+                            <th th:if="${currentUser.currentUser.role == 'admin'}"></th>
+                            <th th:if="${currentUser.currentUser.role == 'admin'}"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -90,11 +90,11 @@
                             <td th:text="${entry.aanmaakDatum}"></td>
                             <td th:text="${entry.lat}"></td>
                             <td th:text="${entry.lon}"></td>
-                            <td><a th:href="@{/edit(id=${entry.id})}"><button type="button" class="btn btn-success btn-sm"><i class="material-icons">edit</i></button></a></td>
-                            <td><a th:href="@{/deleteItems(id=${entry.id})}"><button type="button" class="btn btn-danger btn-sm" onclick="return confirm('Delete entry?')"><i class="material-icons">delete</i></button></a></td>                        </tr>
+                            <td th:if="${currentUser.currentUser.role == 'admin'}"><a th:href="@{/edit(id=${entry.id})}"><button type="button" class="btn btn-success btn-sm"><i class="material-icons">edit</i></button></a></td>
+                            <td th:if="${currentUser.currentUser.role == 'admin'}"><a th:href="@{/deleteItems(id=${entry.id})}"><button type="button" class="btn btn-danger btn-sm" onclick="return confirm('Delete entry?')"><i class="material-icons">delete</i></button></a></td>                        </tr>
                     </tbody>
                 </table>
-                <button type="button" class="btn btn-danger"  data-toggle="modal" data-target="#confirm-delete">Verwijder geselecteerde items</button>
+                <button th:if="${currentUser.currentUser.role == 'admin'}" type="button" class="btn btn-danger"  data-toggle="modal" data-target="#confirm-delete">Verwijder geselecteerde items</button>
                 <input type="checkbox" name="id" value="-1" style="display:none" checked="checked" />
                 <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
