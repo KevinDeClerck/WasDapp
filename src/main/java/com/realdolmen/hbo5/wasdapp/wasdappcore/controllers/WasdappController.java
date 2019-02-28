@@ -20,8 +20,8 @@ public class WasdappController {
 
     @RequestMapping(value = "/wasdapp", method = RequestMethod.GET)
     public String showList(Model model) {
-        model.addAttribute("entries", wasdappService.findAll());
         if (currentUser.getCurrentUser() != null) {
+            model.addAttribute("entries", wasdappService.findAll());
             model.addAttribute(currentUser);
             return "wasdapp.xhtml";
         } else {
