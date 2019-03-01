@@ -11,6 +11,6 @@ Login as admin:
 admin@gmail.com
 password: password
 
-You can add users, add entries to the database, edit entries and upload files!
+You can add users, add entries to the database, edit entries, delete entries and upload files!
 
 have fun!
