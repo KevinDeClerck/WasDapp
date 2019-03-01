@@ -13,11 +13,11 @@ import org.mockito.Mock;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.when;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.ui.Model;
 
 @RunWith(MockitoJUnitRunner.class)
-@SpringBootApplication
+@SpringBootTest
 public class LoginControllerTest {
 
     @Mock
