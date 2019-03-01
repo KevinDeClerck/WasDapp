@@ -51,6 +51,7 @@ public class WasdappServiceImpl implements WasdappService {
                 .collect(toList());
     }
 
+    @Override
     public WasdappEntry update(WasdappEntryResponse entryResponse) {
         WasdappEntry entry = wasdappEntryResponseMapper.mapToEntry(entryResponse);
         if (entry.getAanmaakDatum() == null) {
@@ -60,6 +61,7 @@ public class WasdappServiceImpl implements WasdappService {
         return wasdappRepository.save(entry);
     }
 
+    @Override
     public List<WasdappEntryResponse> findAll() {
         List<WasdappEntry> entries = wasdappRepository.findAll();
         return entries.stream()
@@ -67,12 +69,14 @@ public class WasdappServiceImpl implements WasdappService {
                 .collect(toList());
     }
 
+    @Override
     public WasdappEntryResponse findById(Long id) {
         WasdappEntry entry = wasdappRepository.findById(id).get();
         WasdappEntryResponse entryResponse = wasdappEntryMapper.mapToDto(entry);
         return entryResponse;
     }
     
+    @Override
     public void deleteById(Long id){
         wasdappRepository.deleteById(id);
     }

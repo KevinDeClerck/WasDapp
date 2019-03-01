@@ -1,7 +1,7 @@
 package com.realdolmen.hbo5.wasdapp.wasdappcore.controllers;
 
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.CurrentUser;
-import com.realdolmen.hbo5.wasdapp.wasdappcore.service.impl.WasdappServiceImpl;
+import com.realdolmen.hbo5.wasdapp.wasdappcore.service.WasdappService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +15,7 @@ public class WasdappController {
     CurrentUser currentUser;
 
     @Autowired
-    WasdappServiceImpl wasdappService;
+    WasdappService wasdappService;
 
 
     @RequestMapping(value = "/wasdapp", method = RequestMethod.GET)

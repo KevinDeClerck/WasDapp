@@ -1,7 +1,7 @@
 package com.realdolmen.hbo5.wasdapp.wasdappcore.controllers;
 
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.CurrentUser;
-import com.realdolmen.hbo5.wasdapp.wasdappcore.service.impl.WasdappServiceImpl;
+import com.realdolmen.hbo5.wasdapp.wasdappcore.service.WasdappService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,19 +17,15 @@ public class DeleteEntryController {
     CurrentUser currentUser;
 
     @Autowired
-    WasdappServiceImpl wasdappService;
+    WasdappService wasdappService;
 
     @RequestMapping(value = "/deleteItems", method = RequestMethod.GET)
     public String handleDeleteItems(@RequestParam("id") List<Long> ids, Model model) {
         if (currentUser.getCurrentUser() != null) {
             if (currentUser.getCurrentUser().getRole().equals("admin")) {
                 for (Long id : ids) {
-                    if (id == -1) {
-                        return "redirect:/wasdapp";
-                    } else if (id != 0) {
+                    if (id > 0) {
                         wasdappService.deleteById(id);
-                    } else {
-                        wasdappService.deleteAll();
                     }
                 }
             } else {

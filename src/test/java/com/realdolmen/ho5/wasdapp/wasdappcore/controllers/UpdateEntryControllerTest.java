@@ -4,7 +4,7 @@ package com.realdolmen.ho5.wasdapp.wasdappcore.controllers;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.controllers.UpdateEntryController;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.domain.UserWassdapp;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.CurrentUser;
-import com.realdolmen.hbo5.wasdapp.wasdappcore.service.impl.WasdappServiceImpl;
+import com.realdolmen.hbo5.wasdapp.wasdappcore.service.WasdappService;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,18 +12,18 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import static org.mockito.Mockito.when;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.ui.Model;
 
 @RunWith(MockitoJUnitRunner.class)
-@SpringBootApplication
+@SpringBootTest
 public class UpdateEntryControllerTest {
     
     @Mock
     Model model;
 
     @Mock
-    WasdappServiceImpl wasdappService;
+    WasdappService wasdappService;
 
     @Mock
     CurrentUser currentUser;

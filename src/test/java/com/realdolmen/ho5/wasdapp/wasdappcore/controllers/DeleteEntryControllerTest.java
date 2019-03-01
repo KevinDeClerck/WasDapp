@@ -4,7 +4,7 @@ package com.realdolmen.ho5.wasdapp.wasdappcore.controllers;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.controllers.DeleteEntryController;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.domain.UserWassdapp;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.CurrentUser;
-import com.realdolmen.hbo5.wasdapp.wasdappcore.service.impl.WasdappServiceImpl;
+import com.realdolmen.hbo5.wasdapp.wasdappcore.service.WasdappService;
 import java.util.ArrayList;
 import static org.junit.Assert.*;
 import java.util.List;
@@ -13,19 +13,19 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.ui.Model;
 import static org.mockito.Mockito.*;
+import org.springframework.boot.test.context.SpringBootTest;
 
 @RunWith(MockitoJUnitRunner.class)
-@SpringBootApplication
+@SpringBootTest
 public class DeleteEntryControllerTest {
 
     @Mock
     Model model;
 
     @Mock
-    WasdappServiceImpl wasdappService;
+    WasdappService wasdappService;
 
     @Mock
     CurrentUser currentUser;
