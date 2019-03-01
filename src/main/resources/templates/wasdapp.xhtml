@@ -25,9 +25,9 @@
             <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2" id="toggler">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item"><a class="nav-link" href="wasdapp"><th th:text="#{Home}"/></a></li>
-                    <li class="nav-item"><a class="nav-link" href="add"><th th:text="#{Add}"/></a></li>
-                    <li class="nav-item"><a class="nav-link" href="upload"><th th:text="#{Upload}"/></a></li>
-                    <li class="nav-item"><a class="nav-link" href="createUser"><th th:text="#{AddUser}"/></a></li>
+                    <li th:if="${currentUser.currentUser.role == 'admin'}" class="nav-item"><a class="nav-link" href="add"><th th:text="#{Add}"/></a></li>
+                    <li th:if="${currentUser.currentUser.role == 'admin'}" class="nav-item"><a class="nav-link" href="upload"><th th:text="#{Upload}"/></a></li>
+                    <li th:if="${currentUser.currentUser.role == 'admin'}" class="nav-item"><a class="nav-link" href="createUser"><th th:text="#{AddUser}"/></a></li>
                 </ul>
             </div>
             <div class="mx-auto order-0">
