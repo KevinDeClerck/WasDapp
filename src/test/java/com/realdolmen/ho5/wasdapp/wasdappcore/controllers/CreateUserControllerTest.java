@@ -1,7 +1,7 @@
 
 package com.realdolmen.ho5.wasdapp.wasdappcore.controllers;
 
-import com.realdolmen.hbo5.wasdapp.wasdappcore.controllers.createUserController;
+import com.realdolmen.hbo5.wasdapp.wasdappcore.controllers.CreateUserController;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.domain.UserWassdapp;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.CurrentUser;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.UserService;
@@ -12,11 +12,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import static org.mockito.Mockito.when;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.ui.Model;
 
 @RunWith(MockitoJUnitRunner.class)
-@SpringBootApplication
+@SpringBootTest
 public class CreateUserControllerTest {
 
     @Mock
@@ -29,7 +29,7 @@ public class CreateUserControllerTest {
     CurrentUser currentUser;
 
     @InjectMocks
-    createUserController createUserController;
+    CreateUserController createUserController;
 
     @Test
     public void createUserSucces() {
