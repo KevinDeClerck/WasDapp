@@ -50,7 +50,9 @@ public class GeneratePdfReport {
                     CS.beginText();
                     CS.setFont(PDType1Font.COURIER, 30);
                     CS.newLineAtOffset(50, 500);
-                    CS.showText(i.getName());
+                    if (i.getName() != null) {
+                        CS.showText(i.getName());
+                    }
                     CS.endText();
 
                     CS.beginText();
@@ -65,14 +67,18 @@ public class GeneratePdfReport {
                         CS.setFont(PDType1Font.HELVETICA, 12);
                         CS.newLineAtOffset(165, 300 - w * 15);
                         wrT[w] = i.getOmschrijving();
-                        CS.showText(i.getOmschrijving());
+                        if (i.getOmschrijving() != null) {
+                            CS.showText(i.getOmschrijving());
+                        }
                         CS.endText();
                     }
 
                     CS.beginText();
                     CS.setFont(PDType1Font.COURIER, 20);
                     CS.newLineAtOffset(50, 100);
-                    CS.showText(i.getLocatie());
+                    if (i.getLocatie() != null) {
+                        CS.showText(i.getLocatie());
+                    }
                     CS.endText();
                     CS.close();
                     x++;

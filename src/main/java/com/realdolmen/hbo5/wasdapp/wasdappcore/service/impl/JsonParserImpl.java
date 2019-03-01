@@ -22,8 +22,6 @@ public class JsonParserImpl {
     private ObjectMapper mapper;
     List<WasdappEntry> entries;
 
-    private String errMsg;
-
     @Autowired
     public JsonParserImpl(WasdappService wasdappService) {
         this.wasdappService = wasdappService;
@@ -36,13 +34,11 @@ public class JsonParserImpl {
                 if(!w.getName().isEmpty()){
                     wasdappService.save(w);
                 }else{
-                    errMsg ="Empty name found in file, this entry has not been added.";
-                    LOGGER.error(errMsg);
+                    LOGGER.error("Empty name found in file, this entry has not been added.");
                 }
             }
         }else{
-            errMsg = "The list of entries to save is empty.";
-            LOGGER.error(errMsg);
+            LOGGER.error("The list of entries to save is empty.");
             throw new WrongFileException();
         } 
     }
@@ -53,19 +49,8 @@ public class JsonParserImpl {
         entries = mapper.readValue(is, new TypeReference<List<WasdappEntry>>(){});
         return entries;
         }catch(Exception e){
-            errMsg = "Something went wrong when reading the JSON file.";
-            LOGGER.error(errMsg);
+            LOGGER.error("Something went wrong when reading the JSON file.");
             return null;
         }
-    }
-
-    public String getErrMsg() {
-        return errMsg;
-    }
-
-    public void setErrMsg(String errMsg) {
-        this.errMsg = errMsg;
-    }
-    
-    
+    } 
 }
