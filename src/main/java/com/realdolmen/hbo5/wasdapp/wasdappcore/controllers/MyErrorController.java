@@ -20,7 +20,7 @@ public class MyErrorController implements ErrorController {
             model.addAttribute(currentUser);
             return "error.xhtml";
         } else {
-            return "redirect:/login";
+            return "redirect:/";
         }
     }
 

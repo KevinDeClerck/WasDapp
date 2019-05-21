@@ -1,8 +1,10 @@
 package com.realdolmen.hbo5.wasdapp.wasdappcore.controllers;
 
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.CurrentUser;
+import com.realdolmen.hbo5.wasdapp.wasdappcore.service.FireBaseService;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.WasdappService;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,14 +20,17 @@ public class DeleteEntryController {
 
     @Autowired
     WasdappService wasdappService;
+    
+    @Autowired
+    FireBaseService fsService;
 
     @RequestMapping(value = "/deleteItems", method = RequestMethod.GET)
-    public String handleDeleteItems(@RequestParam("id") List<Long> ids, Model model) {
+    public String handleDeleteItems(@RequestParam("id") List<Long> ids, Model model) throws InterruptedException, ExecutionException {
         if (currentUser.getCurrentUser() != null) {
             if (currentUser.getCurrentUser().getRole().equals("admin")) {
                 for (Long id : ids) {
                     if (id > 0) {
-                        wasdappService.deleteById(id);
+                        fsService.deleteById(id);
                     }
                 }
             } else {

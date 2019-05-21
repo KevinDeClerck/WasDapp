@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "410436301128",
+    "firebase_url": "https://wasdapp-137af.firebaseio.com",
+    "project_id": "wasdapp-137af",
+    "storage_bucket": "wasdapp-137af.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:410436301128:android:165e7851e4c1caf1",
+        "android_client_info": {
+          "package_name": "com.example.wasdappapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "410436301128-gb2mvmm5k8eqgte4moeo9jngamoh48m7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtb14iV3dMRMa1-CiSCJPD0JPxZM-5PLI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "410436301128-gb2mvmm5k8eqgte4moeo9jngamoh48m7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

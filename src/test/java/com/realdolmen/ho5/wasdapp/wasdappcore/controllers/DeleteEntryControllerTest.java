@@ -1,13 +1,14 @@
-
 package com.realdolmen.ho5.wasdapp.wasdappcore.controllers;
 
 import com.realdolmen.hbo5.wasdapp.wasdappcore.controllers.DeleteEntryController;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.domain.UserWassdapp;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.CurrentUser;
+import com.realdolmen.hbo5.wasdapp.wasdappcore.service.FireBaseService;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.WasdappService;
 import java.util.ArrayList;
 import static org.junit.Assert.*;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -28,45 +29,48 @@ public class DeleteEntryControllerTest {
     WasdappService wasdappService;
 
     @Mock
+    FireBaseService fireStoreService;
+
+    @Mock
     CurrentUser currentUser;
 
     @InjectMocks
     DeleteEntryController deleteEntryController;
 
     @Test
-    public void handleDeleteNoUser() {
+    public void handleDeleteNoUser() throws InterruptedException, ExecutionException {
         List<Long> list = new ArrayList<>();
         list.add(-1l);
         UserWassdapp user = null;
         when(currentUser.getCurrentUser()).thenReturn(user);
         assertEquals("redirect:/wasdapp", deleteEntryController.handleDeleteItems(list, model));
-        verifyZeroInteractions(wasdappService);
+        verifyZeroInteractions(fireStoreService);
     }
 
     @Test
-    public void handleDeleteNoAdmin() {
+    public void handleDeleteNoAdmin() throws InterruptedException, ExecutionException {
         List<Long> list = new ArrayList<>();
         list.add(-1l);
         UserWassdapp user = new UserWassdapp();
         user.setRole("user");
         when(currentUser.getCurrentUser()).thenReturn(user);
         assertEquals("redirect:/wasdapp", deleteEntryController.handleDeleteItems(list, model));
-        verifyZeroInteractions(wasdappService);
+        verifyZeroInteractions(fireStoreService);
     }
 
     @Test
-    public void handleDeleteItemsNoIds() {
+    public void handleDeleteItemsNoIds() throws ExecutionException, InterruptedException {
         List<Long> list = new ArrayList<>();
         list.add(-1l);
         UserWassdapp user = new UserWassdapp();
         user.setRole("admin");
         when(currentUser.getCurrentUser()).thenReturn(user);
         assertEquals("redirect:/wasdapp", deleteEntryController.handleDeleteItems(list, model));
-        verifyZeroInteractions(wasdappService);
+        verifyZeroInteractions(fireStoreService);
     }
 
     @Test
-    public void handleDeleteItemsOneId() {
+    public void handleDeleteItemsOneId() throws InterruptedException, ExecutionException {
         List<Long> list = new ArrayList<>();
         list.add(22l);
         list.add(-1l);
@@ -74,11 +78,11 @@ public class DeleteEntryControllerTest {
         user.setRole("admin");
         when(currentUser.getCurrentUser()).thenReturn(user);
         assertEquals("redirect:/wasdapp", deleteEntryController.handleDeleteItems(list, model));
-        verify(wasdappService, times(1)).deleteById(22l);
+        verify(fireStoreService, times(1)).deleteById(22l);
     }
 
     @Test
-    public void handleDeleteItemsMultipleIds() {
+    public void handleDeleteItemsMultipleIds() throws InterruptedException, ExecutionException {
         List<Long> list = new ArrayList<>();
         list.add(22l);
         list.add(123l);
@@ -87,8 +91,8 @@ public class DeleteEntryControllerTest {
         user.setRole("admin");
         when(currentUser.getCurrentUser()).thenReturn(user);
         assertEquals("redirect:/wasdapp", deleteEntryController.handleDeleteItems(list, model));
-        verify(wasdappService, times(1)).deleteById(22l);
-        verify(wasdappService, times(1)).deleteById(123l);
+        verify(fireStoreService, times(1)).deleteById(22l);
+        verify(fireStoreService, times(1)).deleteById(123l);
 
     }
 

@@ -4,7 +4,9 @@ package com.realdolmen.ho5.wasdapp.wasdappcore.controllers;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.controllers.UpdateEntryController;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.domain.UserWassdapp;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.CurrentUser;
+import com.realdolmen.hbo5.wasdapp.wasdappcore.service.FireBaseService;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.WasdappService;
+import java.util.concurrent.ExecutionException;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,6 +26,9 @@ public class UpdateEntryControllerTest {
 
     @Mock
     WasdappService wasdappService;
+    
+    @Mock
+    FireBaseService fireStoreService;
 
     @Mock
     CurrentUser currentUser;
@@ -32,7 +37,7 @@ public class UpdateEntryControllerTest {
     UpdateEntryController updateEntryController;
 
     @Test
-    public void updateFormSucces() {
+    public void updateFormSucces() throws InterruptedException, ExecutionException {
         UserWassdapp user = new UserWassdapp();
         user.setRole("admin");
         when(currentUser.getCurrentUser()).thenReturn(user);
@@ -40,14 +45,14 @@ public class UpdateEntryControllerTest {
     }
 
     @Test
-    public void updateFormFailNoUser() {
+    public void updateFormFailNoUser() throws InterruptedException, ExecutionException {
         UserWassdapp user = null;
         when(currentUser.getCurrentUser()).thenReturn(user);
         assertEquals("redirect:/login", updateEntryController.updateForm(1l,model));
     }
 
     @Test
-    public void updateFormFailNoAdmin() {
+    public void updateFormFailNoAdmin() throws InterruptedException, ExecutionException {
         UserWassdapp user = new UserWassdapp();
         user.setRole("user");
         when(currentUser.getCurrentUser()).thenReturn(user);

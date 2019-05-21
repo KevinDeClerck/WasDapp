@@ -4,6 +4,7 @@ import com.realdolmen.hbo5.wasdapp.wasdappcore.domain.WasdappEntry;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.dto.WasdappEntryResponse;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 public class WasdappEntryResponseMapper {
 
@@ -11,11 +12,11 @@ public class WasdappEntryResponseMapper {
         
         Timestamp createDate = Timestamp.valueOf(LocalDateTime.now());
         if(entry.getAanmaakDatum() != null){
-            createDate = entry.getAanmaakDatum();
+            createDate = new Timestamp(entry.getAanmaakDatum().getTime());
         }
         Timestamp updateDate = Timestamp.valueOf(LocalDateTime.now());
         if(entry.getWijzigDatum() != null){
-            updateDate = entry.getWijzigDatum();
+            updateDate = new Timestamp(entry.getWijzigDatum().getTime());
         }   
         return WasdappEntry.builder()
                 .withId(entry.getId())

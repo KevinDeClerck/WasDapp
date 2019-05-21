@@ -1,4 +1,3 @@
-
 package com.realdolmen.ho5.wasdapp.wasdappcore.controllers;
 
 import com.realdolmen.hbo5.wasdapp.wasdappcore.controllers.AddEntryController;
@@ -6,7 +5,10 @@ import com.realdolmen.hbo5.wasdapp.wasdappcore.domain.UserWassdapp;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.domain.WasdappEntry;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.dto.WasdappEntryResponse;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.CurrentUser;
+import com.realdolmen.hbo5.wasdapp.wasdappcore.service.FireBaseService;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.WasdappService;
+import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 import static org.junit.Assert.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,6 +28,9 @@ public class AddEntryControllerTest {
 
     @Mock
     WasdappService wasdappService;
+
+    @Mock
+    FireBaseService fireStoreService;
 
     @Mock
     CurrentUser currentUser;
@@ -57,7 +62,7 @@ public class AddEntryControllerTest {
     }
 
     @Test
-    public void entrySubmitSucces() {
+    public void entrySubmitSucces() throws IOException, InterruptedException, ExecutionException {
         WasdappEntryResponse entry = new WasdappEntryResponse();
         entry.setStraat("Gaston crommenlaan");
         entry.setGemeente("Gent");
@@ -66,7 +71,7 @@ public class AddEntryControllerTest {
         entry.setLat(51.037028);
         entry.setLon(3.735785);
         entry.setOmschrijving("Kantoor gent in de refter");
-        
+
         WasdappEntry entry2 = new WasdappEntry();
         entry2.setStraat("Gaston crommenlaan");
         entry2.setGemeente("Gent");
@@ -75,7 +80,7 @@ public class AddEntryControllerTest {
         entry2.setLat(51.037028);
         entry2.setLon(3.735785);
         entry2.setOmschrijving("Kantoor gent in de refter");
- 
+
         assertEquals("redirect:/wasdapp", addEntryController.entrySubmit(null, null, "Gaston crommenlaan", "4", null, "Gent", null, "Kantoor gent in de refter", null, null, 51.037028, 3.735785, model));
 //        when(wasdappService.update(entry)).thenReturn(entry2);
 //        verify(wasdappService, times(1)).update(entry); 

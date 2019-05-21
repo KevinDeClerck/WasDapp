@@ -4,10 +4,12 @@ import com.realdolmen.hbo5.wasdapp.wasdappcore.domain.WasdappEntry;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.exception.EmptyFileException;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.exception.WasdappRuntimeException;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.exception.WrongFileException;
+import com.realdolmen.hbo5.wasdapp.wasdappcore.repo.FireBaseRepository;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.CsvParser;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.WasdappService;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.util.Logger;
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +28,8 @@ import static java.lang.Double.valueOf;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+import java.util.logging.Level;
 import java.util.stream.Collectors;
 import static java.util.stream.Collectors.toList;
 import org.apache.logging.log4j.LogManager;
@@ -35,7 +39,10 @@ import static org.apache.logging.log4j.util.Strings.isBlank;
 public class CsvParserImpl implements CsvParser {
 
     private static final org.apache.logging.log4j.Logger LOGGER = LogManager.getLogger(Logger.class.getName());
-
+    
+    @Autowired
+    private FireBaseRepository fireStoreRepo;
+        
     private WasdappService wasdappService;
 
     private BufferedReader bufferedReader;
@@ -47,19 +54,23 @@ public class CsvParserImpl implements CsvParser {
     }
 
     @Override
-    public void importCsv(InputStream is) throws IOException, WrongFileException {
+    public void importCsv(InputStream is) throws IOException, WrongFileException, FileNotFoundException {
         List<WasdappEntry> entries = new ArrayList<>();
         try {
             entries = readLines(is)
                     .stream()
                     .map(this::mapLineToEntry)
                     .collect(Collectors.toList());
-        } catch (Exception e) {
+        } catch (IOException e) {
             LOGGER.error("Faulty CSV file.");
             throw new WrongFileException();
         }
         if (!entries.contains(null)) {
-            wasdappService.save(entries);
+            try {
+                fireStoreRepo.addEntryList(entries);
+            } catch (InterruptedException | ExecutionException ex) {
+                java.util.logging.Logger.getLogger(CsvParserImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else {
             LOGGER.error("Faulty CSV file.");
             throw new WrongFileException();
@@ -71,7 +82,9 @@ public class CsvParserImpl implements CsvParser {
         getLines(fileName)
                 .stream()
                 .map(this::mapLineToEntry)
-                .forEach(entry -> wasdappService.save(entry));
+                .forEach(entry -> {
+                    wasdappService.save(entry);
+        });
     }
 
     protected List<String> readLines(InputStream is) throws UnsupportedEncodingException, IOException {

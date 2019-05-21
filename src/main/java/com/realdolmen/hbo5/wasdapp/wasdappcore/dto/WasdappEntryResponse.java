@@ -1,6 +1,6 @@
 package com.realdolmen.hbo5.wasdapp.wasdappcore.dto;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 public class WasdappEntryResponse {
 
@@ -19,8 +19,8 @@ public class WasdappEntryResponse {
     private String email;
     private Double prijs;
     private String persoon;
-    private Timestamp aanmaakDatum;
-    private Timestamp wijzigDatum;
+    private Date aanmaakDatum;
+    private Date wijzigDatum;
     private Double lat;
     private Double lon;
 
@@ -45,8 +45,8 @@ public class WasdappEntryResponse {
         private String email;
         private Double prijs;
         private String persoon;
-        private Timestamp aanmaakDatum;
-        private Timestamp wijzigDatum;
+        private Date aanmaakDatum;
+        private Date wijzigDatum;
         private Double lat;
         private Double lon;
 
@@ -128,12 +128,12 @@ public class WasdappEntryResponse {
             return this;
         }
 
-        public WasdappEntryResponseBuilder withAanmaakDatum(Timestamp aanmaakDatum) {
+        public WasdappEntryResponseBuilder withAanmaakDatum(Date aanmaakDatum) {
             this.aanmaakDatum = aanmaakDatum;
             return this;
         }
 
-        public WasdappEntryResponseBuilder withWijzigDatum(Timestamp wijzigDatum) {
+        public WasdappEntryResponseBuilder withWijzigDatum(Date wijzigDatum) {
             this.wijzigDatum = wijzigDatum;
             return this;
         }
@@ -233,11 +233,11 @@ public class WasdappEntryResponse {
         return persoon;
     }
 
-    public Timestamp getAanmaakDatum() {
+    public Date getAanmaakDatum() {
         return aanmaakDatum;
     }
 
-    public Timestamp getWijzigDatum() {
+    public Date getWijzigDatum() {
         return wijzigDatum;
     }
 
@@ -309,11 +309,11 @@ public class WasdappEntryResponse {
         this.persoon = persoon;
     }
 
-    public void setAanmaakDatum(Timestamp aanmaakDatum) {
+    public void setAanmaakDatum(Date aanmaakDatum) {
         this.aanmaakDatum = aanmaakDatum;
     }
 
-    public void setWijzigDatum(Timestamp wijzigDatum) {
+    public void setWijzigDatum(Date wijzigDatum) {
         this.wijzigDatum = wijzigDatum;
     }
 
