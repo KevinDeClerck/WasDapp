@@ -39,7 +39,7 @@ public class UserService {
         try {
             List<UserWassdapp> list = userRepo.findAll();
             for (UserWassdapp u : list) {
-                if (u.getEmail().equals(uname)) {
+                if (u.getEmail().toLowerCase().equals(uname.toLowerCase())) {
                     if (u.getPassword().equals(upwd)) {
                         isValidUser = true;
                     }

@@ -34,8 +34,8 @@ public class WasdappServiceImpl implements WasdappService {
 
     @Override
     public WasdappEntry save(WasdappEntry entry) {
-            Long idNull = 0L;
-            entry.setId(idNull);
+        Long idNull = 0L;
+        entry.setId(idNull);
         if (entry.getAanmaakDatum() == null) {
             entry.setAanmaakDatum(Timestamp.valueOf(LocalDateTime.now()));
         }
@@ -75,13 +75,13 @@ public class WasdappServiceImpl implements WasdappService {
         WasdappEntryResponse entryResponse = wasdappEntryMapper.mapToDto(entry);
         return entryResponse;
     }
-    
+
     @Override
-    public void deleteById(Long id){
+    public void deleteById(Long id) {
         wasdappRepository.deleteById(id);
     }
-    
-    public void deleteAll(){
+
+    public void deleteAll() {
         wasdappRepository.deleteAll();
     }
 }

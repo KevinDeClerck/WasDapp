@@ -2,7 +2,10 @@ package com.realdolmen.hbo5.wasdapp.wasdappcore.controllers;
 
 import com.realdolmen.hbo5.wasdapp.wasdappcore.dto.WasdappEntryResponse;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.CurrentUser;
+import com.realdolmen.hbo5.wasdapp.wasdappcore.service.FireBaseService;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.WasdappService;
+import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +21,9 @@ public class AddEntryController {
 
     @Autowired
     WasdappService wasdappService;
+    
+    @Autowired
+    FireBaseService fsService;
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String createForm(Model model) {
@@ -41,7 +47,7 @@ public class AddEntryController {
             @RequestParam String land, @RequestParam String omschrijving,
             @RequestParam String telefoon, @RequestParam String email,
             @RequestParam Double latitude, @RequestParam Double longitude,
-            Model model) {
+            Model model) throws IOException, InterruptedException, ExecutionException {
         WasdappEntryResponse entry = new WasdappEntryResponse();
         Long id = 0L;
         entry.setId(id);
@@ -57,7 +63,7 @@ public class AddEntryController {
         entry.setEmail(email);
         entry.setLat(latitude);
         entry.setLon(longitude);
-        wasdappService.update(entry);
+        fsService.addEntry(entry);
         model.addAttribute("entry", entry);
         return "redirect:/wasdapp";
     }

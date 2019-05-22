@@ -2,7 +2,9 @@ package com.realdolmen.hbo5.wasdapp.wasdappcore.controllers;
 
 import com.realdolmen.hbo5.wasdapp.wasdappcore.dto.WasdappEntryResponse;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.CurrentUser;
+import com.realdolmen.hbo5.wasdapp.wasdappcore.service.FireBaseService;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.WasdappService;
+import java.util.concurrent.ExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,9 +21,12 @@ public class UpdateEntryController {
     @Autowired
     WasdappService wasdappService;
 
+    @Autowired
+    FireBaseService fsService;
+
     @RequestMapping(value = "/edit")
-    public String updateForm(@RequestParam(name = "id") Long id, Model model) {
-        WasdappEntryResponse entry = wasdappService.findById(id);
+    public String updateForm(@RequestParam(name = "id") Long id, Model model) throws InterruptedException, ExecutionException {
+        WasdappEntryResponse entry = fsService.findById(id);
         model.addAttribute("entry", entry);
         if (currentUser.getCurrentUser() != null) {
             if (currentUser.getCurrentUser().getRole().equals("admin")) {
@@ -60,7 +65,7 @@ public class UpdateEntryController {
         entry.setEmail(email);
         entry.setLat(latitude);
         entry.setLon(longitude);
-        wasdappService.update(entry);
+        fsService.updateEntry(entry);
 
         model.addAttribute("entry", entry);
 

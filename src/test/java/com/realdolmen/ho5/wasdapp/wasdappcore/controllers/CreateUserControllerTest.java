@@ -1,9 +1,10 @@
-
 package com.realdolmen.ho5.wasdapp.wasdappcore.controllers;
 
-import com.realdolmen.hbo5.wasdapp.wasdappcore.controllers.CreateUserController;
+import com.google.firebase.auth.FirebaseAuthException;
+import com.realdolmen.hbo5.wasdapp.wasdappcore.controllers.AddUserController;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.domain.UserWassdapp;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.CurrentUser;
+import com.realdolmen.hbo5.wasdapp.wasdappcore.service.FireBaseService;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.UserService;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
@@ -26,13 +27,16 @@ public class CreateUserControllerTest {
     UserService userService;
 
     @Mock
+    FireBaseService fireStoreService;
+
+    @Mock
     CurrentUser currentUser;
 
     @InjectMocks
-    CreateUserController createUserController;
+    AddUserController createUserController;
 
     @Test
-    public void createUserSucces() {
+    public void createUserSucces() throws FirebaseAuthException {
         UserWassdapp user = new UserWassdapp();
         user.setRole("admin");
         when(currentUser.getCurrentUser()).thenReturn(user);
@@ -40,22 +44,22 @@ public class CreateUserControllerTest {
     }
 
     @Test
-    public void createUserFailNoUser() {
+    public void createUserFailNoUser() throws FirebaseAuthException {
         UserWassdapp user = null;
         when(currentUser.getCurrentUser()).thenReturn(user);
         assertEquals("redirect:/wasdapp", createUserController.createForm(model));
     }
 
     @Test
-    public void createUserFailNoAdmin() {
+    public void createUserFailNoAdmin() throws FirebaseAuthException, FirebaseAuthException {
         UserWassdapp user = new UserWassdapp();
         user.setRole("user");
         when(currentUser.getCurrentUser()).thenReturn(user);
         assertEquals("redirect:/wasdapp", createUserController.createForm(model));
     }
-    
+
     @Test
-    public void entrySubmitSucces() {
-        assertEquals("redirect:/createUser", createUserController.entrySubmit("test", "test@test.com", "test", "test", "user", model));      
+    public void entrySubmitSucces() throws FirebaseAuthException {
+        assertEquals("redirect:/createUser", createUserController.entrySubmit("test", "test@test.com", "test", "test", model));
     }
 }

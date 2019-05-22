@@ -1,7 +1,14 @@
 package com.realdolmen.hbo5.wasdapp.wasdappcore.controllers;
 
+import com.realdolmen.hbo5.wasdapp.wasdappcore.domain.WasdappEntry;
+import com.realdolmen.hbo5.wasdapp.wasdappcore.dto.WasdappEntryResponse;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.CurrentUser;
+import com.realdolmen.hbo5.wasdapp.wasdappcore.service.FireBaseService;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.WasdappService;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,11 +24,15 @@ public class WasdappController {
     @Autowired
     WasdappService wasdappService;
 
+    @Autowired
+    FireBaseService fsService;
 
     @RequestMapping(value = "/wasdapp", method = RequestMethod.GET)
-    public String showList(Model model) {
+    public String showList(Model model) throws InterruptedException, ExecutionException {
         if (currentUser.getCurrentUser() != null) {
-            model.addAttribute("entries", wasdappService.findAll());
+            List<WasdappEntryResponse> allEntries = fsService.findAll();
+            sortList(allEntries);
+            model.addAttribute("entries", allEntries);
             model.addAttribute(currentUser);
             String nothing = "";
             model.addAttribute("nothing", nothing);
@@ -31,6 +42,8 @@ public class WasdappController {
         }
     }
     
-    
-
+    public List<WasdappEntryResponse> sortList(List<WasdappEntryResponse> list){
+        Collections.sort(list, (WasdappEntryResponse o1, WasdappEntryResponse o2) -> Long.compare(o1.getId(), o2.getId()));
+        return list;
+    }
 }
