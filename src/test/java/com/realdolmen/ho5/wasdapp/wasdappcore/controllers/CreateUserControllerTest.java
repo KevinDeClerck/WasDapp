@@ -36,7 +36,7 @@ public class CreateUserControllerTest {
     CreateUserController createUserController;
 
     @Test
-    public void createUserSucces() throws FirebaseAuthException {
+    public void createUserSucces() {
         UserWassdapp user = new UserWassdapp();
         user.setRole("admin");
         when(currentUser.getCurrentUser()).thenReturn(user);
@@ -44,14 +44,14 @@ public class CreateUserControllerTest {
     }
 
     @Test
-    public void createUserFailNoUser() throws FirebaseAuthException {
+    public void createUserFailNoUser() {
         UserWassdapp user = null;
         when(currentUser.getCurrentUser()).thenReturn(user);
         assertEquals("redirect:/wasdapp", createUserController.createForm(model));
     }
 
     @Test
-    public void createUserFailNoAdmin() throws FirebaseAuthException {
+    public void createUserFailNoAdmin() {
         UserWassdapp user = new UserWassdapp();
         user.setRole("user");
         when(currentUser.getCurrentUser()).thenReturn(user);
@@ -60,6 +60,6 @@ public class CreateUserControllerTest {
 
     @Test
     public void entrySubmitSucces() throws FirebaseAuthException {
-        assertEquals("redirect:/createUser", createUserController.entrySubmit("test", "test@test.com", "test", "test", model));
+        assertEquals("redirect:/createUser", createUserController.entrySubmit("test", "test@test.com", "test", "test", "user", model));
     }
 }
