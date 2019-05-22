@@ -59,7 +59,7 @@ public class FireBaseRepository {
 
     public void addEntry(WasdappEntry entry) throws FileNotFoundException, IOException, InterruptedException, ExecutionException {
         init();
-        if (!collection.get().get().isEmpty()) {
+        if (!collection.get().get().toObjects(WasdappEntryResponse.class).isEmpty()) {
             long lastId = collection.orderBy("id", Query.Direction.DESCENDING).limit(1).get().get().toObjects(WasdappEntryResponse.class).get(0).getId();
             entry.setId(lastId + 1);
             collection.document(Long.toString(lastId + 1)).set(entry);

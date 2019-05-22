@@ -25,11 +25,11 @@ public class WasdappCoreApplication {
 
     public static void main(String[] args) throws IOException, InterruptedException, ExecutionException {
         FileInputStream serviceAccount
-                = new FileInputStream(".\\wasdapptestkey.json");
+                = new FileInputStream(".\\wasdappkey.json");
 
         FirebaseOptions options = new FirebaseOptions.Builder()
                 .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-                .setDatabaseUrl("https://wasdapptest.firebaseio.com")
+                .setDatabaseUrl("https://wasdapp-137af.firebaseio.com")
                 .build();
 
         FirebaseApp app = FirebaseApp.initializeApp(options);

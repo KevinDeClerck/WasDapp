@@ -2,12 +2,14 @@ package com.realdolmen.hbo5.wasdapp.wasdappcore.controllers;
 
 import com.realdolmen.hbo5.wasdapp.wasdappcore.dto.WasdappEntryResponse;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.CurrentUser;
+import com.realdolmen.hbo5.wasdapp.wasdappcore.service.FireBaseService;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.impl.GeneratePdfReport;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.impl.WasdappServiceImpl;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.ui.Model;
 
 @Controller
-public class pdfController {
+public class PdfPrintController {
 
     private GeneratePdfReport generatePdf = new GeneratePdfReport();
 
@@ -26,6 +28,9 @@ public class pdfController {
 
     @Autowired
     private WasdappServiceImpl wasdappService;
+    
+    @Autowired
+    private FireBaseService fireBaseService;
 
     @RequestMapping(value = "/downloadAll", method = RequestMethod.GET)
     public void printAll(HttpServletResponse response) throws IOException {
@@ -37,14 +42,14 @@ public class pdfController {
     }
 
     @RequestMapping(value = "/download", method = RequestMethod.GET)
-    public String entriesReport(HttpServletResponse response, Model model, @RequestParam("id") List<Long> ids) throws IOException {
+    public String entriesReport(HttpServletResponse response, Model model, @RequestParam("id") List<Long> ids) throws IOException, InterruptedException, ExecutionException {
 
         if (currentUser.getCurrentUser() != null) {
             if (currentUser.getCurrentUser().getRole().equals("admin")) {
                 List<WasdappEntryResponse> listtoprint = new ArrayList<>();
                 for (Long id : ids) {
                         if (id > 0) {
-                        listtoprint.add(wasdappService.findById(id));
+                        listtoprint.add(fireBaseService.findById(id));
                     }
                 }
                 ByteArrayOutputStream bis = generatePdf.generatePdf(listtoprint);
