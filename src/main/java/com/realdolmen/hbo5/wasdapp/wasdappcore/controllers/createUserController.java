@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class createUserController {
+public class CreateUserController {
 
     @Autowired
     CurrentUser currentUser;
