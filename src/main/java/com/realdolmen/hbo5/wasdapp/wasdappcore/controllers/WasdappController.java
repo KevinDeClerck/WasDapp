@@ -1,10 +1,13 @@
 package com.realdolmen.hbo5.wasdapp.wasdappcore.controllers;
 
+import com.google.common.collect.ComparisonChain;
+import com.google.common.collect.Ordering;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.domain.WasdappEntry;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.dto.WasdappEntryResponse;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.CurrentUser;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.FireBaseService;
 import com.realdolmen.hbo5.wasdapp.wasdappcore.service.WasdappService;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -41,9 +44,11 @@ public class WasdappController {
             return "redirect:/login";
         }
     }
-    
-    public List<WasdappEntryResponse> sortList(List<WasdappEntryResponse> list){
-        Collections.sort(list, (WasdappEntryResponse o1, WasdappEntryResponse o2) -> Long.compare(o1.getId(), o2.getId()));
+
+    public List<WasdappEntryResponse> sortList(List<WasdappEntryResponse> list) {
+        Collections.sort(list, (WasdappEntryResponse t1, WasdappEntryResponse t2) -> ComparisonChain.start()
+                .compare(t1.getId(), t2.getId(), Ordering.natural().nullsLast())
+                .result());
         return list;
     }
 }
